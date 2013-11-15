@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="glut.h" />
     <ClInclude Include="Main.h" />
   </ItemGroup>
   <ItemGroup>
