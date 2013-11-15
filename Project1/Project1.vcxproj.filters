@@ -18,12 +18,16 @@
     <ClInclude Include="Main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="JNN_SAPI.h">
     <ClInclude Include="glut.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JNN_SAPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
