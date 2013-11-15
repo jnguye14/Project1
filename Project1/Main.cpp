@@ -7,6 +7,56 @@
 int var =0;
 #include "Main.h"
 #include "glut.h"
+void timer(int frame)
+{
+	glutTimerFunc(1000/60, timer, frame+1);
+	start_listening("Hello");
+}
+
+void speechWait()
+{
+	glutPostRedisplay();
+}
+void display()
+{
+	/* clear the screen*/
+	//glViewport(250,250,500,500);
+	glBegin(GL_POLYGON);
+	glVertex2f(var,-0.5);
+	glVertex2f(0.5,-0.5);
+	glVertex2f(0.5,0.5);
+	glVertex2f(var,0.5);
+	glEnd();
+	glColor3f(0.0,1.0,0.0);
+	glFlush();
+	//getchar();
+}
+void init()
+{
+	/* set background clear color to black */
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	/* set current color to white */
+	glColor3f(1.0, 0.0, 0.0);
+
+
+	/* identify the projection matrix that we would like to alter */
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	/* the window will correspond to these world coorinates */
+	gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
+	glViewport(250,250,500,500);
+	/* identify the modeling and viewing matrix that can be modified from here on */
+	/* we leave the routine in this mode in case we want to move the object around */
+	/* or specify the camera */
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	/*doing a second view port*////////////////////////////////////////
+	/*glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-10.0,10.0,-10.0,10.0);*/
+	
+}
+
 int main(int argc, char* argv[])
 {
 	cout << "Initializing SAPI interface" << endl;
@@ -101,58 +151,10 @@ int main(int argc, char* argv[])
 	system("PAUSE");
 	return EXIT_SUCCESS;
 }
-void timer(int frame)
-{
-	glutTimerFunc(1000/60, timer, frame+1);
-	start_listening("Hello");
-}
 
-void speechWait()
-{
-	glutPostRedisplay();
-}
-void display()
-{
-	/* clear the screen*/
-	//glViewport(250,250,500,500);
-	glBegin(GL_POLYGON);
-	glVertex2f(var,-0.5);
-	glVertex2f(0.5,-0.5);
-	glVertex2f(0.5,0.5);
-	glVertex2f(var,0.5);
-	glEnd();
-	glColor3f(0.0,1.0,0.0);
-	glFlush();
-	//getchar();
-}
 
 /* Initialize states -- called before */
 
-void init()
-{
-	/* set background clear color to black */
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-	/* set current color to white */
-	glColor3f(1.0, 0.0, 0.0);
-
-
-	/* identify the projection matrix that we would like to alter */
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	/* the window will correspond to these world coorinates */
-	gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
-	glViewport(250,250,500,500);
-	/* identify the modeling and viewing matrix that can be modified from here on */
-	/* we leave the routine in this mode in case we want to move the object around */
-	/* or specify the camera */
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	/*doing a second view port*////////////////////////////////////////
-	/*glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(-10.0,10.0,-10.0,10.0);*/
-	
-}
 
 
 #pragma mark region SAPI Speech-to-Text JNN
