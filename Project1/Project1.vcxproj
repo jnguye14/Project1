@@ -65,6 +65,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="JNN_SAPI.h" />
+    <ClInclude Include="glut.h" />
     <ClInclude Include="Main.h" />
   </ItemGroup>
   <ItemGroup>
