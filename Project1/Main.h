@@ -48,6 +48,7 @@
 #include <sapi.h>
 #include <iostream>
 #include <string>
+#include "glut.h"
 
 using namespace std;
 
@@ -68,9 +69,9 @@ HANDLE handles[1]; // event handlers, we really only need one
 //ISpMMSysAudio* pMMSysAudio;
 //SpMMAudioIn* MMAudioIn;
 
-
 bool saidHello = false;
 bool isPlayerOneTurn = true;
+int currentScene = 0;
 bool endGame = false;
 
 enum Command
@@ -106,6 +107,11 @@ int currentCommand;
 string actionLocation;
 
 
+void MainMenuDisplay();
+void UnitSetupDisplay();
+void MainGameDisplay();
+void EndGameDisplay();
+
 int main(int argc, char* argv []);
 
 // JNN: modified SAPI speech-to-text code
@@ -113,6 +119,7 @@ bool SAPIinit(); // returns true if successful
 bool initGrammar(); // returns true if successful
 void SAPIcleanup(); // releases SAPI stuff
 char* listen(); // returns what it heard
+void check_result(const HRESULT& result);
 
 // JNN: game listening functions
 void listenForPiece();
@@ -135,9 +142,3 @@ int getNumber(string location);
 void game();
 void performAction();
 //void doAction(piece unit, int command, string location);
-
-// Elasticboy: sample SAPI speech-to-text code
-int start_listening(const std::string& word);
-ISpRecoGrammar* init_grammar(ISpRecoContext* recoContext, const std::string& command);
-void get_text(ISpRecoContext* reco_context);
-void check_result(const HRESULT& result);

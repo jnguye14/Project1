@@ -4,40 +4,119 @@
 // and also from Elasticboy at
 // http://stackoverflow.com/questions/16547349/sapi-speech-to-text-example
 // September 28, 2013
-int var =0;
+
 #include "Main.h"
-#include "glut.h"
-void timer(int frame)
-{
-	glutTimerFunc(1000/60, timer, frame+1);
-	start_listening("Hello");
-}
 
 void speechWait()
 {
 	glutPostRedisplay();
 }
+
 void display()
 {
 	/* clear the screen*/
 	//glViewport(250,250,500,500);
 	glBegin(GL_POLYGON);
-	glVertex2f(var,-0.5);
+	glVertex2f(-0.5,-0.5);
 	glVertex2f(0.5,-0.5);
+	glVertex2f(-0.5,0.5);
 	glVertex2f(0.5,0.5);
-	glVertex2f(var,0.5);
 	glEnd();
 	glColor3f(0.0,1.0,0.0);
 	glFlush();
 	//getchar();
+
+	switch (currentScene)
+	{
+	case 0: // main menu
+		MainMenuDisplay();
+		break;
+	case 1:	// set up pieces
+		UnitSetupDisplay();
+		break;
+	case 2: // main gain
+		MainGameDisplay();
+		break;
+	case 3: // end game
+		EndGameDisplay();
+	default:
+		cout << "Error, unknown scene" << endl;
+		break;
+	}
 }
+
+#pragma mark region Game Screens
+void MainMenuDisplay()
+{
+	// start button
+	// instructions
+	// credits
+	// if (press start)
+	// currentScene = 1; // UnitSetupDisplay()
+}
+
+void UnitSetupDisplay()
+{
+	// Renders screen
+	
+	// player one and player two set their pieces
+	// gameSetup(); //Look at this method
+	if (isPlayerOneTurn)
+	{
+		// ask player one to set up
+		// after player one finishes set up
+		// isPlayerOneTurn = false;
+	}
+	else
+	{
+		// ask player two to set up
+		// after player two finishes set up
+		// isPlayerOneTurn = true;
+		// currentScene = 2; // MainGameDisplay()
+	}
+}
+
+void MainGameDisplay()
+{
+	// Allen Renders Battle Scene
+
+	// JNN's stuff
+	cout << "Entering main game command loop" << endl;
+	game(); // player one and player two alternate turns until game ends
+
+	// at game over:
+	if (endGame)
+	{
+		//	cout << "\nEnd of Game Demo\n" << endl;
+		//currentScene = 3;
+	}
+}
+
+void EndGameDisplay()
+{
+	//show stats/winner
+	// replay button
+}
+#pragma mark endregion
+
+
 void init()
 {
+	cout << "Initializing SAPI interface" << endl;
+	if (!SAPIinit())
+	{
+		cout << "Error: Failed to initialize SAPI interface. Exiting program." << endl;
+		system("PAUSE");
+		exit(EXIT_FAILURE);
+	}
+	cout << "Initialization complete. " << endl;
+
+	cout << "\nPlease start Windows Recognition if you haven't yet done so." << endl;
+
 	/* set background clear color to black */
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	/* set current color to white */
 	glColor3f(1.0, 0.0, 0.0);
-
 
 	/* identify the projection matrix that we would like to alter */
 	glMatrixMode(GL_PROJECTION);
@@ -54,84 +133,11 @@ void init()
 	/*glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(-10.0,10.0,-10.0,10.0);*/
-	
 }
 
 int main(int argc, char* argv[])
 {
-	cout << "Initializing SAPI interface" << endl;
-	if (!SAPIinit())
-	{
-		cout << "Error: Failed to initialize SAPI interface. Exiting program." << endl;
-		system("PAUSE");
-		return EXIT_FAILURE;
-	}
-	cout << "Initialization complete. " << endl;
-
-	cout << "\nPlease start Windows Recognition if you haven't yet done so." << endl;
-
-	//*
-	cout << "Entering main game loop" << endl;
-	gameSetup(); // player one and player two set their pieces
-	game(); // player one and player two alternate turns until game ends
-	cout << "\nEnd of Game Demo\n" << endl;
-	//*/
-
-	/* //cout << "Say \"Hello\" or \"Goodbye\"" << endl;
-	do
-	{
-		cout << "Listening..." << endl;
-		listen();
-		if (saidHello)
-		{
-			hr = pVoice->Speak(L"<pitch middle = '+10'/>Hello User", 0, NULL);
-		}
-		else
-		{
-			hr = pVoice->Speak(L"<pitch middle = '+10'/>Goodbye User", 0, NULL);
-		}
-	} while (saidHello);
-	//*/
-
-	/* // Initialize COM library
-	if (FAILED(::CoInitialize(NULL))) // difference between NULL and nullptr?
-	{
-		cout << "Error: unable to initialize COM library. Exiting program." << endl;
-		system("PAUSE");
-		return EXIT_FAILURE;
-	}
-
-	cout << "You should start Windows Recognition if you haven't done so yet." << endl;
-
-	// Create SAPI's voice
-	hr = CoCreateInstance(CLSID_SpVoice, NULL, CLSCTX_ALL, IID_ISpVoice, (void **) &pVoice);
-	if (SUCCEEDED(hr))
-	{
-		do
-		{
-			cout << "Say \"Hello\" or \"Goodbye\"" << endl;
-			start_listening("Hello");
-			if (saidHello)
-			{
-				hr = pVoice->Speak(L"<pitch middle = '+10'/>Hello User", 0, NULL);
-			}
-			else
-			{
-				hr = pVoice->Speak(L"<pitch middle = '+10'/>Goodbye User", 0, NULL);
-			}
-		} while (saidHello);
-
-		// Change pitch
-		//hr = pVoice->Speak(L"This sounds normal <pitch middle = '-10'/> but the pitch drops half way through", SPF_IS_XML, NULL);
-		pVoice->Release();
-		pVoice = NULL;
-	}//*/
-
-	//::CoUninitialize();
-	SAPIcleanup();
-		//start_listening("Goodbye");
-	
-		/* create a window, position it, and name it */
+	/* create a window, position it, and name it */
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 	glutInitWindowSize(500, 500);
@@ -141,22 +147,18 @@ int main(int argc, char* argv[])
 	/* create a callback routine for (re-)display */
 	glutIdleFunc(speechWait);
 	glutDisplayFunc(display);
-	glutTimerFunc(1000000/60, timer, 0);
-
+	
 	/* init some states */
 	init();
 	
 	/* entering the event loop */
 	glutMainLoop();
-	system("PAUSE");
+	SAPIcleanup();
 	return EXIT_SUCCESS;
 }
 
 
 /* Initialize states -- called before */
-
-
-
 #pragma mark region SAPI Speech-to-Text JNN
 bool SAPIinit()
 {
@@ -381,6 +383,54 @@ char* listen()
 	// return what it heard as a char*
 	return nstring;
 }
+
+void check_result(const HRESULT& result)
+{
+	if (result == S_OK)
+	{
+		return;
+	}
+
+	string message;
+	switch (result)
+	{
+	case E_ABORT:
+		message = "Error, operation is aborting.";
+		break;
+	case E_ACCESSDENIED:
+		message = "Acces Denied.";
+		break;
+	case E_FAIL:
+		message = "Failure.";
+		break;
+	case E_HANDLE:
+		message = "Handle is not valid.";
+		break;
+	case E_INVALIDARG:
+		message = "One or more arguments are invalids.";
+		break;
+	case E_NOINTERFACE:
+		message = "Interface does not exist.";
+		break;
+	case E_NOTIMPL:
+		message = "Not implemented method.";
+		break;
+	case E_OUTOFMEMORY:
+		message = "Out of memory.";
+		break;
+	case E_POINTER:
+		message = "Invalid pointer.";
+		break;
+	case E_UNEXPECTED:
+		message = "Unexpecter error.";
+		break;
+	default:
+		message = "Unknown : " + to_string(result);
+		break;
+	}
+
+	throw exception(message.c_str());
+}
 #pragma mark endregion
 
 #pragma mark region Game listening functions
@@ -545,37 +595,33 @@ int getNumber(string location)
 void game()
 {
 	// main game loop
-	while (!endGame)
+	if (isPlayerOneTurn)
 	{
-		if (isPlayerOneTurn)
-		{
-			cout << "\nPlayer One's Turn" << endl;
-			cout << "Player One, say location" << endl;
-			system("PAUSE"); // listenForPiece();
-			cout << "Player One, say command" << endl;
-			listenForCommand();
-			cout << "Player One, say location" << endl;
-			system("PAUSE"); // listenForActionLocation();
-			cout << "\nPerforming action" << endl;
-			performAction();
-			isPlayerOneTurn = !isPlayerOneTurn;
-			//endGame = true;
-		}
-		else // player's two turn
-		{
-			cout << "\nPlayer Two's Turn" << endl;
-			cout << "Player Two, say location" << endl;
-			system("PAUSE"); // listenForPiece();
-			cout << "Player Two, say command" << endl;
-			listenForCommand();
-			cout << "Player Two, say location" << endl;
-			system("Pause"); // listenForActionLocation();
-			cout << "\nPerforming action" << endl;
-			performAction();
-			isPlayerOneTurn = !isPlayerOneTurn;
-			//endGame = true;
-		}
+		cout << "\nPlayer One's Turn" << endl;
+		cout << "Player One, say location" << endl;
+		system("PAUSE"); // listenForPiece();
+		cout << "Player One, say command" << endl;
+		listenForCommand();
+		cout << "Player One, say location" << endl;
+		system("PAUSE"); // listenForActionLocation();
 	}
+	else // player's two turn
+	{
+		cout << "\nPlayer Two's Turn" << endl;
+		cout << "Player Two, say location" << endl;
+		system("PAUSE"); // listenForPiece();
+		cout << "Player Two, say command" << endl;
+		listenForCommand();
+		cout << "Player Two, say location" << endl;
+		system("Pause"); // listenForActionLocation();
+		cout << "\nPerforming action" << endl;
+	}
+
+	cout << "\nPerforming action" << endl;
+	performAction();
+	isPlayerOneTurn = !isPlayerOneTurn;
+	// check win game conditions, if
+	//endGame = true;
 }
 
 void performAction()
@@ -625,216 +671,3 @@ void performAction()
 	}
 }
 
-#pragma mark region SAPI speech-to-text Elasticboy
-// This function exits when the word passed as parameter is said by the user
-int start_listening(const string& word)
-{
-	// Create a voice recognizer
-	hr = CoCreateInstance(CLSID_SpSharedRecognizer, nullptr, CLSCTX_ALL, IID_ISpRecognizer, reinterpret_cast<void**>(&recognizer));
-	check_result(hr);
-
-	// Create a context recognizer
-	hr = recognizer->CreateRecoContext(&recoContext);
-	check_result(hr);
-
-	// Disable context so grammar can be added
-	hr = recoContext->Pause(0);
-	check_result(hr);
-
-	// Create grammar recognizer for each grammar, rule, or word
-	recoGrammar = init_grammar(recoContext, word);
-	ISpRecoGrammar* recoGrammar2 = init_grammar(recoContext, "Goodbye");
-
-	// JNN: not sure, double check!
-	hr = recoContext->SetNotifyWin32Event();
-	check_result(hr);
-
-	// Create event handlers
-	handles[0] = recoContext->GetNotifyEventHandle();
-	if (handles[0] == INVALID_HANDLE_VALUE)
-	{
-		check_result(E_FAIL);
-	}
-
-	// Create interest? ...JNN: double check
-	ULONGLONG interest; // interest?
-	interest = SPFEI(SPEI_RECOGNITION);
-	hr = recoContext->SetInterest(interest, interest);
-	check_result(hr);
-
-	// Activate Grammar
-	hr = recoGrammar->SetRuleState(ruleName1, 0, SPRS_ACTIVE);
-	check_result(hr);
-	hr = recoGrammar2->SetRuleState(ruleName1, 0, SPRS_ACTIVE);
-	check_result(hr);
-
-	// Enable context
-	hr = recoContext->Resume(0);
-	check_result(hr);
-
-	// Wait for SAPI to recognize a voice command
-	WaitForMultipleObjects(1, handles, FALSE, INFINITE); // waits here
-	get_text(recoContext);
-
-	if (saidHello)
-	{
-		cout << "Hello user" << endl;
-	}
-	else
-	{
-		cout << "Goodbye user" << endl;
-	}
-
-	recoGrammar->Release();
-	recoGrammar2->Release();
-
-	return EXIT_SUCCESS;
-}
-
-/**
-* Create and initialize the Grammar.
-* Create a rule for the grammar.
-* Add word to the grammar.
-*/
-ISpRecoGrammar* init_grammar(ISpRecoContext* recoContext, const string& command)
-{
-	//HRESULT hr;
-	SPSTATEHANDLE sate;
-
-	ISpRecoGrammar* recoGrammar;
-	hr = recoContext->CreateGrammar(grammarId, &recoGrammar);
-	check_result(hr);
-	
-	WORD langId = MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US); // supports english
-	//WORD langId = MAKELANGID(LANG_FRENCH, SUBLANG_FRENCH); // doesn't support french apparently
-	//WORD langId = MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_US); // neither does it support spanish
-	try
-	{
-		hr = recoGrammar->ResetGrammar(langId);
-		check_result(hr);
-	}
-	catch (exception ex)
-	{
-		langId = GetUserDefaultUILanguage();
-		hr = recoGrammar->ResetGrammar(langId);
-	}
-	
-	// Create rules
-	hr = recoGrammar->GetRule(ruleName1, 0, SPRAF_TopLevel | SPRAF_Active, true, &sate);
-	check_result(hr);
-
-	// Add a word
-	const wstring commandWstr = wstring(command.begin(), command.end());
-	hr = recoGrammar->AddWordTransition(sate, NULL, commandWstr.c_str(), L" ", SPWT_LEXICAL, 1, nullptr);
-	check_result(hr);
-
-	// Commit changes
-	hr = recoGrammar->Commit(0);
-	check_result(hr);
-
-	return recoGrammar;
-}
-
-void get_text(ISpRecoContext* reco_context)
-{
-	const ULONG maxEvents = 10;
-	SPEVENT events[maxEvents];
-
-	ULONG eventCount;
-	hr = reco_context->GetEvents(maxEvents, events, &eventCount);
-
-	// Warning hr equal S_FALSE if everything is OK
-	// but eventCount < requestedEventCount
-	if (!(hr == S_OK || hr == S_FALSE))
-	{
-		check_result(hr);
-	}
-
-	ISpRecoResult* recoResult;
-	recoResult = reinterpret_cast<ISpRecoResult*>(events[0].lParam);
-
-	/* // JNN: trying to make SAPI say what I just said
-	ULONG ulStreamNum = 1;
-	hr = recoResult->SpeakAudio(0, 0, 0, &ulStreamNum);
-	if (SUCCEEDED(hr))
-	{
-		cout << "success" << endl;
-	}
-	else
-	{
-		cout << "fail" << endl;
-	}//*/
-
-	wchar_t* text;
-	hr = recoResult->GetText(SP_GETWHOLEPHRASE, SP_GETWHOLEPHRASE, FALSE, &text, NULL);
-	check_result(hr);
-	
-	// JNN: convert wchar_t* to char*
-	size_t size = (wcslen(text)+1) ; // +1 for '\0'
-	size_t convertedChars = 0;
-	char *nstring = new char[size];
-	wcstombs_s(&convertedChars, nstring, size, text, _TRUNCATE);
-	//*/
-	
-	//cout << nstring << endl;
-	if (strcmp(nstring, "Hello") == 0)
-	{
-		saidHello = true;
-	}
-	else
-	{
-		saidHello = false;
-	}
-
-	CoTaskMemFree(text);
-}
-
-void check_result(const HRESULT& result)
-{
-	if (result == S_OK)
-	{
-		return;
-	}
-
-	string message;
-	switch (result)
-	{
-	case E_ABORT:
-		message = "Error, operation is aborting.";
-		break;
-	case E_ACCESSDENIED:
-		message = "Acces Denied.";
-		break;
-	case E_FAIL:
-		message = "Failure.";
-		break;
-	case E_HANDLE:
-		message = "Handle is not valid.";
-		break;
-	case E_INVALIDARG:
-		message = "One or more arguments are invalids.";
-		break;
-	case E_NOINTERFACE:
-		message = "Interface does not exist.";
-		break;
-	case E_NOTIMPL:
-		message = "Not implemented method.";
-		break;
-	case E_OUTOFMEMORY:
-		message = "Out of memory.";
-		break;
-	case E_POINTER:
-		message = "Invalid pointer.";
-		break;
-	case E_UNEXPECTED:
-		message = "Unexpecter error.";
-		break;
-	default:
-		message = "Unknown : " + to_string(result);
-		break;
-	}
-
-	throw exception(message.c_str());
-}
-
-#pragma mark endregion
