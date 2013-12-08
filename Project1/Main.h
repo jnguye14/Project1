@@ -81,7 +81,8 @@ enum Command
 	Attack,
 	Group,
 	Move,
-	Heal
+	Heal,
+	King
 };
 
 string commandList[] =
@@ -91,7 +92,8 @@ string commandList[] =
 	"Attack",
 	"Group",
 	"Move",
-	"Heal"
+	"Heal",
+	"King"
 };
 
 // 26 letters, ten numbers
