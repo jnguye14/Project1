@@ -49,7 +49,7 @@
 #include <iostream>
 #include <string>
 #include "glut.h"
-
+#include "MasterPiece.h"
 using namespace std;
 
 const ULONGLONG grammarId = 0;
@@ -73,6 +73,10 @@ bool saidHello = false;
 bool isPlayerOneTurn = true;
 int currentScene = 0;
 bool endGame = false;
+
+MasterPiece masterP;
+
+MasterPiece masterP2;
 
 enum Command
 {

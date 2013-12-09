@@ -6,6 +6,7 @@
 // September 28, 2013
 
 #include "Main.h"
+
 void MouseButton(int button, int state, int x, int y)
 {
   // Respond to mouse button presses.
@@ -91,6 +92,10 @@ void UnitSetupDisplay()
 	if (isPlayerOneTurn)
 	{
 		cout<<"Set up piece"<<endl;
+				masterP2.posX=400;
+		masterP2.toString();
+		masterP.toString();
+		cout<<"Pause"<<endl;
 
 		// ask player one to set up
 		// after player one finishes set up
@@ -98,6 +103,10 @@ void UnitSetupDisplay()
 	}
 	else
 	{
+		cout<<"Set up piece"<<endl;
+
+		cout<<"Pause"<<endl;
+
 		// ask player two to set up
 		// after player two finishes set up
 		isPlayerOneTurn = true;
@@ -130,6 +139,12 @@ void EndGameDisplay()
 }
 #pragma mark endregion
 
+void pieceInit()
+{
+	//create arrays
+	//initalize position for the 2 arrays
+	//use this for the position set up
+}
 
 void init()
 {
@@ -168,6 +183,7 @@ void init()
 
 int main(int argc, char* argv[])
 {
+	//masterP.toString();
 	/* create a window, position it, and name it */
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);//GLUT_SINGLE);

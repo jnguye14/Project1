@@ -65,8 +65,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Commander.h" />
     <ClInclude Include="glut.h" />
+    <ClInclude Include="Heavy.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="MasterPiece.h" />
+    <ClInclude Include="Medic.h" />
+    <ClInclude Include="Scout.h" />
+    <ClInclude Include="Sniper.h" />
+    <ClInclude Include="Soldier.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

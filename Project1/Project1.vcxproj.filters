@@ -6,5 +6,31 @@
   <ItemGroup>
     <ClInclude Include="glut.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="MasterPiece.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Commander.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Soldier.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Heavy.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Medic.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Scout.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Sniper.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Models">
+      <UniqueIdentifier>{1b6e2d1e-9eb1-4159-ad71-22c67729e15f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
