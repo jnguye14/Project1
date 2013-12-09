@@ -19,6 +19,9 @@
     <ClInclude Include="Main.h">
       <Filter>Controller</Filter>
     </ClInclude>
+    <ClInclude Include="MasterPiece.h">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="View">
@@ -26,6 +29,9 @@
     </Filter>
     <Filter Include="Controller">
       <UniqueIdentifier>{495818dc-3f2e-4ee8-a0ac-6e0e7f553178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{96e3857c-6674-41d7-bec9-10c40369740d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

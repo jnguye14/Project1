@@ -69,6 +69,7 @@
     <ClInclude Include="JNNSAPI.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MainView.h" />
+    <ClInclude Include="MasterPiece.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

@@ -4,11 +4,16 @@
 #define MAINVIEW_H
 
 #include "glut.h"
+#include "MasterPiece.h"
 #include <mutex>
 
 int currentScene = 0;
 bool isPlayerOneTurn = true;
 bool endGame = false;
+
+MasterPiece masterP;
+
+MasterPiece masterP2;
 
 // TODO: implement mutual exclusion for shared global variables
 //mutex curSceneLock; // for int currentScene;
@@ -38,6 +43,7 @@ void speechWait()
 {
 	glutPostRedisplay();
 }
+
 void motion(int x, int y)
 {
 	printf("(%d, %d)\n", x, y);
@@ -76,6 +82,10 @@ void UnitSetupDisplay()
 	if (isPlayerOneTurn)
 	{
 		cout << "Set up piece" << endl;
+		masterP2.posX = 400;
+		masterP2.toString();
+		masterP.toString();
+		cout << "Pause" << endl;
 
 		// ask player one to set up
 		// after player one finishes set up
@@ -83,6 +93,10 @@ void UnitSetupDisplay()
 	}
 	else
 	{
+		cout << "Set up piece" << endl;
+
+		cout << "Pause" << endl;
+
 		// ask player two to set up
 		// after player two finishes set up
 		isPlayerOneTurn = true;
@@ -136,6 +150,13 @@ void display()
 	}
 	glutSwapBuffers();
 	//glFlush();
+}
+
+void pieceInit()
+{
+	//create arrays
+	//initalize position for the 2 arrays
+	//use this for the position set up
 }
 
 void init()
