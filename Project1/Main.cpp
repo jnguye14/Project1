@@ -4,6 +4,7 @@
 
 int main(int argc, char* argv[])
 {
+	//masterP.toString();
 	/* create a window, position it, and name it */
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);//GLUT_SINGLE);

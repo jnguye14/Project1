@@ -44,7 +44,7 @@
 #include "JNNSAPI.h"
 #include "MainView.h"
 #include <thread>
-
+#include "MasterPiece.h"
 JNNSAPI sapi;
 
 int main(int argc, char* argv []);

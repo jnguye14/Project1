@@ -22,16 +22,26 @@
     <ClInclude Include="MasterPiece.h">
       <Filter>Model</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="View">
-      <UniqueIdentifier>{97f94b74-aa35-42c8-ab4c-1a8b37c156d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Controller">
-      <UniqueIdentifier>{495818dc-3f2e-4ee8-a0ac-6e0e7f553178}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Model">
-      <UniqueIdentifier>{96e3857c-6674-41d7-bec9-10c40369740d}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="MasterPiece.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Commander.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Soldier.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Heavy.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Medic.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Scout.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Sniper.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
