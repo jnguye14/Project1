@@ -1,37 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="JNNSAPI.cpp">
-      <Filter>Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Controller</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="glut.h" />
-    <ClInclude Include="JNNSAPI.h">
-      <Filter>Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="MainView.h">
-      <Filter>View</Filter>
-    </ClInclude>
-    <ClInclude Include="Main.h">
-      <Filter>Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="MasterPiece.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="MasterPiece.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Commander.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Soldier.h">
-      <Filter>Models</Filter>
-    </ClInclude>
     <ClInclude Include="Heavy.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterPiece.h">
       <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="Medic.h">
@@ -43,5 +17,39 @@
     <ClInclude Include="Sniper.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="Soldier.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Commander.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="MainView.h">
+      <Filter>Views</Filter>
+    </ClInclude>
+    <ClInclude Include="JNNSAPI.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Models">
+      <UniqueIdentifier>{52023676-ed7e-4115-ac3d-96e016216cfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Views">
+      <UniqueIdentifier>{a57810c1-d788-402e-96cf-2e3b4bcc61ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controllers">
+      <UniqueIdentifier>{45d02abf-a832-4e3d-b6b0-e0f448194536}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="JNNSAPI.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
