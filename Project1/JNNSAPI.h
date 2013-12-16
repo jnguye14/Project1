@@ -23,11 +23,9 @@ using namespace std;
 
 class JNNSAPI
 {
-public:
-	// JNN: made global since is used everywhere
+private:
 	HRESULT hr; // used to test SAPI results
 	ISpVoice *pVoice;// = nullptr; // voice that speaks to you (not needed)
-private:
 	ISpRecognizer* recognizer;// = nullptr; // voice recognizer
 	ISpRecoContext* recoContext;// = nullptr; // recognition context
 	ISpRecoGrammar* recoGrammar;// = nullptr; // grammar recognizer, needed for each grammar, rule, or word
@@ -52,8 +50,6 @@ public:
 		King
 	};
 	
-	bool saidHello;// = false;
-
 	// 26 letters, ten numbers
 	string locations[26][10];
 
@@ -66,11 +62,11 @@ public:
 	// location of action to perform
 	string actionLocation;
 
+	// SAPI Constructor, Calls SAPIInit() which calls initGrammar()
 	JNNSAPI()
 	{
 		cout << "Initializing SAPI interface" << endl;
 
-		saidHello = false;
 		commandList = {
 			"yellow",
 			"goodbye",
@@ -92,9 +88,34 @@ public:
 		cout << "\nPlease start Windows Recognition if you haven't yet done so." << endl;
 	}
 
+	// SAPI Clean Up
 	~JNNSAPI()
 	{
-		SAPIcleanup();
+		if (pVoice != nullptr)
+		{
+			pVoice->Release();
+			pVoice = nullptr;
+			cout << "Released SAPI's voice" << endl;
+		}
+		if (recognizer != nullptr)
+		{
+			recognizer->Release();
+			recognizer = nullptr;
+			cout << "Released SAPI's recognizer" << endl;
+		}
+		if (recoContext != nullptr)
+		{
+			recoContext->Release();
+			recoContext = nullptr;
+			cout << "Released SAPI's recognition context" << endl;
+		}
+		if (recoGrammar != nullptr)
+		{
+			recoGrammar->Release();
+			recoGrammar = nullptr;
+			cout << "Released SAPI's recognition grammar" << endl;
+		}
+		::CoUninitialize();
 	}
 
 	// JNN: location functions
@@ -102,14 +123,12 @@ public:
 	char getLetter(string location);
 	int getNumber(string location);
 
-	char* listen(); // returns what it heard
 	void Say(string phrase);
+	char* listen(); // returns what it heard
 
 private:
-	// JNN: modified SAPI speech-to-text code
 	bool SAPIinit(); // returns true if successful
 	bool initGrammar(); // returns true if successful
-	void SAPIcleanup(); // releases SAPI stuff
 	void check_result(const HRESULT& result);
 };
 

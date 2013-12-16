@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 
 	/* entering the OpenGL event loop */
 	glutMainLoop();
-	
+
 	controlThread.join(); // pauses until the control thread finishes
 
 	return EXIT_SUCCESS;
@@ -100,9 +100,12 @@ string getLocation(char* command)
 
 int getCommand(char* command)
 {
-	int numberOfCommands = sapi.commandList.size();//sizeof(sapi.commandList) / sizeof(string);
+	int numberOfCommands = sapi.commandList.size();
 	for (int i = 0; i < numberOfCommands; i++)
 	{
+		// for debugging
+		cout << "Heard: " << command << "; Checking With: " << sapi.commandList.at(i) << endl;
+		
 		if (sapi.commandList.at(i).compare(command) == 0)
 		{
 			return i; // index of command, same as Command enum
@@ -144,6 +147,8 @@ void playerSetup()
 // should run on separate thread from display
 void game()
 {
+	sapi.Say("Voice Combattants : The Emblem. A game made by Allen Hsia and Jordan Nguyen. Please press play to start.");
+
 	// continue running this loop while the game lasts
 	while (!endGame)
 	{

@@ -55,9 +55,8 @@ int JNNSAPI::getNumber(string location)
 // see: http://social.msdn.microsoft.com/Forums/en-US/0f749fd8-8a43-4580-b54b-fbf964d68375/convert-stdstring-to-lpcwstr-best-way-in-c?forum=Vsexpressvc
 std::wstring s2ws(const std::string& s)
 {
-	int len;
 	int slength = (int) s.length() + 1;
-	len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
+	int len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
 	wchar_t* buf = new wchar_t[len];
 	MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, buf, len);
 	std::wstring r(buf);
@@ -69,12 +68,50 @@ void JNNSAPI::Say(string phrase)
 {
 	wstring speech(L"<pitch middle = '+10'/>");
 	speech.append(s2ws(phrase));
-	hr = pVoice->Speak(speech.c_str(), 0, NULL);
+	//hr = pVoice->Speak(speech.c_str(), 0, NULL); // defaults
+	hr = pVoice->Speak(speech.c_str(), SVSFlagsAsync, NULL); // asynchronous (i.e. speak in the background)
 	check_result(hr);
 }
 
+char* JNNSAPI::listen()
+{
+	// Wait for SAPI to recognize a voice command
+	WaitForMultipleObjects(1, handles, FALSE, INFINITE); // waits here in an infinite loop
+	const ULONG maxEvents = 10;
+	SPEVENT events[maxEvents];
+
+	ULONG eventCount;
+	hr = recoContext->GetEvents(maxEvents, events, &eventCount);
+	// Warning hr equal S_FALSE if everything is OK, but eventCount < requestedEventCount
+	if (!(hr == S_OK || hr == S_FALSE))
+	{
+		check_result(hr);
+	}
+
+	// reinterprets the event from the handle into a recognizable result
+	ISpRecoResult* recoResult;
+	recoResult = reinterpret_cast<ISpRecoResult*>(events[0].lParam);
+
+	// get the recognition result as a wchar_t*
+	wchar_t* text;
+	hr = recoResult->GetText(SP_GETWHOLEPHRASE, SP_GETWHOLEPHRASE, FALSE, &text, NULL);
+	check_result(hr);
+
+	// convert wchar_t* to char* (which is more meaningul to me)
+	size_t size = (wcslen(text) + 1); // +1 for '\0'
+	size_t convertedChars = 0;
+	char* nstring = new char[size];
+	wcstombs_s(&convertedChars, nstring, size, text, _TRUNCATE);
+
+	// get rid of wchar_t* since it was a temporary variable
+	CoTaskMemFree(text);
+
+	// return what it heard as a char*
+	return nstring;
+}
+
 /* Initialize states -- called before */
-#pragma mark region SAPI Speech-to-Text JNN
+#pragma mark region SAPI Init Functions
 bool JNNSAPI::SAPIinit()
 {
 	// Initialize COM library
@@ -232,72 +269,7 @@ bool JNNSAPI::initGrammar()
 
 	return true;
 }
-
-void JNNSAPI::SAPIcleanup()
-{
-	if (pVoice != nullptr)
-	{
-		pVoice->Release();
-		pVoice = nullptr;
-		cout << "Released SAPI's voice" << endl;
-	}
-	if (recognizer != nullptr)
-	{
-		recognizer->Release();
-		recognizer = nullptr;
-		cout << "Released SAPI's recognizer" << endl;
-	}
-	if (recoContext != nullptr)
-	{
-		recoContext->Release();
-		recoContext = nullptr;
-		cout << "Released SAPI's recognition context" << endl;
-	}
-	if (recoGrammar != nullptr)
-	{
-		recoGrammar->Release();
-		recoGrammar = nullptr;
-		cout << "Released SAPI's recognition grammar" << endl;
-	}
-	::CoUninitialize();
-}
-
-char* JNNSAPI::listen()
-{
-	// Wait for SAPI to recognize a voice command
-	WaitForMultipleObjects(1, handles, FALSE, INFINITE); // waits here in an infinite loop
-	const ULONG maxEvents = 10;
-	SPEVENT events[maxEvents];
-
-	ULONG eventCount;
-	hr = recoContext->GetEvents(maxEvents, events, &eventCount);
-	// Warning hr equal S_FALSE if everything is OK, but eventCount < requestedEventCount
-	if (!(hr == S_OK || hr == S_FALSE))
-	{
-		check_result(hr);
-	}
-
-	// reinterprets the event from the handle into a recognizable result
-	ISpRecoResult* recoResult;
-	recoResult = reinterpret_cast<ISpRecoResult*>(events[0].lParam);
-
-	// get the recognition result as a wchar_t*
-	wchar_t* text;
-	hr = recoResult->GetText(SP_GETWHOLEPHRASE, SP_GETWHOLEPHRASE, FALSE, &text, NULL);
-	check_result(hr);
-
-	// convert wchar_t* to char* (which is more meaningul to me)
-	size_t size = (wcslen(text) + 1); // +1 for '\0'
-	size_t convertedChars = 0;
-	char* nstring = new char[size];
-	wcstombs_s(&convertedChars, nstring, size, text, _TRUNCATE);
-
-	// get rid of wchar_t* since it was a temporary variable
-	CoTaskMemFree(text);
-
-	// return what it heard as a char*
-	return nstring;
-}
+#pragma mark endregion
 
 void JNNSAPI::check_result(const HRESULT& result)
 {
@@ -346,4 +318,3 @@ void JNNSAPI::check_result(const HRESULT& result)
 
 	throw exception(message.c_str());
 }
-#pragma mark endregion
