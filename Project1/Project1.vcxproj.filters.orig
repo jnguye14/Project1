@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="JNNSAPI.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="glut.h" />
+<<<<<<< HEAD
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="MasterPiece.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Commander.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Soldier.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Heavy.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Medic.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Scout.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Sniper.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Models">
+      <UniqueIdentifier>{1b6e2d1e-9eb1-4159-ad71-22c67729e15f}</UniqueIdentifier>
+=======
+    <ClInclude Include="JNNSAPI.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="MainView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterPiece.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="View">
+      <UniqueIdentifier>{97f94b74-aa35-42c8-ab4c-1a8b37c156d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller">
+      <UniqueIdentifier>{495818dc-3f2e-4ee8-a0ac-6e0e7f553178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{96e3857c-6674-41d7-bec9-10c40369740d}</UniqueIdentifier>
+>>>>>>> 2da49cc49dc7b69818fd2364a5c1ca7967441f54
+    </Filter>
+  </ItemGroup>
+</Project>

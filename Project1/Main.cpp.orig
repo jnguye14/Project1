@@ -1,0 +1,424 @@
+// Jordan Nguyen and Allen Hsia start
+
+#include "Main.h"
+<<<<<<< HEAD
+
+void MouseButton(int button, int state, int x, int y)
+{
+  // Respond to mouse button presses.
+  // If button1 pressed, mark this state so we know in motion function.
+	if(button==GLUT_LEFT_BUTTON)
+	{
+		if(state==GLUT_UP)
+		{
+		//printf("(%d, %d)\n",x, y);
+			if((x>224)&&(x<274)&&(y>226)&&(y<275))
+			{
+				currentScene=1;
+				glutPostRedisplay();
+			}
+		printf("%s","pressed button");
+		}
+	}
+}
+
+void speechWait()
+{
+	glutPostRedisplay();
+}
+void motion(int x, int y)
+{
+	printf("(%d, %d)\n",x, y);
+}
+
+void display()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	switch (currentScene)
+	{
+	case 0: // main menu
+		MainMenuDisplay();
+		break;
+	case 1:	// set up pieces
+		UnitSetupDisplay();		
+		break;
+	case 2: // main gain
+		MainGameDisplay();
+		break;
+	case 3: // end game
+		EndGameDisplay();
+	default:
+		cout << "Error, unknown scene" << endl;
+		break;
+	}
+	glutSwapBuffers();
+	//glFlush();
+}
+
+#pragma mark region Game Screens
+void MainMenuDisplay()
+{
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glVertex2f(-0.1,-0.1);
+	glVertex2f(0.1,-0.1);
+	glVertex2f(0.1,0.1);
+	glVertex2f(-0.1,0.1);
+	glEnd();
+	glColor3f(0.0,0.0,1.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glVertex2f(-0.5,-0.5);
+	glVertex2f(-0.3,-0.5);
+	glVertex2f(-0.3,-0.3);
+	glVertex2f(-0.5,-0.3);
+	glColor3f(0.0,0.0,1.0);
+	glEnd();
+	glPopMatrix();
+}
+
+void UnitSetupDisplay()
+{
+	// Renders screen
+
+	// player one and player two set their pieces
+	// gameSetup(); //Look at this method
+	if (isPlayerOneTurn)
+	{
+		cout<<"Set up piece"<<endl;
+				masterP2.posX=400;
+		masterP2.toString();
+		masterP.toString();
+		cout<<"Pause"<<endl;
+
+		// ask player one to set up
+		// after player one finishes set up
+		isPlayerOneTurn = false;
+	}
+	else
+	{
+		cout<<"Set up piece"<<endl;
+
+		cout<<"Pause"<<endl;
+
+		// ask player two to set up
+		// after player two finishes set up
+		isPlayerOneTurn = true;
+		
+	}
+	currentScene = 2; // MainGameDisplay()
+}
+
+void MainGameDisplay()
+{
+	// Allen Renders Battle Scene
+
+	// JNN's stuff
+	cout << "Entering main game command loop" << endl;
+	game(); // player one and player two alternate turns until game ends
+
+	// at game over:
+	if (endGame)
+	{
+		cout << "\nEnd of Game Demo\n" << endl;
+		//currentScene = 3;
+	}
+}
+
+void EndGameDisplay()
+{
+	printf("%s","YOU ARE NOW IN THE END GAME\n\n\n\nEVERYONE IS A WINNAR!");
+	//show stats/winner
+	// replay button
+}
+#pragma mark endregion
+
+void pieceInit()
+{
+	//create arrays
+	//initalize position for the 2 arrays
+	//use this for the position set up
+}
+
+void init()
+{
+	cout << "Initializing SAPI interface" << endl;
+	if (!SAPIinit())
+	{
+		cout << "Error: Failed to initialize SAPI interface. Exiting program." << endl;
+		system("PAUSE");
+		exit(EXIT_FAILURE);
+	}
+	cout << "Initialization complete. " << endl;
+
+	cout << "\nPlease start Windows Recognition if you haven't yet done so." << endl;
+
+	/* set background clear color to black */
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	/* set current color to white */
+	glColor3f(1.0, 0.0, 0.0);
+
+	/* identify the projection matrix that we would like to alter */
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	/* the window will correspond to these world coorinates */
+	gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
+	glViewport(250,250,500,500);
+	/* identify the modeling and viewing matrix that can be modified from here on */
+	/* we leave the routine in this mode in case we want to move the object around */
+	/* or specify the camera */
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	/*doing a second view port*////////////////////////////////////////
+	/*glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-10.0,10.0,-10.0,10.0);*/
+}
+=======
+>>>>>>> 2da49cc49dc7b69818fd2364a5c1ca7967441f54
+
+int main(int argc, char* argv[])
+{
+	//masterP.toString();
+	/* create a window, position it, and name it */
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);//GLUT_SINGLE);
+	glutInitWindowSize(500, 500);
+	glutInitWindowPosition(200, 200);
+	glutCreateWindow("basics");
+	
+	/* create a callback routine for (re-)display */
+	glutIdleFunc(speechWait);
+	glutDisplayFunc(display);
+	glutMotionFunc(motion);
+	glutMouseFunc(MouseButton);
+	/* init some states */
+	init();
+
+	// runs the game in a separate thread from the OpenGL GUI
+	thread controlThread(game);
+
+	/* entering the OpenGL event loop */
+	glutMainLoop();
+	
+	controlThread.join(); // pauses until the control thread finishes
+
+	return EXIT_SUCCESS;
+}
+
+#pragma mark region Game listening functions
+void listenForPiece()
+{
+	// listen for location
+	string location = getLocation(sapi.listen());
+	//bool again = true;
+	//while(again)
+	//{
+		while (location.compare("ERROR") == 0) // while invalid location
+		{
+			cout << "Invalid location. Please repeat your location" << endl;
+			location = getLocation(sapi.listen());
+		}
+		//if(isPieceAtLocation(location))
+		//{
+			// again = false;
+		//}
+		//else
+		//{
+			//cout << "No piece at location. Please repeat a location" << endl;
+			//again = true;
+			// location = getLocation(location);
+		//}
+	//}
+		sapi.pieceLocation = location;
+}
+
+void listenForCommand()
+{
+	// listen for command
+	int command = getCommand(sapi.listen());
+	while(command == -1) // while command is invalid
+	{
+		cout << "Invalid command. Please repeat your command" << endl;
+		command = getCommand(sapi.listen());
+	}
+	sapi.currentCommand = command;
+}
+
+void listenForActionLocation()
+{
+	char* heard = sapi.listen();
+	// while (heard != validlocation)
+	// {
+	//		heard = listen();
+	//      if(location within piece.range)
+	//			able to perform action
+	//		else, choose another location
+	// }
+	// actionLocation = heard;
+}
+
+string getLocation(char* command)
+{
+	for (int i = 0; i < 26; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			if (sapi.locations[i][j].compare(command) == 0)
+			{
+				// location found, return it
+				return sapi.locations[i][j];
+			}
+		}
+	}
+	return "ERROR"; // invalid location
+}
+
+int getCommand(char* command)
+{
+	int numberOfCommands = sapi.commandList.size();//sizeof(sapi.commandList) / sizeof(string);
+	for (int i = 0; i < numberOfCommands; i++)
+	{
+		if (sapi.commandList.at(i).compare(command) == 0)
+		{
+			return i; // index of command, same as Command enum
+		}
+	}
+	return -1; // invalid command
+}
+#pragma mark endregion
+
+#pragma mark region Setup
+void gameSetup()
+{
+	cout << "\nSetting up game parameters" << endl;
+	// set up options/settings if time permits us to add functionality	
+	playerSetup();
+	cout << "Game set up complete" << endl;
+	system("PAUSE");
+}
+
+void playerSetup()
+{
+	// set player pieces in their correct places
+	if (isPlayerOneTurn) // player 1's turn to set his/her pieces
+	{
+		cout << "Player One, set pieces" << endl;
+		system("PAUSE");
+		isPlayerOneTurn = !isPlayerOneTurn;
+		playerSetup();
+	}
+	else // player 2's turn to set his/her pieces
+	{
+		cout << "Player Two, set pieces" << endl;
+		system("PAUSE");
+		isPlayerOneTurn = !isPlayerOneTurn;
+	}
+}
+#pragma mark endregion
+
+// should run on separate thread from display
+void game()
+{
+	// continue running this loop while the game lasts
+	while (!endGame)
+	{
+		switch (currentScene)
+		{
+		case 0: // main menu, do nothing
+			break;
+		case 1: // set up pieces
+			break;
+		case 2: // main game
+			MainGameControl();
+		default: // unknown scene, do nothing (display should display error message)
+			break;
+		}
+	}
+}
+
+void MainGameControl()
+{
+	if (isPlayerOneTurn)
+	{
+		cout << "\nPlayer One's Turn" << endl;
+		cout << "Player One, say location" << endl;
+		system("PAUSE"); // listenForPiece();
+		cout << "Player One, say command" << endl;
+		listenForCommand();
+		cout << "Player One, say location" << endl;
+		system("PAUSE"); // listenForActionLocation();
+	}
+	else // player's two turn
+	{
+		cout << "\nPlayer Two's Turn" << endl;
+		cout << "Player Two, say location" << endl;
+		system("PAUSE"); // listenForPiece();
+		cout << "Player Two, say command" << endl;
+		listenForCommand();
+		cout << "Player Two, say location" << endl;
+		system("Pause"); // listenForActionLocation();
+		cout << "\nPerforming action" << endl;
+	}
+
+	cout << "\nPerforming action" << endl;
+	performAction();
+
+	isPlayerOneTurn = !isPlayerOneTurn;
+
+	// check win game conditions, if
+	//endGame = true; // change current scene
+}
+
+void performAction()
+{
+	switch (sapi.currentCommand)
+	{
+	case sapi.Hello:
+		sapi.Say("Hello User");
+		cout << "Hello User" << endl;
+		break;
+	case sapi.Goodbye:
+		sapi.Say("Goodbye User");
+		cout << "Goodbye User" << endl;
+		endGame = true;
+		break;
+	case sapi.Attack:
+		sapi.Say("Attacking Piece");
+		cout << sapi.pieceLocation << " attacking opponent " << sapi.actionLocation << endl;
+		//if(attackedPiece == defeated)
+		//{
+		// if the king/commander is defeated, or if the king/commander is the last one standing
+		//if(attackedPiece == king/commander || otherPlayer'sNumberPieces == 1)
+		//{
+		//endGame = true;
+		//isPlayerOneWinner = isPlayerOneTurn;
+		//}
+		//}
+		break;
+	case sapi.Group:
+		sapi.Say("Grouping Together");
+		cout << "grouping piece " << sapi.pieceLocation << " together with group " << sapi.actionLocation << endl;
+		break;
+	case sapi.Move:
+		// if(move to enemy space) currentCommand = Attack; performAction(); //autoattack;
+		// else if(move to friendly space) currentCommand = Group; performAction(); // autogroup;
+		// else: move unit to location
+		sapi.Say("Moving Piece");
+		cout << "moving " << sapi.pieceLocation << " to location" << sapi.actionLocation << endl;
+		break;
+	case sapi.Heal:
+		sapi.Say("Healing Piece");
+		cout << sapi.pieceLocation << " healing piece " << sapi.actionLocation << endl;
+		break;
+	case sapi.King:
+
+		break;
+	default:
+		cout << "unknown command" << endl;
+		break;
+	}
+}
+
