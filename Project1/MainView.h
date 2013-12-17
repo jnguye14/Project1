@@ -6,7 +6,7 @@
 #include "glut.h"
 #include "MasterPiece.h"
 #include <mutex>
-
+#include <sstream>
 int currentScene = 0;
 bool isPlayerOneTurn = true;
 bool endGame = false;
@@ -29,7 +29,11 @@ void MouseButton(int button, int state, int x, int y)
 		if (state == GLUT_UP)
 		{
 			//printf("(%d, %d)\n",x, y);
-			if ((x > 224) && (x < 274) && (y>226) && (y < 275))
+			if ((x > 325) && (x < 400) && (y>225) && (y < 275))
+			{
+				exit(0);
+			}
+			if ((x > 100) && (x < 175) && (y>225) && (y < 275))
 			{
 				currentScene = 1;
 				glutPostRedisplay();
@@ -52,25 +56,53 @@ void motion(int x, int y)
 #pragma mark region Game Screens
 void MainMenuDisplay()
 {
-	glPushMatrix();
-	glBegin(GL_POLYGON);
-	glVertex2f(-0.1, -0.1);
-	glVertex2f(0.1, -0.1);
-	glVertex2f(0.1, 0.1);
-	glVertex2f(-0.1, 0.1);
-	glEnd();
-	glColor3f(0.0, 0.0, 1.0);
-	glPopMatrix();
 
 	glPushMatrix();
 	glBegin(GL_POLYGON);
-	glVertex2f(-0.5, -0.5);
-	glVertex2f(-0.3, -0.5);
-	glVertex2f(-0.3, -0.3);
-	glVertex2f(-0.5, -0.3);
 	glColor3f(0.0, 0.0, 1.0);
+	glVertex2f(-0.6, -0.1);
+	glVertex2f(-0.6, 0.1);
+	glVertex2f(-0.3, 0.1);
+	glVertex2f(-0.3, -0.1);
 	glEnd();
 	glPopMatrix();
+
+	glColor3f(1.0,1.0,1.0);
+	glRasterPos2f(-0.54,-0.03);
+	stringstream ss;
+	ss<<"PLAY";
+	string play = ss.str();
+	for(int i =0;i<play.length();i++){
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,play[i]);
+	}
+
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.0, 1.0);
+	glVertex2f(0.6, -0.1);
+	glVertex2f(0.6, 0.1);
+	glVertex2f(0.3, 0.1);
+	glVertex2f(0.3, -0.1);
+	glEnd();
+	glPopMatrix();
+	
+	glColor3f(1.0,1.0,1.0);
+	glRasterPos2f(0.35,-0.03);
+	stringstream sss;
+	sss<<"QUIT";
+	string Quit = sss.str();
+	for(int i =0;i<Quit.length();i++){
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,Quit[i]);
+	}
+
+	glColor3f(1.0,1.0,1.0);
+	glRasterPos2f(-0.28,0.5);
+	stringstream titleStream;
+	titleStream<<"THE EMBLEMS!";
+	string title = titleStream.str();
+	for(int i =0;i<title.length();i++){
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,title[i]);
+	}
 }
 
 void UnitSetupDisplay()
