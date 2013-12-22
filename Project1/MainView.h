@@ -109,36 +109,36 @@ void UnitSetupDisplay()
 
 	// player one and player two set their pieces
 	// gameSetup(); //Look at this method
-	if (isPlayerOneTurn)
-	{
+	//if (isPlayerOneTurn)
+	//{
 		cout << "Set up piece" << endl;
-		cout<<"commander posX"<<masterP1.commander.getPosX()<<endl;
-		cout<<"heavy posX"<<masterP1.heavy.getPosX()<<endl;
-		cout<<"medic posX"<<masterP1.medic.getPosX()<<endl;
-		cout<<"scout posX"<<masterP1.scout.getPosX()<<endl;
-		cout<<"sniper posX"<<masterP1.sniper.getPosX()<<endl;
-		cout<<"soldier posX"<<masterP1.soldier.getPosX()<<endl;
+		cout<<"P1 commander posX"<<masterP1.commander.getPosX()<<endl;
+		cout<<"P1 heavy posX"<<masterP1.heavy.getPosX()<<endl;
+		cout<<"P1 medic posX"<<masterP1.medic.getPosX()<<endl;
+		cout<<"P1 scout posX"<<masterP1.scout.getPosX()<<endl;
+		cout<<"P1 sniper posX"<<masterP1.sniper.getPosX()<<endl;
+		cout<<"P1 soldier posX"<<masterP1.soldier.getPosX()<<endl;
 		cout << "Pause" << endl;
 
 		// ask player one to set up
 		// after player one finishes set up
-		isPlayerOneTurn = false;
-	}
-	else
-	{
+		//isPlayerOneTurn = false;
+	//}
+	//else
+	//{
 		cout << "Set up piece" << endl;
-		cout<<"commander posY"<<masterP2.commander.getPosY()<<endl;
-		cout<<"heavy posY"<<masterP2.heavy.getPosY()<<endl;
-		cout<<"medic posY"<<masterP2.medic.getPosY()<<endl;
-		cout<<"scout posY"<<masterP2.scout.getPosY()<<endl;
-		cout<<"sniper posY"<<masterP2.sniper.getPosY()<<endl;
-		cout<<"soldier posY"<<masterP2.soldier.getPosY()<<endl;
+		cout<<"P2 commander posY"<<masterP2.commander.getPosY()<<endl;
+		cout<<"P2 heavy posY"<<masterP2.heavy.getPosY()<<endl;
+		cout<<"P2 medic posY"<<masterP2.medic.getPosY()<<endl;
+		cout<<"P2 scout posY"<<masterP2.scout.getPosY()<<endl;
+		cout<<"P2 sniper posY"<<masterP2.sniper.getPosY()<<endl;
+		cout<<"P2 soldier posY"<<masterP2.soldier.getPosY()<<endl;
 		cout << "Pause" << endl;
 
 		// ask player two to set up
 		// after player two finishes set up
-		isPlayerOneTurn = true;
-	}
+		//isPlayerOneTurn = true;
+	//}
 	currentScene = 2; // MainGameDisplay()
 }
 
