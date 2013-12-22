@@ -18,12 +18,27 @@
 class MasterPiece
 {
 public:
+	Heavy heavy;
+	Commander commander;
+	Medic medic;
+	Scout scout;
+	Sniper sniper;
+	Soldier soldier;
+
 	float posX;
 	float posY;
+	float health;
+	float movement;
+	float attackDamage;
+	float attackRange;
 
 	MasterPiece(){
-		posX = 200;
-		posY = 100;
+		posX = 0;
+		posY = 0;
+		health = 0;
+		movement = 0;
+		attackDamage = 0;
+		attackRange = 0;
 	}
 	~MasterPiece(){}
 

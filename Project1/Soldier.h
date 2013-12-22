@@ -20,11 +20,38 @@ public:
 	float attackRange;
 
 	Soldier(){
-		posX = 200;
-		posY = 100;
+		posX = 600;
+		posY = 600;
+		health = 600;
+		movement = 600;
+		attackDamage = 600;
+		attackRange = 600;
 	}
 	~Soldier(){}
-
+		float getPosX()
+	{
+		return posX;
+	}
+	float getPosY()
+	{
+		return posY;
+	}
+	float getHealth()
+	{
+		return health;
+	}
+	float getMovement()
+	{
+		return movement;
+	}
+	float getAttackDamage()
+	{
+		return attackDamage;
+	}
+	float getAttackRange()
+	{
+		return attackRange;
+	}
 	void toString()
 	{
 		printf("%s \n","This is the soldier");

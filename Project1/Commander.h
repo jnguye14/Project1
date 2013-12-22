@@ -20,11 +20,38 @@ public:
 	float attackRange;
 	
 	Commander(){
-		posX = 200;
+		posX = 100;
 		posY = 100;
+		health = 100;
+		movement = 100;
+		attackDamage = 100;
+		attackRange = 100;
 	}
 	~Commander(){}
-
+		float getPosX()
+	{
+		return posX;
+	}
+	float getPosY()
+	{
+		return posY;
+	}
+	float getHealth()
+	{
+		return health;
+	}
+	float getMovement()
+	{
+		return movement;
+	}
+	float getAttackDamage()
+	{
+		return attackDamage;
+	}
+	float getAttackRange()
+	{
+		return attackRange;
+	}
 	void toString()
 	{
 		printf("%s \n","This is the Commander");

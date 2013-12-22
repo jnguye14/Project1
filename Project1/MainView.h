@@ -11,10 +11,8 @@ int currentScene = 0;
 bool isPlayerOneTurn = true;
 bool endGame = false;
 
-MasterPiece masterP;
-
+MasterPiece masterP1;
 MasterPiece masterP2;
-
 // TODO: implement mutual exclusion for shared global variables
 //mutex curSceneLock; // for int currentScene;
 //mutex playerTurnLock; // for bool isPlayerOneTurn;
@@ -114,9 +112,12 @@ void UnitSetupDisplay()
 	if (isPlayerOneTurn)
 	{
 		cout << "Set up piece" << endl;
-		masterP2.posX = 400;
-		masterP2.toString();
-		masterP.toString();
+		cout<<"commander posX"<<masterP1.commander.getPosX()<<endl;
+		cout<<"heavy posX"<<masterP1.heavy.getPosX()<<endl;
+		cout<<"medic posX"<<masterP1.medic.getPosX()<<endl;
+		cout<<"scout posX"<<masterP1.scout.getPosX()<<endl;
+		cout<<"sniper posX"<<masterP1.sniper.getPosX()<<endl;
+		cout<<"soldier posX"<<masterP1.soldier.getPosX()<<endl;
 		cout << "Pause" << endl;
 
 		// ask player one to set up
@@ -126,7 +127,12 @@ void UnitSetupDisplay()
 	else
 	{
 		cout << "Set up piece" << endl;
-
+		cout<<"commander posY"<<masterP2.commander.getPosY()<<endl;
+		cout<<"heavy posY"<<masterP2.heavy.getPosY()<<endl;
+		cout<<"medic posY"<<masterP2.medic.getPosY()<<endl;
+		cout<<"scout posY"<<masterP2.scout.getPosY()<<endl;
+		cout<<"sniper posY"<<masterP2.sniper.getPosY()<<endl;
+		cout<<"soldier posY"<<masterP2.soldier.getPosY()<<endl;
 		cout << "Pause" << endl;
 
 		// ask player two to set up

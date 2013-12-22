@@ -20,11 +20,38 @@ public:
 	float attackRange;
 	
 	Scout(){
-		posX = 200;
-		posY = 100;
+		posX = 400;
+		posY = 400;
+		health = 400;
+		movement = 400;
+		attackDamage = 400;
+		attackRange = 400;
 	}
 	~Scout(){}
-
+		float getPosX()
+	{
+		return posX;
+	}
+	float getPosY()
+	{
+		return posY;
+	}
+	float getHealth()
+	{
+		return health;
+	}
+	float getMovement()
+	{
+		return movement;
+	}
+	float getAttackDamage()
+	{
+		return attackDamage;
+	}
+	float getAttackRange()
+	{
+		return attackRange;
+	}
 	void toString()
 	{
 		printf("%s \n","This is the scout");

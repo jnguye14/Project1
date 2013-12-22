@@ -20,11 +20,38 @@ public:
 	float attackRange;
 	
 	Sniper(){
-		posX = 200;
-		posY = 100;
+		posX = 500;
+		posY = 500;		
+		health = 500;
+		movement = 500;
+		attackDamage = 500;
+		attackRange = 500;
 	}
 	~Sniper(){}
-
+		float getPosX()
+	{
+		return posX;
+	}
+	float getPosY()
+	{
+		return posY;
+	}
+	float getHealth()
+	{
+		return health;
+	}
+	float getMovement()
+	{
+		return movement;
+	}
+	float getAttackDamage()
+	{
+		return attackDamage;
+	}
+	float getAttackRange()
+	{
+		return attackRange;
+	}
 	void toString()
 	{
 		printf("%s \n","This is the sniper");
