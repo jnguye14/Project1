@@ -8,6 +8,7 @@
 #include <string>
 #include "glut.h"
 #include "Main.h"
+#include "MasterPiece.h"
 
 class Heavy
 {

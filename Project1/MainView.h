@@ -5,14 +5,23 @@
 
 #include "glut.h"
 #include "MasterPiece.h"
+#include "Commander.h"
+#include "Heavy.h"
+#include "Medic.h"
+#include "Scout.h"
+#include "Sniper.h"
+#include "Soldier.h"
 #include <mutex>
 #include <sstream>
 int currentScene = 0;
+int playerWinner = 0;
 bool isPlayerOneTurn = true;
 bool endGame = false;
 
 MasterPiece masterP1;
 MasterPiece masterP2;
+vector <MasterPiece> unitList1;
+vector <MasterPiece> unitList2;
 // TODO: implement mutual exclusion for shared global variables
 //mutex curSceneLock; // for int currentScene;
 //mutex playerTurnLock; // for bool isPlayerOneTurn;
@@ -111,7 +120,10 @@ void UnitSetupDisplay()
 	// gameSetup(); //Look at this method
 	//if (isPlayerOneTurn)
 	//{
-		cout << "Set up piece" << endl;
+	unitList1.push_back(masterP1);
+	
+	//unitList1.push_back(masterP1.heavy);
+		/*cout << "Set up piece" << endl;
 		cout<<"P1 commander posX"<<masterP1.commander.getPosX()<<endl;
 		cout<<"P1 heavy posX"<<masterP1.heavy.getPosX()<<endl;
 		cout<<"P1 medic posX"<<masterP1.medic.getPosX()<<endl;
@@ -133,34 +145,50 @@ void UnitSetupDisplay()
 		cout<<"P2 scout posY"<<masterP2.scout.getPosY()<<endl;
 		cout<<"P2 sniper posY"<<masterP2.sniper.getPosY()<<endl;
 		cout<<"P2 soldier posY"<<masterP2.soldier.getPosY()<<endl;
-		cout << "Pause" << endl;
+		cout << "Pause" << endl;*/
 
 		// ask player two to set up
 		// after player two finishes set up
 		//isPlayerOneTurn = true;
 	//}
-	currentScene = 2; // MainGameDisplay()
+	//currentScene = 2; // MainGameDisplay()
 }
 
 void MainGameDisplay()
 {
 	// Allen Renders Battle Scene
-
+	
 	// JNN's stuff
 	//cout << "Entering main game command loop" << endl;
 	//game(); // player one and player two alternate turns until game ends
-
+	if(unitList1.size()==0)
+	{
+		endGame=true;
+		playerWinner=2;
+	}
+	else if(unitList2.size()==0)
+	{
+		endGame=true;
+		playerWinner=1;
+	}
 	// at game over:
 	if (endGame)
 	{
 		cout << "\nEnd of Game Demo\n" << endl;
-		//currentScene = 3;
+		currentScene = 3;
 	}
 }
 
 void EndGameDisplay()
 {
-	printf("%s", "YOU ARE NOW IN THE END GAME\n\n\n\nEVERYONE IS A WINNAR!");
+	glColor3f(1.0,1.0,1.0);
+	glRasterPos2f(-0.28,0.5);
+	stringstream EndText;
+	EndText<<"Player "<<playerWinner<< " is the winner!";
+	string endGame = EndText.str();
+	for(int i =0;i<endGame.length();i++){
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,endGame[i]);
+	}
 	//show stats/winner
 	// replay button
 }

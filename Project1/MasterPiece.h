@@ -18,7 +18,7 @@
 class MasterPiece
 {
 public:
-	Heavy heavy;
+	/*Heavy heavy;
 	Commander commander;
 	Medic medic;
 	Scout scout;
@@ -30,22 +30,17 @@ public:
 	float health;
 	float movement;
 	float attackDamage;
-	float attackRange;
-
+	float attackRange;*/
+	
 	MasterPiece(){
-		posX = 0;
-		posY = 0;
-		health = 0;
-		movement = 0;
-		attackDamage = 0;
-		attackRange = 0;
+
 	}
 	~MasterPiece(){}
 
 	void toString()
 	{
 		printf("%s \n","This is the masterpiece");
-		printf("%f \n %f", posX, posY);
+		//printf("%f \n %f", posX, posY);
 	}
 	void drawPiece()
 	{
