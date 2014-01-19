@@ -13,15 +13,17 @@
 #include "Soldier.h"
 #include <mutex>
 #include <sstream>
+
 int currentScene = 0;
 int playerWinner = 0;
 bool isPlayerOneTurn = true;
 bool endGame = false;
 
-MasterPiece masterP1;
-MasterPiece masterP2;
-vector <MasterPiece> unitList1;
-vector <MasterPiece> unitList2;
+Heavy masterP1;
+Medic masterP2;
+vector <MasterPiece*> unitList1;
+vector <MasterPiece*> unitList2;
+
 // TODO: implement mutual exclusion for shared global variables
 //mutex curSceneLock; // for int currentScene;
 //mutex playerTurnLock; // for bool isPlayerOneTurn;
@@ -119,10 +121,12 @@ void UnitSetupDisplay()
 	// player one and player two set their pieces
 	// gameSetup(); //Look at this method
 	//if (isPlayerOneTurn)
-	//{
-	unitList1.push_back(masterP1);
-	
-	//unitList1.push_back(masterP1.heavy);
+	//{	
+	unitList1.push_back(&masterP1);
+	unitList1.push_back(&masterP2);
+	cout<<endl<<endl<<endl;
+	unitList1.at(0)->toString();
+	unitList1.at(1)->toString();
 		/*cout << "Set up piece" << endl;
 		cout<<"P1 commander posX"<<masterP1.commander.getPosX()<<endl;
 		cout<<"P1 heavy posX"<<masterP1.heavy.getPosX()<<endl;

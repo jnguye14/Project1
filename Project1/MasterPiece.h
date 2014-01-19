@@ -8,53 +8,34 @@
 #include <string>
 #include "glut.h"
 #include "Main.h"
-#include "Commander.h"
-#include "Heavy.h"
-#include "Medic.h"
-#include "Scout.h"
-#include "Sniper.h"
-#include "Soldier.h"
 
 class MasterPiece
 {
-public:
-	/*Heavy heavy;
-	Commander commander;
-	Medic medic;
-	Scout scout;
-	Sniper sniper;
-	Soldier soldier;
-
+protected:
 	float posX;
 	float posY;
 	float health;
 	float movement;
 	float attackDamage;
-	float attackRange;*/
+	float attackRange;
+public:
 	
 	MasterPiece(){
-
 	}
 	~MasterPiece(){}
 
-	void toString()
+	virtual void toString()-
 	{
-		printf("%s \n","This is the masterpiece");
-		//printf("%f \n %f", posX, posY);
+		
 	}
-	void drawPiece()
+	virtual void drawPiece()
 	{
 
-		glColor3f(1.0, 0.0, 0.0);
-		glPushMatrix();
-		glBegin(GL_POLYGON);
-		glVertex2f(-0.1, -0.1);
-		glVertex2f(0.1, -0.1);
-		glVertex2f(0.1, 0.1);
-		glVertex2f(-0.1, 0.1);
-		glEnd();
-		glPopMatrix();
 	}
+	virtual void setHealth()
+	{
+	}
+
 };
 
 #endif

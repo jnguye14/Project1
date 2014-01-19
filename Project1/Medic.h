@@ -9,15 +9,10 @@
 #include "glut.h"
 #include "Main.h"
 
-class Medic
+class Medic: public MasterPiece
 {
 public:
-	float posX;
-	float posY;
-	float health;
-	float movement;
-	float attackDamage;
-	float attackRange;
+
 	
 	Medic(){
 		posX = 300;
@@ -39,6 +34,10 @@ public:
 	float getHealth()
 	{
 		return health;
+	}
+	void setHealth(float newHealth)
+	{
+		health=2*newHealth;
 	}
 	float getMovement()
 	{

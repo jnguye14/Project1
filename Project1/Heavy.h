@@ -7,18 +7,12 @@
 #include <iostream>
 #include <string>
 #include "glut.h"
-#include "Main.h"
 #include "MasterPiece.h"
 
-class Heavy
+class Heavy : public MasterPiece
 {
 public:
-	float posX;
-	float posY;
-	float health;
-	float movement;
-	float attackDamage;
-	float attackRange;
+
 	
 	Heavy(){
 		posX = 200;
@@ -41,6 +35,10 @@ public:
 	float getHealth()
 	{
 		return health;
+	}
+	void setHealth(float newHealth)
+	{
+		health=newHealth;
 	}
 	float getMovement()
 	{
