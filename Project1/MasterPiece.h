@@ -18,13 +18,15 @@ protected:
 	float movement;
 	float attackDamage;
 	float attackRange;
+	string text;
 public:
 	
 	MasterPiece(){
 	}
 	~MasterPiece(){}
 
-	virtual void toString(){} //debugging purposes
+	virtual string toString(){
+	return text;} //debugging purposes
 	virtual void drawPiece(){}
 	virtual void setHealth(){}
 	virtual void setPosX(){}

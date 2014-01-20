@@ -57,10 +57,10 @@ float getPosX()
 	{
 		return attackRange;
 	}
-	void toString()
+	string toString()
 	{
-		printf("%s","\nThis is the Sniper ");
-		printf("%f %f", posX, posY);
+		text = "This is the Sniper\n";
+		return text;
 	}
 	void drawPiece()
 	{

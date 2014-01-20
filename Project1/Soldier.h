@@ -57,10 +57,10 @@ public:
 	{
 		return attackRange;
 	}
-	void toString()
+	string toString()
 	{
-		printf("%s","\nThis is the Soldier ");
-		printf("%f %f", posX, posY);
+		text = "This is the Soldier\n";
+		return text;
 	}
 	void drawPiece()
 	{

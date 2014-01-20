@@ -121,10 +121,10 @@ void MainMenuDisplay()
 
 void UnitSetupDisplay()
 {
+	//comment out one of them to display the ending for the win condition of one player having all units gone
 	// Renders screen
 	// player one and player two set their pieces
 	// gameSetup(); //Look at this method
-
 	unitList1.push_back(&commander);
 	unitList1.push_back(&heavy);
 	unitList1.push_back(&medic);
@@ -133,7 +133,7 @@ void UnitSetupDisplay()
 	unitList1.push_back(&soldier);
 	for (int i =0;i<6;i++)
 	{
-		unitList1.at(i)->toString();
+		cout<<unitList1.at(i)->toString();
 	}
 	unitList2.push_back(&commander);
 	unitList2.push_back(&heavy);
@@ -143,9 +143,9 @@ void UnitSetupDisplay()
 	unitList2.push_back(&soldier);
 	for (int i =0;i<6;i++)
 	{
-		unitList2.at(i)->toString();
+		cout<<unitList2.at(i)->toString();
 	}
-	//currentScene = 2; // MainGameDisplay()
+	currentScene = 2; // MainGameDisplay()
 }
 
 void MainGameDisplay()
@@ -183,7 +183,46 @@ void EndGameDisplay()
 	for(int i =0;i<endGame.length();i++){
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,endGame[i]);
 	}
-	//show stats/winner
+
+	stringstream endStat;	
+	if(unitList1.size()==0)
+	{
+		endStat<<"Player 1's army is empty ";
+		endStat<<"\nPlayer 2's remaining army is : ";
+		for (int i =0;i<6;i++)
+		{
+			endStat<<unitList2.at(i)->toString();
+		}		
+	}
+	else if(unitList2.size()==0)
+	{
+		endStat<<"Player 2's army is empty";
+		endStat<<"\nPlayer 1's remaining army is : ";
+		for (int i =0;i<6;i++)
+		{
+			endStat<<unitList1.at(i)->toString();
+		}
+	}
+	else
+	{
+		endStat<<"Player 1's remaining army is : ";
+		for (int i =0;i<6;i++)
+		{
+			endStat<<unitList1.at(i)->toString();
+		}
+		endStat<<"Player 2's remaining army is : ";
+		for (int i =0;i<6;i++)
+		{
+			endStat<<unitList2.at(i)->toString();
+		}
+	}
+	glColor3f(0.5,0.5,0.5);
+	glRasterPos2f(-0.5,-0.5);
+	string endText = endStat.str();
+	for(int i =0;i<endText.length();i++){
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endText[i]);
+	}
+
 	// replay button
 }
 #pragma mark endregion
@@ -204,19 +243,13 @@ void display()
 		break;
 	case 3: // end game
 		EndGameDisplay();
+		break;
 	default:
 		cout << "Error, unknown scene" << endl;
 		break;
 	}
 	glutSwapBuffers();
 	//glFlush();
-}
-
-void pieceInit()
-{
-	//create arrays
-	//initalize position for the 2 arrays
-	//use this for the position set up
 }
 
 void init()
