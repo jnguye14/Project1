@@ -9,16 +9,9 @@
 #include "glut.h"
 #include "Main.h"
 
-class Scout
+class Scout : public MasterPiece
 {
 public:
-	float posX;
-	float posY;
-	float health;
-	float movement;
-	float attackDamage;
-	float attackRange;
-	
 	Scout(){
 		posX = 400;
 		posY = 400;
@@ -28,7 +21,7 @@ public:
 		attackRange = 400;
 	}
 	~Scout(){}
-		float getPosX()
+	float getPosX()
 	{
 		return posX;
 	}
@@ -36,9 +29,21 @@ public:
 	{
 		return posY;
 	}
+	void setPosX(float newPosX)
+	{
+		posX = newPosX;
+	}
+	void setPosY(float newPosY)
+	{
+		posY = newPosY;
+	}
 	float getHealth()
 	{
 		return health;
+	}
+	void setHealth(float newHealth)
+	{
+		health=newHealth;
 	}
 	float getMovement()
 	{
@@ -54,8 +59,8 @@ public:
 	}
 	void toString()
 	{
-		printf("%s \n","This is the scout");
-		printf("%f \n %f", posX, posY);
+		printf("%s","\nThis is the Scout ");
+		printf("%f %f", posX, posY);
 	}
 	void drawPiece()
 	{

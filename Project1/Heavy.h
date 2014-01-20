@@ -12,8 +12,6 @@
 class Heavy : public MasterPiece
 {
 public:
-
-	
 	Heavy(){
 		posX = 200;
 		posY = 200;
@@ -23,7 +21,6 @@ public:
 		attackRange = 200;
 	}
 	~Heavy(){}
-	
 	float getPosX()
 	{
 		return posX;
@@ -31,6 +28,14 @@ public:
 	float getPosY()
 	{
 		return posY;
+	}
+	void setPosX(float newPosX)
+	{
+		posX = newPosX;
+	}
+	void setPosY(float newPosY)
+	{
+		posY = newPosY;
 	}
 	float getHealth()
 	{
@@ -54,8 +59,8 @@ public:
 	}
 	void toString()
 	{
-		printf("%s \n","This is the Heavy");
-		printf("%f \n %f", posX, posY);
+		printf("%s","\nThis is the Heavy ");
+		printf("%f %f", posX, posY);
 	}
 	void drawPiece()
 	{

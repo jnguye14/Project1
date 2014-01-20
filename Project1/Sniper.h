@@ -9,16 +9,9 @@
 #include "glut.h"
 #include "Main.h"
 
-class Sniper
+class Sniper : public MasterPiece
 {
 public:
-	float posX;
-	float posY;
-	float health;
-	float movement;
-	float attackDamage;
-	float attackRange;
-	
 	Sniper(){
 		posX = 500;
 		posY = 500;		
@@ -28,7 +21,7 @@ public:
 		attackRange = 500;
 	}
 	~Sniper(){}
-		float getPosX()
+float getPosX()
 	{
 		return posX;
 	}
@@ -36,9 +29,21 @@ public:
 	{
 		return posY;
 	}
+	void setPosX(float newPosX)
+	{
+		posX = newPosX;
+	}
+	void setPosY(float newPosY)
+	{
+		posY = newPosY;
+	}
 	float getHealth()
 	{
 		return health;
+	}
+	void setHealth(float newHealth)
+	{
+		health=newHealth;
 	}
 	float getMovement()
 	{
@@ -54,8 +59,8 @@ public:
 	}
 	void toString()
 	{
-		printf("%s \n","This is the sniper");
-		printf("%f \n %f", posX, posY);
+		printf("%s","\nThis is the Sniper ");
+		printf("%f %f", posX, posY);
 	}
 	void drawPiece()
 	{

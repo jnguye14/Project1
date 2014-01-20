@@ -19,8 +19,13 @@ int playerWinner = 0;
 bool isPlayerOneTurn = true;
 bool endGame = false;
 
-Heavy masterP1;
-Medic masterP2;
+Commander commander;
+Heavy heavy;
+Medic medic;
+Scout scout;
+Sniper sniper;
+Soldier soldier;
+
 vector <MasterPiece*> unitList1;
 vector <MasterPiece*> unitList2;
 
@@ -117,44 +122,29 @@ void MainMenuDisplay()
 void UnitSetupDisplay()
 {
 	// Renders screen
-
 	// player one and player two set their pieces
 	// gameSetup(); //Look at this method
-	//if (isPlayerOneTurn)
-	//{	
-	unitList1.push_back(&masterP1);
-	unitList1.push_back(&masterP2);
-	cout<<endl<<endl<<endl;
-	unitList1.at(0)->toString();
-	unitList1.at(1)->toString();
-		/*cout << "Set up piece" << endl;
-		cout<<"P1 commander posX"<<masterP1.commander.getPosX()<<endl;
-		cout<<"P1 heavy posX"<<masterP1.heavy.getPosX()<<endl;
-		cout<<"P1 medic posX"<<masterP1.medic.getPosX()<<endl;
-		cout<<"P1 scout posX"<<masterP1.scout.getPosX()<<endl;
-		cout<<"P1 sniper posX"<<masterP1.sniper.getPosX()<<endl;
-		cout<<"P1 soldier posX"<<masterP1.soldier.getPosX()<<endl;
-		cout << "Pause" << endl;
 
-		// ask player one to set up
-		// after player one finishes set up
-		//isPlayerOneTurn = false;
-	//}
-	//else
-	//{
-		cout << "Set up piece" << endl;
-		cout<<"P2 commander posY"<<masterP2.commander.getPosY()<<endl;
-		cout<<"P2 heavy posY"<<masterP2.heavy.getPosY()<<endl;
-		cout<<"P2 medic posY"<<masterP2.medic.getPosY()<<endl;
-		cout<<"P2 scout posY"<<masterP2.scout.getPosY()<<endl;
-		cout<<"P2 sniper posY"<<masterP2.sniper.getPosY()<<endl;
-		cout<<"P2 soldier posY"<<masterP2.soldier.getPosY()<<endl;
-		cout << "Pause" << endl;*/
-
-		// ask player two to set up
-		// after player two finishes set up
-		//isPlayerOneTurn = true;
-	//}
+	unitList1.push_back(&commander);
+	unitList1.push_back(&heavy);
+	unitList1.push_back(&medic);
+	unitList1.push_back(&scout);
+	unitList1.push_back(&sniper);
+	unitList1.push_back(&soldier);
+	for (int i =0;i<6;i++)
+	{
+		unitList1.at(i)->toString();
+	}
+	unitList2.push_back(&commander);
+	unitList2.push_back(&heavy);
+	unitList2.push_back(&medic);
+	unitList2.push_back(&scout);
+	unitList2.push_back(&sniper);
+	unitList2.push_back(&soldier);
+	for (int i =0;i<6;i++)
+	{
+		unitList2.at(i)->toString();
+	}
 	//currentScene = 2; // MainGameDisplay()
 }
 

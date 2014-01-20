@@ -9,16 +9,9 @@
 #include "glut.h"
 #include "Main.h"
 
-class Soldier
+class Soldier : public MasterPiece
 {
 public:
-	float posX;
-	float posY;
-	float health;
-	float movement;
-	float attackDamage;
-	float attackRange;
-
 	Soldier(){
 		posX = 600;
 		posY = 600;
@@ -28,7 +21,7 @@ public:
 		attackRange = 600;
 	}
 	~Soldier(){}
-		float getPosX()
+	float getPosX()
 	{
 		return posX;
 	}
@@ -36,9 +29,21 @@ public:
 	{
 		return posY;
 	}
+	void setPosX(float newPosX)
+	{
+		posX = newPosX;
+	}
+	void setPosY(float newPosY)
+	{
+		posY = newPosY;
+	}
 	float getHealth()
 	{
 		return health;
+	}
+	void setHealth(float newHealth)
+	{
+		health=newHealth;
 	}
 	float getMovement()
 	{
@@ -54,12 +59,11 @@ public:
 	}
 	void toString()
 	{
-		printf("%s \n","This is the soldier");
-		printf("%f \n %f", posX, posY);
+		printf("%s","\nThis is the Soldier ");
+		printf("%f %f", posX, posY);
 	}
 	void drawPiece()
 	{
-
 		glColor3f(1.0, 0.0, 0.0);
 		glPushMatrix();
 		glBegin(GL_POLYGON);

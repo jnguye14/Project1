@@ -12,8 +12,6 @@
 class Medic: public MasterPiece
 {
 public:
-
-	
 	Medic(){
 		posX = 300;
 		posY = 300;
@@ -23,7 +21,7 @@ public:
 		attackRange = 300;
 	}
 	~Medic(){}
-		float getPosX()
+	float getPosX()
 	{
 		return posX;
 	}
@@ -31,13 +29,21 @@ public:
 	{
 		return posY;
 	}
+	void setPosX(float newPosX)
+	{
+		posX = newPosX;
+	}
+	void setPosY(float newPosY)
+	{
+		posY = newPosY;
+	}
 	float getHealth()
 	{
 		return health;
 	}
 	void setHealth(float newHealth)
 	{
-		health=2*newHealth;
+		health=newHealth;
 	}
 	float getMovement()
 	{
@@ -53,8 +59,8 @@ public:
 	}
 	void toString()
 	{
-		printf("%s \n","This is the medic");
-		printf("%f \n %f", posX, posY);
+		printf("%s","\nThis is the Medic ");
+		printf("%f %f", posX, posY);
 	}
 	void drawPiece()
 	{
