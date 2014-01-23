@@ -64,15 +64,56 @@ public:
 	}
 	void drawPiece()
 	{
-		glColor3f(1.0, 0.0, 0.0);
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		//glColor3f(1.0, 0.0, 0.0);
 		glPushMatrix();
-		glBegin(GL_POLYGON);
+
+		/*glBegin(GL_POLYGON);
 		glVertex2f(-0.1, -0.1);
 		glVertex2f(0.1, -0.1);
 		glVertex2f(0.1, 0.1);
 		glVertex2f(-0.1, 0.1);
+		glEnd();//*/
+
+		/*
+		glBegin(GL_TRIANGLES);
+		glTexCoord2f(5.0f/6.0f,1.0f);
+		glVertex2f(-0.1, -0.1);
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex2f(0.1, -0.1);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex2f(0.1, 0.1);
+
+		glTexCoord2f(5.0f / 6.0f, 1.0f);
+		glVertex2f(-0.1, -0.1);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex2f(0.1, 0.1);
+		glTexCoord2f(5.0f / 6.0f, 0.0f);
+		glVertex2f(-0.1, 0.1);
 		glEnd();
+		//*/
+
+		//*
+		glBegin(GL_TRIANGLES);
+		glTexCoord2f(5.0f / 6.0f, 1.0f);
+		glVertex2f(-0.1, -0.1);
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex2f(0.1, -0.1);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex2f(0.1, 0.1);
+
+		glTexCoord2f(5.0f / 6.0f, 1.0f);
+		glVertex2f(-0.1, -0.1);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex2f(0.1, 0.1);
+		glTexCoord2f(5.0f / 6.0f, 0.0f);
+		glVertex2f(-0.1, 0.1);
+		glEnd();
+		//*/
+
 		glPopMatrix();
+		glDisable(GL_TEXTURE_2D);
 	}
 };
 
