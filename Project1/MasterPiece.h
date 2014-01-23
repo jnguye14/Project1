@@ -20,7 +20,8 @@ protected:
 	float attackRange;
 	string text;
 public:
-	
+	GLuint texture;
+
 	MasterPiece(){
 	}
 	~MasterPiece(){}

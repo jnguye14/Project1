@@ -11,6 +11,7 @@
 #include "Scout.h"
 #include "Sniper.h"
 #include "Soldier.h"
+#include "Textures.h"
 #include <mutex>
 #include <sstream>
 
@@ -125,7 +126,8 @@ void UnitSetupDisplay()
 	// Renders screen
 	// player one and player two set their pieces
 	// gameSetup(); //Look at this method
-	
+
+	commander.texture = texture;
 	unitList1.push_back(&commander);
 	unitList1.push_back(&heavy);
 	unitList1.push_back(&medic);
@@ -146,7 +148,8 @@ void UnitSetupDisplay()
 	{
 		cout<<unitList2.at(i)->toString();
 	}
-	currentScene = 2; // MainGameDisplay()
+	commander.drawPiece();
+	//currentScene = 2; // MainGameDisplay()
 }
 
 void MainGameDisplay()
@@ -255,6 +258,8 @@ void display()
 
 void init()
 {
+	LoadTexture();
+
 	/* set background clear color to black */
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	/* set current color to white */
