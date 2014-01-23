@@ -67,15 +67,16 @@ public:
 	{
 		cout << "Initializing SAPI interface" << endl;
 
-		/*commandList = {
-			"yellow",
+		//*
+		commandList = {
+			"hello",
 			"goodbye",
 			"attack",
 			"group",
 			"move",
 			"heal",
 			"king"
-		};*/
+		};//*/
 
 		if (!SAPIinit())
 		{

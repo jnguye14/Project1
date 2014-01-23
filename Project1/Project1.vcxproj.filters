@@ -32,6 +32,9 @@
     <ClInclude Include="Main.h">
       <Filter>Controllers</Filter>
     </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Models">
@@ -49,6 +52,12 @@
       <Filter>Controllers</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image.c">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
   </ItemGroup>
