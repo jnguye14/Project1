@@ -125,6 +125,7 @@ void UnitSetupDisplay()
 	// Renders screen
 	// player one and player two set their pieces
 	// gameSetup(); //Look at this method
+	
 	unitList1.push_back(&commander);
 	unitList1.push_back(&heavy);
 	unitList1.push_back(&medic);
