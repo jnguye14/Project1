@@ -21,7 +21,7 @@ protected:
 	string text;
 public:
 	GLuint texture;
-
+	
 	MasterPiece(){
 	}
 	~MasterPiece(){}
@@ -30,8 +30,12 @@ public:
 	return text;} //debugging purposes
 	virtual void drawPiece(){}
 	virtual void setHealth(){}
-	virtual void setPosX(){}
-	virtual void setPosY(){}
+	virtual void setPosX(float newPosX){
+		posX=newPosX;
+	}
+	virtual void setPosY(float newPosY){
+		posY=newPosY;
+	}
 };
 
 #endif

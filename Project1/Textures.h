@@ -9,6 +9,9 @@ extern "C" unsigned char *stbi_load(char const *filename, int *x, int *y, int *c
 extern GLuint texture;
 extern GLubyte *image; // unsigned char *
 
+extern GLuint texture_1;
+extern GLubyte *image_1;
+
 extern int imageWidth;
 extern int imageHeight;
 extern int bitDepth;

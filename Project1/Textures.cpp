@@ -3,6 +3,9 @@
 GLuint texture;
 GLubyte *image;
 
+GLuint texture_1;
+GLubyte *image_1;
+
 int imageWidth = 64*6;
 int imageHeight = 64;
 int bitDepth = 32;
@@ -12,15 +15,18 @@ void LoadTexture()
 	/* Load in a PNG image */
 	//int loadCorrectly = 0;
 	//Use the stbi_image file to load an image
-	image = stbi_load("Units/Units.bmp", &imageWidth, &imageHeight, &bitDepth, 0);
+	image = stbi_load("Units/Units_G.bmp", &imageWidth, &imageHeight, &bitDepth, 0);
+	
 	//gluScaleImage(GL_RGB,imageWidth,imageHeight,GL_RGB,imageWidth,imageHeight,GL_RGB,image);
 
 	glGenTextures(1, &texture); //generate the texture with the loaded data
+
 
 	//The first thing that must take place in the process of uploading the texture is a call to glBindTexture. 
 	//What glBindTexture does is it tells OpenGL which texture "id" we will be working with. 
 	//A texture "id" is just a number that you will use to access your textures. Here is a sample call.
 	glBindTexture(GL_TEXTURE_2D, texture); //bind texture to its array
+
 
 
 	//The glPixelStorei call tells OpenGL how the data that is going to be uploaded is aligned. 
@@ -60,4 +66,20 @@ void LoadTexture()
 	//This is the image data that will be uploaded to the video memory. 
 	//Note that after your call to glTexImage2D you can free this memory since the texture is already uploaded into video memory.
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+
+	image_1 = stbi_load("Units/Units_B.bmp", &imageWidth, &imageHeight, &bitDepth, 0);
+	glGenTextures(1, &texture_1); //generate the texture with the loaded data
+
+	glBindTexture(GL_TEXTURE_2D, texture_1); //bind texture to its array
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);// GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);// GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image_1);
 }

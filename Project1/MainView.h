@@ -126,29 +126,66 @@ void UnitSetupDisplay()
 	// Renders screen
 	// player one and player two set their pieces
 	// gameSetup(); //Look at this method
-
-	commander.texture = texture;
 	unitList1.push_back(&commander);
+	unitList1.at(0)->setPosX(0.0f);
+	unitList1.at(0)->setPosY(0.2f);
 	unitList1.push_back(&heavy);
+	unitList1.at(1)->setPosX(0.5f);
+	unitList1.at(1)->setPosY(0.2f);
 	unitList1.push_back(&medic);
-	unitList1.push_back(&scout);
-	unitList1.push_back(&sniper);
+	unitList1.at(2)->setPosX(-0.5f);
+	unitList1.at(2)->setPosY(-0.2f);
 	unitList1.push_back(&soldier);
-	for (int i =0;i<6;i++)
+	unitList1.at(3)->setPosX(0.0f);
+	unitList1.at(3)->setPosY(0.5f);
+	unitList1.push_back(&sniper);
+	unitList1.at(4)->setPosX(0.5f);
+	unitList1.at(4)->setPosY(0.5f);
+	unitList1.push_back(&scout);
+	unitList1.at(5)->setPosX(-0.5f);
+	unitList1.at(5)->setPosY(-0.5f);
+	for(int i=0;i<unitList1.size();i++)
 	{
-		cout<<unitList1.at(i)->toString();
+		unitList1.at(i)->texture=texture;
+		//unitList1.at(i)->drawPiece();
 	}
+	unitList1.at(0)->drawPiece();
+	unitList1.at(1)->drawPiece();
+	unitList1.at(2)->drawPiece();
+	unitList1.at(3)->drawPiece();
+	unitList1.at(4)->drawPiece();
+	unitList1.at(5)->drawPiece();
+
 	unitList2.push_back(&commander);
+	unitList2.at(0)->setPosX(-0.0f);
+	unitList2.at(0)->setPosY(-0.2f);
 	unitList2.push_back(&heavy);
+	unitList2.at(1)->setPosX(-0.5f);
+	unitList2.at(1)->setPosY(-0.2f);
 	unitList2.push_back(&medic);
-	unitList2.push_back(&scout);
-	unitList2.push_back(&sniper);
+	unitList2.at(2)->setPosX(0.5f);
+	unitList2.at(2)->setPosY(0.2f);
 	unitList2.push_back(&soldier);
-	for (int i =0;i<6;i++)
+	unitList2.at(3)->setPosX(-0.0f);
+	unitList2.at(3)->setPosY(-0.5f);
+	unitList2.push_back(&sniper);
+	unitList2.at(4)->setPosX(-0.5f);
+	unitList2.at(4)->setPosY(-0.5f);
+	unitList2.push_back(&scout);
+	unitList2.at(5)->setPosX(0.5f);
+	unitList2.at(5)->setPosY(0.5f);
+	for(int i=0;i<unitList2.size();i++)
 	{
-		cout<<unitList2.at(i)->toString();
+		unitList2.at(i)->texture=texture_1;
+		//unitList1.at(i)->drawPiece();
 	}
-	commander.drawPiece();
+	unitList2.at(0)->drawPiece();
+	unitList2.at(1)->drawPiece();
+	unitList2.at(2)->drawPiece();
+	unitList2.at(3)->drawPiece();
+	unitList2.at(4)->drawPiece();
+	unitList2.at(5)->drawPiece();
+
 	//currentScene = 2; // MainGameDisplay()
 }
 

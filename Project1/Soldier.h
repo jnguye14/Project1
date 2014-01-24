@@ -64,15 +64,30 @@ public:
 	}
 	void drawPiece()
 	{
-		glColor3f(1.0, 0.0, 0.0);
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, texture);
 		glPushMatrix();
-		glBegin(GL_POLYGON);
-		glVertex2f(-0.1, -0.1);
-		glVertex2f(0.1, -0.1);
-		glVertex2f(0.1, 0.1);
-		glVertex2f(-0.1, 0.1);
+
+
+		glBegin(GL_TRIANGLES);
+		glTexCoord2f(4.0f / 6.0f, 1.0f);
+		glVertex2f(-posX-0.1f, -posY-0.1f);
+		glTexCoord2f(5.0f / 6.0f, 1.0f);
+		glVertex2f(-posX+0.1f, -posY-0.1f);
+		glTexCoord2f(5.0f / 6.0f, 0.0f);
+		glVertex2f(-posX+0.1f, -posY+0.1f);
+
+		glTexCoord2f(4.0f / 6.0f, 1.0f);
+		glVertex2f(-posX-0.1f, -posY-0.1f);
+		glTexCoord2f(5.0f / 6.0f, 0.0f);
+		glVertex2f(-posX+0.1f, -posY+0.1f);
+		glTexCoord2f(4.0f / 6.0f, 0.0f);
+		glVertex2f(-posX-0.1f, -posY+0.1f);
 		glEnd();
+		
+
 		glPopMatrix();
+		glDisable(GL_TEXTURE_2D);
 	}
 };
 
