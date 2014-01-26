@@ -26,6 +26,18 @@ Medic medic;
 Scout scout;
 Sniper sniper;
 Soldier soldier;
+/*float commanderPosX=0.0f;
+float commanderPosY=-0.2f;
+float heavyPosX=-0.5f;
+float heavyPosY=-0.2f;
+float medicPosX=0.5f;
+float medicPosY=0.2f;
+float soldierPosX=0.0f;
+float soldierPosY=-0.5f;
+float sniperPosX=-0.5f;
+float sniperPosY=-0.5f;
+float scoutPosX=0.5f;
+float scoutPosY=0.5f;*/
 
 vector <MasterPiece*> unitList1;
 vector <MasterPiece*> unitList2;
@@ -56,6 +68,11 @@ void MouseButton(int button, int state, int x, int y)
 			printf("%s", "pressed button");
 		}
 	}
+}
+void movement(unsigned char key, int x, int y)
+{
+	if(key=='a')
+		unitList1.at(0)->setPosX(unitList1.at(0)->getPosX()-1.0);
 }
 
 void speechWait()

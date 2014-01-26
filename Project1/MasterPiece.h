@@ -36,6 +36,8 @@ public:
 	virtual void setPosY(float newPosY){
 		posY=newPosY;
 	}
+	virtual float getPosX(){return posX;}
+	virtual float getPosY(){return posY;}
 };
 
 #endif

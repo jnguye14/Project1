@@ -17,6 +17,7 @@ int main(int argc, char* argv[])
 	glutDisplayFunc(display);
 	glutMotionFunc(motion);
 	glutMouseFunc(MouseButton);
+	glutKeyboardFunc(movement);
 	/* init some states */
 	init();
 
