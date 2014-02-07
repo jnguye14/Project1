@@ -203,6 +203,7 @@ void EndGameDisplay()
 	for(int i =0;i<endGame.length();i++){
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,endGame[i]);
 	}
+
 	float yy=0.2;
 	glColor3f(0.5,0.5,0.5);
 	stringstream endStat;	
@@ -248,10 +249,9 @@ void EndGameDisplay()
 	// replay button
 }
 #pragma mark endregion
-/*void drawOutline()
+void drawOutline()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	/ draw a filled polygon /
 	glBegin(GL_POLYGON);
 		glColor3f(0.3,0.79,0.12);
 		glVertex2f(-unitList1.at(0)->getPosX(), -unitList1.at(0)->getPosX());
@@ -260,7 +260,7 @@ void EndGameDisplay()
 		glVertex2f( unitList1.at(0)->getPosX(),  unitList1.at(0)->getPosX());
 		glVertex2f(-unitList1.at(0)->getPosX(),  unitList1.at(0)->getPosX());
 	glEnd();
-}*/
+}
 void display()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
