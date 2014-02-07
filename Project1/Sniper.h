@@ -12,9 +12,17 @@
 class Sniper : public MasterPiece
 {
 public:
-	Sniper(){
-		posX = 500;
-		posY = 500;		
+	Sniper(int player){
+		if(player == 1)
+		{
+			posX = 0.5f;
+			posY = 0.5f;
+		}
+		else
+		{
+			posX = -0.5f;
+			posY = -0.5f;
+		}	
 		health = 500;
 		movement = 500;
 		attackDamage = 500;

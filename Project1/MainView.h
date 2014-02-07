@@ -129,34 +129,17 @@ void MainMenuDisplay()
 void UnitSetupDisplay()
 {
 	Commander* commander = new Commander(1);
-Heavy heavy;
-Medic medic;
-Scout scout;
-Sniper sniper;
-Soldier soldier;
+	Heavy* heavy = new Heavy(1);
+	Medic* medic = new Medic(1);
+	Scout* scout = new Scout(1);
+	Sniper* sniper = new Sniper(1);
+	Soldier* soldier = new Soldier(1);
 
 	//comment out one of them to display the ending for the win condition of one player having all units gone
 	// Renders screen
 	// player one and player two set their pieces
 	// gameSetup(); //Look at this method
-	unitList1.push_back(commander);
-	//unitList1.at(0)->setPosX(0.0f);
-	//unitList1.at(0)->setPosY(0.2f);
-	unitList1.push_back(&heavy);
-	unitList1.at(1)->setPosX(0.5f);
-	unitList1.at(1)->setPosY(0.2f);
-	unitList1.push_back(&medic);
-	unitList1.at(2)->setPosX(-0.5f);
-	unitList1.at(2)->setPosY(-0.2f);
-	unitList1.push_back(&soldier);
-	unitList1.at(3)->setPosX(0.0f);
-	unitList1.at(3)->setPosY(0.5f);
-	unitList1.push_back(&sniper);
-	unitList1.at(4)->setPosX(0.5f);
-	unitList1.at(4)->setPosY(0.5f);
-	unitList1.push_back(&scout);
-	unitList1.at(5)->setPosX(-0.5f);
-	unitList1.at(5)->setPosY(-0.5f);
+
 	for(int i=0;i<unitList1.size();i++)
 	{
 		unitList1.at(i)->texture=texture;
@@ -169,24 +152,7 @@ Soldier soldier;
 	unitList1.at(4)->drawPiece();
 	unitList1.at(5)->drawPiece();
 
-	unitList2.push_back(&Commander(2));
-	unitList2.at(0)->setPosX(-0.0f);
-	unitList2.at(0)->setPosY(-0.2f);
-	unitList2.push_back(&heavy);
-	unitList2.at(1)->setPosX(-0.5f);
-	unitList2.at(1)->setPosY(-0.2f);
-	unitList2.push_back(&medic);
-	unitList2.at(2)->setPosX(0.5f);
-	unitList2.at(2)->setPosY(0.2f);
-	unitList2.push_back(&soldier);
-	unitList2.at(3)->setPosX(-0.0f);
-	unitList2.at(3)->setPosY(-0.5f);
-	unitList2.push_back(&sniper);
-	unitList2.at(4)->setPosX(-0.5f);
-	unitList2.at(4)->setPosY(-0.5f);
-	unitList2.push_back(&scout);
-	unitList2.at(5)->setPosX(0.5f);
-	unitList2.at(5)->setPosY(0.5f);
+
 	for(int i=0;i<unitList2.size();i++)
 	{
 		unitList2.at(i)->texture=texture_1;

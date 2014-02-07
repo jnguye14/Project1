@@ -12,9 +12,17 @@
 class Heavy : public MasterPiece
 {
 public:
-	Heavy(){
-		posX = 200;
-		posY = 200;
+	Heavy(int player){
+		if(player == 1)
+		{
+			posX = 0.5f;
+			posY = 0.2f;
+		}
+		else
+		{
+			posX = -0.5f;
+			posY = -0.2f;
+		}
 		health = 200;
 		movement = 200;
 		attackDamage = 200;

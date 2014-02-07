@@ -12,7 +12,17 @@
 class Scout : public MasterPiece
 {
 public:
-	Scout(){
+	Scout(int player){
+		if(player == 1)
+		{
+			posX = -0.5f;
+			posY = -0.5f;
+		}
+		else
+		{
+			posX = 0.5f;
+			posY = 0.5f;
+		}
 		posX = 400;
 		posY = 400;
 		health = 400;
