@@ -12,9 +12,17 @@
 class Soldier : public MasterPiece
 {
 public:
-	Soldier(){
-		posX = 600;
-		posY = 600;
+	Soldier(int player){
+		if(player == 1)
+		{
+			posX = 0.0f;
+			posY = 0.5f;
+		}
+		else
+		{
+			posX = -0.0f;
+			posY = -0.5f;
+		}
 		health = 600;
 		movement = 600;
 		attackDamage = 600;

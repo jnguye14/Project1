@@ -12,9 +12,17 @@
 class Medic: public MasterPiece
 {
 public:
-	Medic(){
-		posX = 300;
-		posY = 300;
+	Medic(int player){
+		if(player == 1)
+		{
+			posX = -0.5f;
+			posY = -0.2f;
+		}
+		else
+		{
+			posX = 0.5f;
+			posY = 0.2f;
+		}
 		health = 300;
 		movement = 300;
 		attackDamage = 300;

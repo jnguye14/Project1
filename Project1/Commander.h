@@ -15,13 +15,13 @@ public:
 	Commander(int player){
 		if(player == 1)
 		{
-			posX = 0.0;
-			posY = 2.0;
+			posX = 0.0f;
+			posY = 2.0f;
 		}
 		else
 		{
-			posX = 0.0;
-			posY = 2.0;
+			posX = -0.0f;
+			posY = -2.0f;
 		}
 		health = 100;
 		movement = 100;
