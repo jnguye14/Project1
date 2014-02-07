@@ -12,32 +12,16 @@
 #include "Sniper.h"
 #include "Soldier.h"
 #include "Textures.h"
+#include <time.h>
 #include <mutex>
 #include <sstream>
-
+#include <string>
 int currentScene = 0;
 int playerWinner = 0;
 bool isPlayerOneTurn = true;
 bool endGame = false;
 
-Commander commander;
-Heavy heavy;
-Medic medic;
-Scout scout;
-Sniper sniper;
-Soldier soldier;
-/*float commanderPosX=0.0f;
-float commanderPosY=-0.2f;
-float heavyPosX=-0.5f;
-float heavyPosY=-0.2f;
-float medicPosX=0.5f;
-float medicPosY=0.2f;
-float soldierPosX=0.0f;
-float soldierPosY=-0.5f;
-float sniperPosX=-0.5f;
-float sniperPosY=-0.5f;
-float scoutPosX=0.5f;
-float scoutPosY=0.5f;*/
+
 
 vector <MasterPiece*> unitList1;
 vector <MasterPiece*> unitList2;
@@ -72,7 +56,12 @@ void MouseButton(int button, int state, int x, int y)
 void movement(unsigned char key, int x, int y)
 {
 	if(key=='a')
-		unitList1.at(0)->setPosX(unitList1.at(0)->getPosX()-1.0);
+	{
+		cout<<"pressed a"<<endl;
+		cout<<"unitlist1.at(0) is:: "<<unitList1.at(0)->getPosX()<<endl;
+		unitList1.at(0)->setPosX(unitList1.at(0)->getPosX()-0.01);
+		cout<<"unitlist1.at(0) is: "<<unitList1.at(0)->getPosX()<<"name"<<unitList1.at(0)->toString();
+	}
 }
 
 void speechWait()
@@ -139,13 +128,20 @@ void MainMenuDisplay()
 
 void UnitSetupDisplay()
 {
+	Commander* commander = new Commander(1);
+Heavy heavy;
+Medic medic;
+Scout scout;
+Sniper sniper;
+Soldier soldier;
+
 	//comment out one of them to display the ending for the win condition of one player having all units gone
 	// Renders screen
 	// player one and player two set their pieces
 	// gameSetup(); //Look at this method
-	unitList1.push_back(&commander);
-	unitList1.at(0)->setPosX(0.0f);
-	unitList1.at(0)->setPosY(0.2f);
+	unitList1.push_back(commander);
+	//unitList1.at(0)->setPosX(0.0f);
+	//unitList1.at(0)->setPosY(0.2f);
 	unitList1.push_back(&heavy);
 	unitList1.at(1)->setPosX(0.5f);
 	unitList1.at(1)->setPosY(0.2f);
@@ -173,7 +169,7 @@ void UnitSetupDisplay()
 	unitList1.at(4)->drawPiece();
 	unitList1.at(5)->drawPiece();
 
-	unitList2.push_back(&commander);
+	unitList2.push_back(&Commander(2));
 	unitList2.at(0)->setPosX(-0.0f);
 	unitList2.at(0)->setPosY(-0.2f);
 	unitList2.push_back(&heavy);
@@ -241,7 +237,8 @@ void EndGameDisplay()
 	for(int i =0;i<endGame.length();i++){
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,endGame[i]);
 	}
-
+	float yy=0.2;
+	glColor3f(0.5,0.5,0.5);
 	stringstream endStat;	
 	if(unitList1.size()==0)
 	{
@@ -250,6 +247,13 @@ void EndGameDisplay()
 		for (int i =0;i<6;i++)
 		{
 			endStat<<unitList2.at(i)->toString();
+			glRasterPos2f(-0.5,yy);
+			string endText = endStat.str();
+			for(int i =0;i<endText.length();i++){
+				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endText[i]);
+			}
+			endStat.str(string());
+			yy=yy-0.1;
 		}		
 	}
 	else if(unitList2.size()==0)
@@ -274,17 +278,23 @@ void EndGameDisplay()
 			endStat<<unitList2.at(i)->toString();
 		}
 	}
-	glColor3f(0.5,0.5,0.5);
-	glRasterPos2f(-0.5,-0.5);
-	string endText = endStat.str();
-	for(int i =0;i<endText.length();i++){
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endText[i]);
-	}
 
 	// replay button
 }
 #pragma mark endregion
-
+/*void drawOutline()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	/ draw a filled polygon /
+	glBegin(GL_POLYGON);
+		glColor3f(0.3,0.79,0.12);
+		glVertex2f(-unitList1.at(0)->getPosX(), -unitList1.at(0)->getPosX());
+		glVertex2f( unitList1.at(0)->getPosX(), -unitList1.at(0)->getPosX());
+		glColor3f(0.52,0.34,0.22);
+		glVertex2f( unitList1.at(0)->getPosX(),  unitList1.at(0)->getPosX());
+		glVertex2f(-unitList1.at(0)->getPosX(),  unitList1.at(0)->getPosX());
+	glEnd();
+}*/
 void display()
 {
 	glClear(GL_COLOR_BUFFER_BIT);

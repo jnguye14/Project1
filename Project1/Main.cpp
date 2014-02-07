@@ -18,6 +18,7 @@ int main(int argc, char* argv[])
 	glutMotionFunc(motion);
 	glutMouseFunc(MouseButton);
 	glutKeyboardFunc(movement);
+//	drawOutline();
 	/* init some states */
 	init();
 
@@ -135,6 +136,7 @@ void playerSetup()
 		cout << "Player One, set pieces" << endl;
 		system("PAUSE");
 		isPlayerOneTurn = !isPlayerOneTurn;
+
 		playerSetup();
 	}
 	else // player 2's turn to set his/her pieces

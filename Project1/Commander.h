@@ -12,9 +12,17 @@
 class Commander : public MasterPiece
 {
 public:	
-	Commander(){
-		posX = 100;
-		posY = 100;
+	Commander(int player){
+		if(player == 1)
+		{
+			posX = 0.0;
+			posY = 2.0;
+		}
+		else
+		{
+			posX = 0.0;
+			posY = 2.0;
+		}
 		health = 100;
 		movement = 100;
 		attackDamage = 100;
