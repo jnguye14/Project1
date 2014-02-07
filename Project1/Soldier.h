@@ -27,6 +27,7 @@ public:
 		movement = 600;
 		attackDamage = 600;
 		attackRange = 600;
+		selected=true;
 	}
 	~Soldier(){}
 	float getPosX()
@@ -70,8 +71,36 @@ public:
 		text = "This is the Soldier\n";
 		return text;
 	}
+	void moveR()
+	{
+		setPosX(getPosX()-0.01);
+	}
+	void moveD()
+	{
+		setPosY(getPosY()+0.01);
+	}
+	void moveL()
+	{
+		setPosX(getPosX()+0.01);
+	}
+	void moveU()
+	{
+		setPosY(getPosY()-0.01);
+	}
 	void drawPiece()
 	{
+		if(selected)
+		{
+			glLineWidth(10);
+			glBegin(GL_LINE_LOOP);
+			glColor3f(1.0,0.0,0.0);
+			glVertex2f(-posX-0.1f, -posY-0.1f);
+			glVertex2f(-posX+0.1f, -posY-0.1f);
+			glVertex2f(-posX+0.1f, -posY+0.1f);
+			glVertex2f(-posX-0.1f, -posY+0.1f);
+			glEnd();
+			glColor3f(1.0,1.0,1.0);
+		}
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glPushMatrix();
@@ -96,6 +125,7 @@ public:
 
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
+		drawOutline();
 	}
 };
 

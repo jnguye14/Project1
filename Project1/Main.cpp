@@ -18,6 +18,7 @@ int main(int argc, char* argv[])
 	glutMotionFunc(motion);
 	glutMouseFunc(MouseButton);
 	glutKeyboardFunc(movement);
+
 //	drawOutline();
 	/* init some states */
 	init();
@@ -141,7 +142,7 @@ void playerSetup()
 		Commander* commander = new Commander(1);
 		Heavy* heavy = new Heavy(1);
 		Medic* medic = new Medic(1);
-		Scout* scout = new Scout(1);
+		//Scout* scout = new Scout(1);
 		Sniper* sniper = new Sniper(1);
 		Soldier* soldier = new Soldier(1);
 
@@ -150,7 +151,7 @@ void playerSetup()
 		unitList1.push_back(medic);
 		unitList1.push_back(soldier);
 		unitList1.push_back(sniper);
-		unitList1.push_back(scout);
+		//unitList1.push_back(scout);
 
 		for (int i = 0; i<unitList1.size(); i++)
 		{
@@ -169,7 +170,7 @@ void playerSetup()
 		Commander* commander = new Commander(2);
 		Heavy* heavy = new Heavy(2);
 		Medic* medic = new Medic(2);
-		Scout* scout = new Scout(2);
+		//Scout* scout = new Scout(2);
 		Sniper* sniper = new Sniper(2);
 		Soldier* soldier = new Soldier(2);
 
@@ -178,7 +179,7 @@ void playerSetup()
 		unitList2.push_back(medic);
 		unitList2.push_back(soldier);
 		unitList2.push_back(sniper);
-		unitList2.push_back(scout);
+		//unitList2.push_back(scout);
 
 		for (int i = 0; i<unitList2.size(); i++)
 		{

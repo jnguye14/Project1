@@ -72,6 +72,22 @@ public:
 		text = "This is the Scout\n";
 		return text;
 	}
+	void moveR()
+	{
+		setPosX(getPosX()-0.01);
+	}
+	void moveD()
+	{
+		setPosY(getPosY()+0.01);
+	}
+	void moveL()
+	{
+		setPosX(getPosX()+0.01);
+	}
+	void moveU()
+	{
+		setPosY(getPosY()-0.01);
+	}
 	void drawPiece()
 	{
 		glEnable(GL_TEXTURE_2D);

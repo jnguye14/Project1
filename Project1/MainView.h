@@ -21,8 +21,6 @@ int playerWinner = 0;
 bool isPlayerOneTurn = true;
 bool endGame = false;
 
-
-
 vector <MasterPiece*> unitList1;
 vector <MasterPiece*> unitList2;
 
@@ -39,6 +37,13 @@ void MouseButton(int button, int state, int x, int y)
 	{
 		if (state == GLUT_UP)
 		{
+			//current selected piece.selected = false;
+			//foreach piece in piecelist,
+			// checkMouseHover(x,y)// return true, if you clicked on piece, else returns false, if no piece selected
+				//if(piece.checkMouseHover())
+					// selectedPiece = piece
+					// piece.select = true; // variable so you know whether or not to highlight
+					//break;
 			//printf("(%d, %d)\n",x, y);
 			if ((x > 325) && (x < 400) && (y>225) && (y < 275))
 			{
@@ -55,12 +60,40 @@ void MouseButton(int button, int state, int x, int y)
 }
 void movement(unsigned char key, int x, int y)
 {
+
+	//find selected unit. store that in a variable
+	if(key=='w')
+	{
+		//move commnander 1
+		unitList2.at(0)->moveU();
+		unitList2.at(1)->moveU();
+		unitList2.at(2)->moveU();
+		unitList2.at(3)->moveU();
+		unitList2.at(4)->moveU();
+	}
 	if(key=='a')
 	{
-		cout<<"pressed a"<<endl;
-		cout<<"unitlist1.at(0) is:: "<<unitList1.at(0)->getPosX()<<endl;
-		unitList1.at(0)->setPosX(unitList1.at(0)->getPosX()-0.01);
-		cout<<"unitlist1.at(0) is: "<<unitList1.at(0)->getPosX()<<"name"<<unitList1.at(0)->toString();
+		unitList2.at(0)->moveL();
+		unitList2.at(1)->moveL();
+		unitList2.at(2)->moveL();
+		unitList2.at(3)->moveL();
+		unitList2.at(4)->moveL();
+	}
+	if(key=='s')
+	{
+		unitList2.at(0)->moveD();
+		unitList2.at(1)->moveD();
+		unitList2.at(2)->moveD();
+		unitList2.at(3)->moveD();
+		unitList2.at(4)->moveD();
+	}
+	if(key=='d')
+	{
+		unitList2.at(0)->moveR();
+		unitList2.at(1)->moveR();
+		unitList2.at(2)->moveR();
+		unitList2.at(3)->moveR();
+		unitList2.at(4)->moveR();
 	}
 }
 

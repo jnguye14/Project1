@@ -27,6 +27,7 @@ public:
 		movement = 500;
 		attackDamage = 500;
 		attackRange = 500;
+		selected=true;
 	}
 	~Sniper(){}
 float getPosX()
@@ -65,13 +66,42 @@ float getPosX()
 	{
 		return attackRange;
 	}
+	void moveR()
+	{
+		setPosX(getPosX()-0.01);
+	}
+	void moveD()
+	{
+		setPosY(getPosY()+0.01);
+	}
+	void moveL()
+	{
+		setPosX(getPosX()+0.01);
+	}
+	void moveU()
+	{
+		setPosY(getPosY()-0.01);
+	}
 	string toString()
 	{
 		text = "This is the Sniper\n";
 		return text;
 	}
+	
 	void drawPiece()
 	{
+		if(selected)
+		{
+			glLineWidth(10);
+			glBegin(GL_LINE_LOOP);
+			glColor3f(1.0,0.0,0.0);
+			glVertex2f(-posX-0.1f, -posY-0.1f);
+			glVertex2f(-posX+0.1f, -posY-0.1f);
+			glVertex2f(-posX+0.1f, -posY+0.1f);
+			glVertex2f(-posX-0.1f, -posY+0.1f);
+			glEnd();
+			glColor3f(1.0,1.0,1.0);
+		}
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glPushMatrix();
@@ -95,6 +125,7 @@ float getPosX()
 
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
+		drawOutline();
 	}
 };
 
