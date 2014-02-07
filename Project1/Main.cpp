@@ -139,11 +139,11 @@ void playerSetup()
 
 		// create new pieces
 		Commander* commander = new Commander(1);
-		Heavy* heavy = new Heavy();
-		Medic* medic = new Medic();
-		Scout* scout = new Scout();
-		Sniper* sniper = new Sniper();
-		Soldier* soldier = new Soldier();
+		Heavy* heavy = new Heavy(1);
+		Medic* medic = new Medic(1);
+		Scout* scout = new Scout(1);
+		Sniper* sniper = new Sniper(1);
+		Soldier* soldier = new Soldier(1);
 
 		unitList1.push_back(commander);
 		unitList1.push_back(heavy);
@@ -167,11 +167,11 @@ void playerSetup()
 
 		// create new pieces
 		Commander* commander = new Commander(2);
-		Heavy* heavy = new Heavy();
-		Medic* medic = new Medic();
-		Scout* scout = new Scout();
-		Sniper* sniper = new Sniper();
-		Soldier* soldier = new Soldier();
+		Heavy* heavy = new Heavy(2);
+		Medic* medic = new Medic(2);
+		Scout* scout = new Scout(2);
+		Sniper* sniper = new Sniper(2);
+		Soldier* soldier = new Soldier(2);
 
 		unitList2.push_back(commander);
 		unitList2.push_back(heavy);
