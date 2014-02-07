@@ -134,19 +134,63 @@ void playerSetup()
 	if (isPlayerOneTurn) // player 1's turn to set his/her pieces
 	{
 		cout << "Player One, set pieces" << endl;
-		system("PAUSE");
+		//system("PAUSE");
 		isPlayerOneTurn = !isPlayerOneTurn;
+
+		// create new pieces
+		Commander* commander = new Commander(1);
+		Heavy* heavy = new Heavy();
+		Medic* medic = new Medic();
+		Scout* scout = new Scout();
+		Sniper* sniper = new Sniper();
+		Soldier* soldier = new Soldier();
+
+		unitList1.push_back(commander);
+		unitList1.push_back(heavy);
+		unitList1.push_back(medic);
+		unitList1.push_back(soldier);
+		unitList1.push_back(sniper);
+		unitList1.push_back(scout);
+
+		for (int i = 0; i<unitList1.size(); i++)
+		{
+			unitList1.at(i)->texture = texture;
+		}
 
 		playerSetup();
 	}
 	else // player 2's turn to set his/her pieces
 	{
 		cout << "Player Two, set pieces" << endl;
-		system("PAUSE");
+		//system("PAUSE");
 		isPlayerOneTurn = !isPlayerOneTurn;
+
+		// create new pieces
+		Commander* commander = new Commander(2);
+		Heavy* heavy = new Heavy();
+		Medic* medic = new Medic();
+		Scout* scout = new Scout();
+		Sniper* sniper = new Sniper();
+		Soldier* soldier = new Soldier();
+
+		unitList2.push_back(commander);
+		unitList2.push_back(heavy);
+		unitList2.push_back(medic);
+		unitList2.push_back(soldier);
+		unitList2.push_back(sniper);
+		unitList2.push_back(scout);
+
+		for (int i = 0; i<unitList2.size(); i++)
+		{
+			unitList2.at(i)->texture = texture_1;
+		}
+
+		currentScene = 2;
 	}
 }
 #pragma mark endregion
+
+bool isSet = false;
 
 // should run on separate thread from display
 void game()
@@ -161,6 +205,10 @@ void game()
 		case 0: // main menu, do nothing
 			break;
 		case 1: // set up pieces
+			if (!isSet)
+			{
+				playerSetup();
+			}
 			break;
 		case 2: // main game
 			MainGameControl();
