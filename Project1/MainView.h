@@ -128,50 +128,22 @@ void MainMenuDisplay()
 
 void UnitSetupDisplay()
 {
-	Commander* commander = new Commander(1);
-	Heavy* heavy = new Heavy(1);
-	Medic* medic = new Medic(1);
-	Scout* scout = new Scout(1);
-	Sniper* sniper = new Sniper(1);
-	Soldier* soldier = new Soldier(1);
-
-	//comment out one of them to display the ending for the win condition of one player having all units gone
-	// Renders screen
-	// player one and player two set their pieces
-	// gameSetup(); //Look at this method
-
-	for(int i=0;i<unitList1.size();i++)
-	{
-		unitList1.at(i)->texture=texture;
-		//unitList1.at(i)->drawPiece();
-	}
-	unitList1.at(0)->drawPiece();
-	unitList1.at(1)->drawPiece();
-	unitList1.at(2)->drawPiece();
-	unitList1.at(3)->drawPiece();
-	unitList1.at(4)->drawPiece();
-	unitList1.at(5)->drawPiece();
-
-
-	for(int i=0;i<unitList2.size();i++)
-	{
-		unitList2.at(i)->texture=texture_1;
-		//unitList1.at(i)->drawPiece();
-	}
-	unitList2.at(0)->drawPiece();
-	unitList2.at(1)->drawPiece();
-	unitList2.at(2)->drawPiece();
-	unitList2.at(3)->drawPiece();
-	unitList2.at(4)->drawPiece();
-	unitList2.at(5)->drawPiece();
-
 	//currentScene = 2; // MainGameDisplay()
 }
 
 void MainGameDisplay()
 {
 	// Allen Renders Battle Scene
-	
+	for (int i = 0; i<unitList1.size(); i++)
+	{
+		unitList1.at(i)->drawPiece();
+	}
+
+	for(int i=0;i<unitList2.size();i++)
+	{
+		unitList2.at(i)->drawPiece();
+	}
+
 	// JNN's stuff
 	//cout << "Entering main game command loop" << endl;
 	//game(); // player one and player two alternate turns until game ends
