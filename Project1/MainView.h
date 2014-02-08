@@ -18,6 +18,7 @@
 #include <string>
 int currentScene = 0;
 int playerWinner = 0;
+int playerNumber = 0;
 bool isPlayerOneTurn = true;
 bool endGame = false;
 
@@ -28,7 +29,17 @@ vector <MasterPiece*> unitList2;
 //mutex curSceneLock; // for int currentScene;
 //mutex playerTurnLock; // for bool isPlayerOneTurn;
 //mutex endGameLock; // for bool endGame;
-
+void hud(int player)
+{
+	glColor3f(1.0,1.0,1.0);
+	glRasterPos2f(-0.5,0.9);
+	stringstream ss;
+	ss<<"Player "<< playerNumber<< " turn";
+	string play = ss.str();
+	for(int i =0;i<play.length();i++){
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,play[i]);
+	}
+}
 void MouseButton(int button, int state, int x, int y)
 {
 	// Respond to mouse button presses.
@@ -176,7 +187,9 @@ void MainGameDisplay()
 	{
 		unitList2.at(i)->drawPiece();
 	}
+	hud(playerNumber);	
 
+	
 	// JNN's stuff
 	//cout << "Entering main game command loop" << endl;
 	//game(); // player one and player two alternate turns until game ends
