@@ -189,7 +189,7 @@ void MainGameDisplay()
 	}
 	hud(playerNumber);	
 
-	
+			endGame=true;
 	// JNN's stuff
 	//cout << "Entering main game command loop" << endl;
 	//game(); // player one and player two alternate turns until game ends
@@ -215,52 +215,99 @@ void EndGameDisplay()
 {
 	glColor3f(1.0,1.0,1.0);
 	glRasterPos2f(-0.28,0.5);
-	stringstream EndText;
-	EndText<<"Player "<<playerWinner<< " is the winner!";
-	string endGame = EndText.str();
+	stringstream endStat;
+	endStat<<"Player "<<playerWinner<< " is the winner!";
+	string endGame = endStat.str();
 	for(int i =0;i<endGame.length();i++){
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,endGame[i]);
 	}
-
+	endStat.str(string());
 	float yy=0.2;
 	glColor3f(0.5,0.5,0.5);
-	stringstream endStat;	
 	if(unitList1.size()==0)
 	{
-		endStat<<"Player 1's army is empty ";
-		endStat<<"\nPlayer 2's remaining army is : ";
-		for (int i =0;i<6;i++)
+		endStat<<"Player 1's army is empty!!!! ";
+		endStat<<"Player 2's remaining army is : ";
+		glRasterPos2f(-0.5,yy);
+		endGame = endStat.str();
+		for(int i =0;i<endGame.length();i++){
+				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
+		}
+		yy=yy-0.1;
+		for (int i =0;i<5;i++)
 		{
+			endStat.str(string());
 			endStat<<unitList2.at(i)->toString();
 			glRasterPos2f(-0.5,yy);
-			string endText = endStat.str();
-			for(int i =0;i<endText.length();i++){
-				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endText[i]);
+			 endGame = endStat.str();
+			for(int i =0;i<endGame.length();i++){
+				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
 			}
-			endStat.str(string());
 			yy=yy-0.1;
 		}		
 	}
 	else if(unitList2.size()==0)
 	{
-		endStat<<"Player 2's army is empty";
-		endStat<<"\nPlayer 1's remaining army is : ";
-		for (int i =0;i<6;i++)
+		endStat<<"Player 2's army is empty!!!! ";
+		endStat<<"Player 1's remaining army is : ";
+		glRasterPos2f(-0.5,yy);
+		endGame = endStat.str();
+		for(int i =0;i<endGame.length();i++){
+				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
+		}
+		yy=yy-0.1;
+		for (int i =0;i<5;i++)
 		{
+			endStat.str(string());
 			endStat<<unitList1.at(i)->toString();
+			glRasterPos2f(-0.5,yy);
+			endGame = endStat.str();
+			for(int i =0;i<endGame.length();i++){
+				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
+			}
+			yy=yy-0.1;
 		}
 	}
 	else
-	{
+	{	
+		float yy2=0.2;
 		endStat<<"Player 1's remaining army is : ";
-		for (int i =0;i<6;i++)
-		{
-			endStat<<unitList1.at(i)->toString();
+		glRasterPos2f(-0.5,yy);
+		endGame = endStat.str();
+		for(int i =0;i<endGame.length();i++){
+				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
 		}
+		yy=yy-0.1;
+		for (int i =0;i<5;i++)
+		{	
+			endStat.str(string());
+			endStat<<unitList1.at(i)->toString();
+			glRasterPos2f(-0.5,yy);
+			endGame = endStat.str();
+			for(int i =0;i<endGame.length();i++){
+				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
+			}
+			yy=yy-0.1;
+		}
+		endStat.str(string());
+		//displaying 2nd player 
 		endStat<<"Player 2's remaining army is : ";
-		for (int i =0;i<6;i++)
-		{
+		glRasterPos2f(0.3,yy2);
+			endGame = endStat.str();
+			for(int i =0;i<endGame.length();i++){
+				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
+		}
+		yy2=yy2-0.1;
+		for (int i =0;i<5;i++)
+		{		
+			endStat.str(string());
 			endStat<<unitList2.at(i)->toString();
+			glRasterPos2f(0.3,yy2);
+			endGame = endStat.str();
+			for(int i =0;i<endGame.length();i++){
+				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
+			}
+			yy2=yy2-0.1;
 		}
 	}
 
