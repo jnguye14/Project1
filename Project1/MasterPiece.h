@@ -40,7 +40,22 @@ public:
 			glColor3f(1.0,1.0,1.0);
 		}
 	}
-
+	virtual void moveR()
+	{
+		setPosX(getPosX()-0.2);
+	}
+	virtual void moveD()
+	{
+		setPosY(getPosY()+0.2);
+	}
+	virtual void moveL()
+	{
+		setPosX(getPosX()+0.2);
+	}
+	virtual void moveU()
+	{
+		setPosY(getPosY()-0.2);
+	}
 	void select()
 	{
 		selected = true;
@@ -79,10 +94,10 @@ public:
 	}
 	virtual float getPosX(){return posX;}
 	virtual float getPosY(){return posY;}
-	virtual void moveU(){};
-	virtual void moveD(){};
-	virtual void moveR(){};
-	virtual void moveL(){};
+	virtual void attack()
+	{
+
+	}
 };
 
 #endif
