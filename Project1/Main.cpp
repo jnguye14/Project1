@@ -267,7 +267,30 @@ void performAction()
 		break;
 	case sapi.Attack:
 		sapi.Say("Attacking Piece");
-		cout << sapi.pieceLocation << " attacking opponent " << sapi.actionLocation << endl;
+		//cout << sapi.pieceLocation << " attacking opponent " << sapi.actionLocation << endl;
+
+		if (isPlayerOneTurn) // player one attacking player two
+		{
+			for (int i = 0; i < unitList2.size(); i++)
+			{
+				if (checkPiece(selectedUnit, unitList2.at(i)))
+				{
+					unitList2.at(i)->setHealth( unitList2.at(i)->getHealth() - selectedUnit->getAttackDamage() );
+					break;
+				}
+			}
+		}
+		else // player two attacking player one
+		{
+			for (int i = 0; i < unitList1.size(); i++)
+			{
+				if (checkPiece(selectedUnit, unitList1.at(i)))
+				{
+					unitList1.at(i)->setHealth(unitList1.at(i)->getHealth() - selectedUnit->getAttackDamage());
+					break;
+				}
+			}
+		}
 		//if(attackedPiece == defeated)
 		//{
 		// if the king/commander is defeated, or if the king/commander is the last one standing
@@ -325,3 +348,28 @@ void performAction()
 	}
 }
 
+bool checkPiece(MasterPiece* unit, MasterPiece* target)
+{
+	float UnitX = unit->getPosX();
+	float UnitY = unit->getPosY();
+	float TargetX = target->getPosX();
+	float TargetY = target->getPosY();
+
+	if (UnitX == TargetX && UnitY == TargetY - 0.2f) // north
+	{
+		return true;
+	}
+	if (UnitX == TargetX + 0.2f && UnitY == TargetY) // west
+	{
+		return true;
+	}
+	if (UnitX == TargetX && UnitY == TargetY + 0.2f) // south
+	{
+		return true;
+	}
+	if (UnitX == TargetX - 0.2f && UnitY == TargetY) // east
+	{
+		return true;
+	}
+	return false;
+}

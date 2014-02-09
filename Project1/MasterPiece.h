@@ -70,7 +70,14 @@ public:
 	virtual string toString(){
 	return text;} //debugging purposes
 	virtual void drawPiece(){}
-	virtual void setHealth(){}
+	virtual void setHealth(float newHealth)
+	{
+		health = newHealth;
+	}
+	virtual float getHealth()
+	{
+		return health;
+	}
 	virtual void setPosX(float newPosX){
 		posX=newPosX;
 	}
@@ -83,6 +90,10 @@ public:
 	virtual void moveD(){};
 	virtual void moveR(){};
 	virtual void moveL(){};
+	virtual float getAttackDamage()
+	{
+		return attackDamage;
+	}
 };
 
 #endif

@@ -66,3 +66,4 @@ void game();
 void MainGameControl();
 void performAction();
 //void doAction(piece unit, int command, string location);
+bool checkPiece(MasterPiece* unit, MasterPiece* target);
