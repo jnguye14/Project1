@@ -224,23 +224,23 @@ void MainGameControl()
 	if (isPlayerOneTurn)
 	{
 		cout << "\nPlayer One's Turn" << endl;
-		cout << "Player One, say location" << endl;
-		system("PAUSE"); // listenForPiece();
+		//cout << "Player One, say location" << endl;
+		//system("PAUSE"); // listenForPiece();
 		cout << "Player One, say command" << endl;
 		listenForCommand();
-		cout << "Player One, say location" << endl;
-		system("PAUSE"); // listenForActionLocation();
+		//cout << "Player One, say location" << endl;
+		//system("PAUSE"); // listenForActionLocation();
 	}
 	else // player's two turn
 	{
 		cout << "\nPlayer Two's Turn" << endl;
-		cout << "Player Two, say location" << endl;
-		system("PAUSE"); // listenForPiece();
+		//cout << "Player Two, say location" << endl;
+		//system("PAUSE"); // listenForPiece();
 		cout << "Player Two, say command" << endl;
 		listenForCommand();
-		cout << "Player Two, say location" << endl;
-		system("Pause"); // listenForActionLocation();
-		cout << "\nPerforming action" << endl;
+		//cout << "Player Two, say location" << endl;
+		//system("Pause"); // listenForActionLocation();
+		//cout << "\nPerforming action" << endl;
 	}
 
 	cout << "\nPerforming action" << endl;
@@ -294,7 +294,30 @@ void performAction()
 		cout << sapi.pieceLocation << " healing piece " << sapi.actionLocation << endl;
 		break;
 	case sapi.King:
-
+		break;
+	case sapi.MoveU:
+		if (selectedUnit != NULL)
+		{
+			selectedUnit->moveU();
+		}
+		break;
+	case sapi.MoveD:
+		if (selectedUnit != NULL)
+		{
+			selectedUnit->moveD();
+		}
+		break;
+	case sapi.MoveL:
+		if (selectedUnit != NULL)
+		{
+			selectedUnit->moveL();
+		}
+		break;
+	case sapi.MoveR:
+		if (selectedUnit != NULL)
+		{
+			selectedUnit->moveR();
+		}
 		break;
 	default:
 		cout << "unknown command" << endl;

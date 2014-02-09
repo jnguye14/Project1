@@ -47,7 +47,11 @@ public:
 		Group,
 		Move,
 		Heal,
-		King
+		King,
+		MoveU,
+		MoveD,
+		MoveL,
+		MoveR
 	};
 	
 	// 26 letters, ten numbers
@@ -73,16 +77,10 @@ public:
 		commandList.push_back("move");
 		commandList.push_back("heal");
 		commandList.push_back("king");
-		/*
-		commandList = {
-			"hello",
-			"goodbye",
-			"attack",
-			"group",
-			"move",
-			"heal",
-			"king"
-		};*/
+		commandList.push_back("Move unit up");
+		commandList.push_back("Move unit down");
+		commandList.push_back("Move unit left");
+		commandList.push_back("Move unit right");
 
 		if (!SAPIinit())
 		{
