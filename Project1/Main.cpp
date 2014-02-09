@@ -247,7 +247,8 @@ void MainGameControl()
 	performAction();
 
 	isPlayerOneTurn = !isPlayerOneTurn;
-
+	selectedUnit->unselect();
+	selectedUnit=NULL;
 	// check win game conditions, if
 	//endGame = true; // change current scene
 }

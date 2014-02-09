@@ -66,22 +66,7 @@ float getPosX()
 	{
 		return attackRange;
 	}
-	void moveR()
-	{
-		setPosX(getPosX()-0.01);
-	}
-	void moveD()
-	{
-		setPosY(getPosY()+0.01);
-	}
-	void moveL()
-	{
-		setPosX(getPosX()+0.01);
-	}
-	void moveU()
-	{
-		setPosY(getPosY()-0.01);
-	}
+
 	string toString()
 	{
 		text = "This is the Sniper\n";

@@ -23,9 +23,9 @@ public:
 			posX = -0.5f;
 			posY = -0.2f;
 		}
-		health = 200;
+		health = 100;
 		movement = 200;
-		attackDamage = 200;
+		attackDamage = 10;
 		attackRange = 200;
 		selected = false;
 	}
@@ -70,22 +70,6 @@ public:
 	{
 		text = "This is the Heavy\n";
 		return text;
-	}
-	void moveR()
-	{
-		setPosX(getPosX()-0.01);
-	}
-	void moveD()
-	{
-		setPosY(getPosY()+0.01);
-	}
-	void moveL()
-	{
-		setPosX(getPosX()+0.01);
-	}
-	void moveU()
-	{
-		setPosY(getPosY()-0.01);
 	}
 	void drawPiece()
 	{
