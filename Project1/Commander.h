@@ -12,7 +12,8 @@
 class Commander : public MasterPiece
 {
 public:	
-	Commander(int player){
+	Commander(int player)
+	{
 		if(player == 1)
 		{
 			posX = 0.0f;
@@ -27,7 +28,7 @@ public:
 		movement = 100;
 		attackDamage = 100;
 		attackRange = 100;
-		selected=true;
+		selected = false;
 	}
 	~Commander(){}
 	float getPosX()
@@ -117,6 +118,7 @@ public:
 
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
+		
 		drawOutline();
 	}
 };

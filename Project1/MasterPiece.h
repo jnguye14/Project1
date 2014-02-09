@@ -40,6 +40,33 @@ public:
 			glColor3f(1.0,1.0,1.0);
 		}
 	}
+
+	void select()
+	{
+		selected = true;
+	}
+
+	void unselect()
+	{
+		selected = false;
+	}
+
+	bool isMouseOver(int x, int y)
+	{
+		int xmin = 500 * ((-posX - 0.1f + 1.0f)/2.0f); // why negative?
+		int xmax = 500 * ((-posX + 0.1f + 1.0f)/2.0f); // why negative?
+		int ymin = 500 * ((posY - 0.1f + 1.0f)/2.0f);
+		int ymax = 500 * ((posY + 0.1f + 1.0f)/2.0f);
+		if ((x > xmin) && (x < xmax) && (y > ymin) && (y < ymax))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	virtual string toString(){
 	return text;} //debugging purposes
 	virtual void drawPiece(){}

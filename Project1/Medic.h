@@ -27,7 +27,7 @@ public:
 		movement = 300;
 		attackDamage = 300;
 		attackRange = 300;
-		selected=true;
+		selected = false;
 	}
 	~Medic(){}
 	float getPosX()
@@ -89,11 +89,9 @@ public:
 	}
 	void drawPiece()
 	{
-
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glPushMatrix();
-
 
 		glBegin(GL_TRIANGLES);
 		glTexCoord2f(2.0f / 6.0f, 1.0f);
@@ -114,9 +112,10 @@ public:
 
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
-		cout<<"enter outline"<<endl;
+
+		//cout << "enter outline" << endl;
 		drawOutline();
-		cout<<"exit outline"<<endl;
+		//cout << "exit outline" << endl;
 	}
 };
 

@@ -27,7 +27,7 @@ public:
 		movement = 500;
 		attackDamage = 500;
 		attackRange = 500;
-		selected=true;
+		selected = false;
 	}
 	~Sniper(){}
 float getPosX()
@@ -90,18 +90,6 @@ float getPosX()
 	
 	void drawPiece()
 	{
-		if(selected)
-		{
-			glLineWidth(10);
-			glBegin(GL_LINE_LOOP);
-			glColor3f(1.0,0.0,0.0);
-			glVertex2f(-posX-0.1f, -posY-0.1f);
-			glVertex2f(-posX+0.1f, -posY-0.1f);
-			glVertex2f(-posX+0.1f, -posY+0.1f);
-			glVertex2f(-posX-0.1f, -posY+0.1f);
-			glEnd();
-			glColor3f(1.0,1.0,1.0);
-		}
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glPushMatrix();

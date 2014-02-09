@@ -24,6 +24,7 @@ bool endGame = false;
 
 vector <MasterPiece*> unitList1;
 vector <MasterPiece*> unitList2;
+MasterPiece* selectedUnit;
 
 // TODO: implement mutual exclusion for shared global variables
 //mutex curSceneLock; // for int currentScene;
@@ -48,24 +49,63 @@ void MouseButton(int button, int state, int x, int y)
 	{
 		if (state == GLUT_UP)
 		{
-			//current selected piece.selected = false;
-			//foreach piece in piecelist,
-			// checkMouseHover(x,y)// return true, if you clicked on piece, else returns false, if no piece selected
-				//if(piece.checkMouseHover())
-					// selectedPiece = piece
-					// piece.select = true; // variable so you know whether or not to highlight
-					//break;
+			switch (currentScene)
+			{
+			case 0: // main menu
+				if ((x > 325) && (x < 400) && (y>225) && (y < 275))
+				{
+					exit(0);
+				}
+				if ((x > 100) && (x < 175) && (y>225) && (y < 275))
+				{
+					currentScene = 1;
+					glutPostRedisplay();
+				}
+				printf("%s", "pressed button");
+				break;
+			case 1: // set up
+				break;
+			case 2: // main game
+				if (isPlayerOneTurn)
+				{
+					for (int i = 0; i<unitList1.size(); i++)
+					{
+						if (unitList1.at(i)->isMouseOver(x,y))
+						{
+							if (selectedUnit != NULL)
+							{
+								selectedUnit->unselect();
+							}
+							selectedUnit = unitList1.at(i);
+							selectedUnit->select();
+							break;
+						}
+					}
+				}
+				else // player two's turn
+				{
+					for (int i = 0; i<unitList2.size(); i++)
+					{
+						if (unitList2.at(i)->isMouseOver(x, y))
+						{
+							if (selectedUnit != NULL)
+							{
+								selectedUnit->unselect();
+							}
+							selectedUnit = unitList2.at(i);
+							selectedUnit->select();
+							break;
+						}
+					}
+				}
+				break;
+			case 3: // end game
+				break;
+			default:
+				break;
+			}
+			
 			//printf("(%d, %d)\n",x, y);
-			if ((x > 325) && (x < 400) && (y>225) && (y < 275))
-			{
-				exit(0);
-			}
-			if ((x > 100) && (x < 175) && (y>225) && (y < 275))
-			{
-				currentScene = 1;
-				glutPostRedisplay();
-			}
-			printf("%s", "pressed button");
 		}
 	}
 }
@@ -189,7 +229,7 @@ void MainGameDisplay()
 	}
 	hud(playerNumber);	
 
-			endGame=true;
+	//endGame=true;
 	// JNN's stuff
 	//cout << "Entering main game command loop" << endl;
 	//game(); // player one and player two alternate turns until game ends

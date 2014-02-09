@@ -29,6 +29,7 @@ public:
 		movement = 400;
 		attackDamage = 400;
 		attackRange = 400;
+		selected = false;
 	}
 	~Scout(){}
 	float getPosX()
