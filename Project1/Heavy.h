@@ -23,6 +23,7 @@ public:
 			posX = -0.5f;
 			posY = -0.2f;
 		}
+		timer=0;
 		health = 100;
 		movement = 200;
 		attackDamage = 10;
@@ -73,6 +74,15 @@ public:
 	}
 	void drawPiece()
 	{
+		if(timer>0)
+		{
+			glColor3f(0.0,0.0,1.0);
+			timer--;
+		}
+		else
+		{
+			glColor3f(1.0,1.0,1.0);
+		}
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glPushMatrix();

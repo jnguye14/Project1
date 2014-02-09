@@ -276,7 +276,7 @@ void performAction()
 			{
 				if (checkPiece(selectedUnit, unitList2.at(i)))
 				{
-					unitList2.at(i)->setHealth( unitList2.at(i)->getHealth() - selectedUnit->getAttackDamage() );
+					unitList2.at(i)->isAttacked( selectedUnit->getAttackDamage());
 					break;
 				}
 			}
@@ -287,7 +287,7 @@ void performAction()
 			{
 				if (checkPiece(selectedUnit, unitList1.at(i)))
 				{
-					unitList1.at(i)->setHealth(unitList1.at(i)->getHealth() - selectedUnit->getAttackDamage());
+					unitList1.at(i)->isAttacked( selectedUnit->getAttackDamage());
 					break;
 				}
 			}

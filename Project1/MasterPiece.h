@@ -6,6 +6,7 @@
 #include <sapi.h>
 #include <iostream>
 #include <string>
+
 #include "glut.h"
 #include "Main.h"
 //Allen Hsia: Todo 1/19/2014.fix the posX and posY for the location to draw
@@ -20,6 +21,7 @@ protected:
 	float attackRange;
 	string text;
 	bool selected;
+	int timer;
 public:
 	GLuint texture;
 	MasterPiece(){
@@ -104,6 +106,11 @@ public:
 	virtual float getAttackDamage()
 	{
 		return attackDamage;
+	}
+	virtual void isAttacked(float damageAmount)
+	{
+		setHealth( getHealth() -damageAmount );
+		timer = 1000;
 	}
 };
 
