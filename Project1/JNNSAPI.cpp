@@ -97,6 +97,15 @@ char* JNNSAPI::listen()
 	hr = recoResult->GetText(SP_GETWHOLEPHRASE, SP_GETWHOLEPHRASE, FALSE, &text, NULL);
 	check_result(hr);
 
+	/*
+	ISpStreamFormat* streamFormat;
+	hr = recoResult->GetAudio(NULL, NULL, &streamFormat);
+	pAudio = reinterpret_cast<ISpAudio*>(streamFormat);
+	
+	ULONG* volume = NULL;
+	pAudio->GetVolumeLevel(volume);
+	cout << *volume << endl;//*/
+
 	// convert wchar_t* to char* (which is more meaningul to me)
 	size_t size = (wcslen(text) + 1); // +1 for '\0'
 	size_t convertedChars = 0;

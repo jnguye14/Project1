@@ -247,14 +247,23 @@ void MainGameControl()
 	performAction();
 
 	isPlayerOneTurn = !isPlayerOneTurn;
-	selectedUnit->unselect();
-	selectedUnit=NULL;
+	if (selectedUnit != NULL)
+	{
+		selectedUnit->unselect();
+		selectedUnit = NULL;
+	}
 	// check win game conditions, if
 	//endGame = true; // change current scene
 }
 
 void performAction()
 {
+	if (selectedUnit == NULL)
+	{
+		sapi.Say("No units selected for action.");
+		return;
+	}
+
 	switch (sapi.currentCommand)
 	{
 	case sapi.Hello:
@@ -272,17 +281,27 @@ void performAction()
 
 		if (isPlayerOneTurn) // player one attacking player two
 		{
+			int n = -1;
 			for (int i = 0; i < unitList2.size(); i++)
 			{
 				if (checkPiece(selectedUnit, unitList2.at(i)))
 				{
 					unitList2.at(i)->isAttacked( selectedUnit->getAttackDamage());
+					n = i;
 					break;
+				}
+			}
+			if (n != -1)
+			{
+				if (unitList2.at(n)->getHealth() <= 0)
+				{
+					unitList2.erase(unitList2.begin() + n);
 				}
 			}
 		}
 		else // player two attacking player one
 		{
+			int n = -1;
 			for (int i = 0; i < unitList1.size(); i++)
 			{
 				if (checkPiece(selectedUnit, unitList1.at(i)))
@@ -291,27 +310,18 @@ void performAction()
 					break;
 				}
 			}
+			if (n != -1)
+			{
+				if (unitList1.at(n)->getHealth() <= 0)
+				{
+					unitList1.erase(unitList1.begin() + n);
+				}
+			}
 		}
-		//if(attackedPiece == defeated)
-		//{
-		// if the king/commander is defeated, or if the king/commander is the last one standing
-		//if(attackedPiece == king/commander || otherPlayer'sNumberPieces == 1)
-		//{
-		//endGame = true;
-		//isPlayerOneWinner = isPlayerOneTurn;
-		//}
-		//}
 		break;
 	case sapi.Group:
 		sapi.Say("Grouping Together");
 		cout << "grouping piece " << sapi.pieceLocation << " together with group " << sapi.actionLocation << endl;
-		break;
-	case sapi.Move:
-		// if(move to enemy space) currentCommand = Attack; performAction(); //autoattack;
-		// else if(move to friendly space) currentCommand = Group; performAction(); // autogroup;
-		// else: move unit to location
-		sapi.Say("Moving Piece");
-		cout << "moving " << sapi.pieceLocation << " to location" << sapi.actionLocation << endl;
 		break;
 	case sapi.Heal:
 		sapi.Say("Healing Piece");
@@ -319,6 +329,8 @@ void performAction()
 		break;
 	case sapi.King:
 		break;
+
+	// TODO: error checking so you won't move on top of pieces
 	case sapi.MoveU:
 		if (selectedUnit != NULL)
 		{
@@ -351,24 +363,26 @@ void performAction()
 
 bool checkPiece(MasterPiece* unit, MasterPiece* target)
 {
-	float UnitX = unit->getPosX();
-	float UnitY = unit->getPosY();
+	float minX = unit->getPosX() - 0.1f;
+	float maxX = unit->getPosX() + 0.1f;
+	float minY = unit->getPosY() - 0.1f;
+	float maxY = unit->getPosY() + 0.1f;
 	float TargetX = target->getPosX();
 	float TargetY = target->getPosY();
 
-	if (UnitX == TargetX && UnitY == TargetY - 0.2f) // north
+	if (TargetX > minX && TargetX < maxX && TargetY - 0.2f > minY && TargetY - 0.2f < maxY) // north
 	{
 		return true;
 	}
-	if (UnitX == TargetX + 0.2f && UnitY == TargetY) // west
+	if (TargetX + 0.2f > minX && TargetX + 0.2f < maxX && TargetY > minY && TargetY < maxY) // west
 	{
 		return true;
 	}
-	if (UnitX == TargetX && UnitY == TargetY + 0.2f) // south
+	if (TargetX > minX && TargetX < maxX && TargetY + 0.2f > minY && TargetY + 0.2f < maxY) // south
 	{
 		return true;
 	}
-	if (UnitX == TargetX - 0.2f && UnitY == TargetY) // east
+	if (TargetX - 0.2f > minX && TargetX - 0.2f < maxX && TargetY > minY && TargetY < maxY) // east
 	{
 		return true;
 	}

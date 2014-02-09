@@ -44,19 +44,19 @@ public:
 	}
 	virtual void moveR()
 	{
-		setPosX(getPosX()-0.2);
+		setPosX(getPosX()-0.1);
 	}
 	virtual void moveD()
 	{
-		setPosY(getPosY()+0.2);
+		setPosY(getPosY()+0.1);
 	}
 	virtual void moveL()
 	{
-		setPosX(getPosX()+0.2);
+		setPosX(getPosX()+0.1);
 	}
 	virtual void moveU()
 	{
-		setPosY(getPosY()-0.2);
+		setPosY(getPosY()-0.1);
 	}
 	void select()
 	{

@@ -33,11 +33,11 @@ private:
 
 	// Audio stream
 	//ISpStream* pInputStream;
-	//ISpAudio* pAudio;
 	//ISpMMSysAudio* pMMSysAudio;
 	//SpMMAudioIn* MMAudioIn;
 
 public:
+	ISpAudio* pAudio;
 	vector<string> commandList;
 	enum Command
 	{
@@ -45,7 +45,6 @@ public:
 		Goodbye,
 		Attack,
 		Group,
-		Move,
 		Heal,
 		King,
 		MoveU,
@@ -74,7 +73,6 @@ public:
 		commandList.push_back("goodbye");
 		commandList.push_back("attack");
 		commandList.push_back("group");
-		commandList.push_back("move");
 		commandList.push_back("heal");
 		commandList.push_back("king");
 		commandList.push_back("Move unit up");
