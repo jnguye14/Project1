@@ -237,11 +237,10 @@ bool JNNSAPI::initGrammar()
 	check_result(hr);
 
 	// Add commands
-	int numberOfCommands = sizeof(commandList) / sizeof(string);
-	for (int i = 0; i < numberOfCommands; i++)
+	for (int i = 0; i<commandList.size(); i++)
 	{
 		// add command to recognition grammar
-		const wstring commandWstr = wstring(commandList[i].begin(), commandList[i].end());
+		const wstring commandWstr = wstring(commandList.at(i).begin(),commandList.at(i).end());
 		hr = recoGrammar->AddWordTransition(sate, NULL, commandWstr.c_str(), L" ", SPWT_LEXICAL, 1, nullptr);
 		check_result(hr);
 
