@@ -406,6 +406,19 @@ void display()
 	//glFlush();
 }
 
+void resizeWindow(int x, int y)
+{
+	glutReshapeWindow(500,500);
+
+	glMatrixMode(GL_PROJECTION); // set the matrix mode to reset the camera
+	glLoadIdentity(); // get the identity matrix
+	glViewport(0, 0, 500, 500);	// set up viewport
+	//gluPerspective(fieldofview, aspectRatio, nearPlane, farPlane);
+
+	glMatrixMode(GL_MODELVIEW); // bring it back to matrix mode for scaling/rotation/translations
+	glLoadIdentity(); // load back the identity matrix JIC
+}
+
 void init()
 {
 	LoadTexture();

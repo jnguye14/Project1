@@ -15,6 +15,7 @@ int main(int argc, char* argv[])
 	/* create a callback routine for (re-)display */
 	glutIdleFunc(speechWait);
 	glutDisplayFunc(display);
+	glutReshapeFunc(resizeWindow);
 	glutMotionFunc(motion);
 	glutMouseFunc(MouseButton);
 	glutKeyboardFunc(movement);
