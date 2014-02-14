@@ -338,11 +338,36 @@ void performAction()
 		cout << "grouping piece " << sapi.pieceLocation << " together with group " << sapi.actionLocation << endl;
 		break;
 	case sapi.Heal:
-		sapi.Say("Healing Piece");
-		cout << sapi.pieceLocation << " healing piece " << sapi.actionLocation << endl;
-		if(selectedUnit->toString()=="Medic")
+		if (strcmp(selectedUnit->toString().c_str(), "Medic") != 0)
 		{
-			cout<<"Hello"<<endl;
+			sapi.Say("Unable to Heal; Unit is not a Medic.");
+			break;
+		}
+
+		sapi.Say("Healing Piece");
+		//cout << sapi.pieceLocation << " healing piece " << sapi.actionLocation << endl;
+
+		if (isPlayerOneTurn) // player one healing piece
+		{
+			for (int i = 0; i < unitList1.size(); i++)
+			{
+				if (checkPiece(selectedUnit, unitList1.at(i)))
+				{
+					unitList1.at(i)->setHealth(unitList1.at(i)->getHealth() + 20);
+					break;
+				}
+			}
+		}
+		else // player two healing piece
+		{
+			for (int i = 0; i < unitList2.size(); i++)
+			{
+				if (checkPiece(selectedUnit, unitList2.at(i)))
+				{
+					unitList2.at(i)->setHealth(unitList2.at(i)->getHealth() + 20);
+					break;
+				}
+			}
 		}
 		
 		if (isPlayerOneTurn) // player one healing

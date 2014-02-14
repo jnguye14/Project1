@@ -54,7 +54,7 @@ void hud(int player)
 	ss.str(string());
 	if(selectedUnit){
 		glColor3f(1.0,0.0,0.0);
-		ss<<"Unit: "<<selectedUnit->toString();
+		if (selectedUnit) ss << "Unit: " << selectedUnit->toString();
 		float xx=-0.9,yy=0.5;
 		string stats = ss.str();
 		glRasterPos2f(xx,0.5);
@@ -62,7 +62,7 @@ void hud(int player)
 			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
 		}
 		ss.str(string());
-		ss<<"Attack damage: "<<selectedUnit->getAttackDamage();
+		if (selectedUnit) ss << "Attack damage: " << selectedUnit->getAttackDamage();
 		//yy=-0.01;
 		glRasterPos2f(xx,0.4);
 		stats = ss.str();
@@ -70,7 +70,7 @@ void hud(int player)
 			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
 		}
 		ss.str(string());
-		ss<<"Health: "<<selectedUnit->getHealth();
+		if (selectedUnit) ss << "Health: " << selectedUnit->getHealth();
 		//yy=-0.01;
 		glRasterPos2f(xx,0.3);
 		stats = ss.str();
