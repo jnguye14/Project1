@@ -116,6 +116,20 @@ public:
 		setHealth( getHealth() -damageAmount );
 		timer = 1000;
 	}
+	virtual void healed()
+	{
+	
+		timer=1000;
+		if(timer>0)
+		{
+			glColor3f(0.0,1.0,0.0);
+			timer--;
+		}
+		else
+		{
+			glColor3f(1.0,1.0,1.0);
+		}
+	}
 };
 
 #endif

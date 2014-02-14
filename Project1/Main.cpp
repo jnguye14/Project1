@@ -346,7 +346,6 @@ void performAction()
 
 		sapi.Say("Healing Piece");
 		//cout << sapi.pieceLocation << " healing piece " << sapi.actionLocation << endl;
-
 		if (isPlayerOneTurn) // player one healing piece
 		{
 			for (int i = 0; i < unitList1.size(); i++)
@@ -354,6 +353,7 @@ void performAction()
 				if (checkPiece(selectedUnit, unitList1.at(i)))
 				{
 					unitList1.at(i)->setHealth(unitList1.at(i)->getHealth() + 20);
+					unitList1.at(i)->healed();
 					break;
 				}
 			}
@@ -365,6 +365,7 @@ void performAction()
 				if (checkPiece(selectedUnit, unitList2.at(i)))
 				{
 					unitList2.at(i)->setHealth(unitList2.at(i)->getHealth() + 20);
+					unitList2.at(i)->healed();
 					break;
 				}
 			}
