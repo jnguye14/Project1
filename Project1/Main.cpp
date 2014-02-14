@@ -344,6 +344,32 @@ void performAction()
 		{
 			cout<<"Hello"<<endl;
 		}
+		
+		if (isPlayerOneTurn) // player one healing
+		{
+			int n = -1;
+			for (int i = 0; i < unitList1.size(); i++)
+			{
+				if (checkPiece(unitList1.at(3), unitList1.at(i)))
+				{
+					unitList1.at(i)->setHealth(unitList1.at(i)->getHealth()+20);
+					n = i;
+					break;
+				}
+			}
+		}
+		else // player two healing
+		{
+			int n = -1;
+			for (int i = 0; i < unitList2.size(); i++)
+			{
+				if (checkPiece(unitList2.at(3), unitList2.at(i)))
+				{
+					unitList2.at(i)->setHealth(unitList2.at(i)->getHealth()+20);
+					break;
+				}
+			}
+		}
 		break;
 	case sapi.King:
 		break;

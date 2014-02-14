@@ -67,6 +67,10 @@ public:
 	{
 		return attackRange;
 	}
+	float healing()
+	{
+		return 20;
+	}
 	string toString()
 	{
 		text = "Medic";
