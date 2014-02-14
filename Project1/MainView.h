@@ -19,8 +19,8 @@
 int currentScene = 0;
 int playerWinner = 0;
 int playerNumber = 0;
+bool isSet = false; 
 bool isPlayerOneTurn = true;
-bool endGame = false;
 
 vector <MasterPiece*> unitList1;
 vector <MasterPiece*> unitList2;
@@ -138,6 +138,14 @@ void MouseButton(int button, int state, int x, int y)
 				}
 				break;
 			case 3: // end game
+				// restart button
+				if ((x > 225) && (x < 313) && (y>350) && (y < 400))
+				{
+					isPlayerOneTurn = true;
+					isSet = false;
+					currentScene = 0;
+					glutPostRedisplay();
+				}
 				break;
 			default:
 				break;
@@ -194,7 +202,6 @@ void motion(int x, int y)
 #pragma mark region Game Screens
 void MainMenuDisplay()
 {
-
 	glPushMatrix();
 	glBegin(GL_POLYGON);
 	glColor3f(0.0, 0.0, 1.0);
@@ -260,28 +267,7 @@ void MainGameDisplay()
 	{
 		unitList2.at(i)->drawPiece();
 	}
-	hud(playerNumber);	
-
-	//endGame=true;
-	// JNN's stuff
-	//cout << "Entering main game command loop" << endl;
-	//game(); // player one and player two alternate turns until game ends
-	if(unitList1.size()==0)
-	{
-		endGame=true;
-		playerWinner=2;
-	}
-	else if(unitList2.size()==0)
-	{
-		endGame=true;
-		playerWinner=1;
-	}
-	// at game over:
-	if (endGame)
-	{
-		cout << "\nEnd of Game Demo\n" << endl;
-		currentScene = 3;
-	}
+	hud(playerNumber);
 }
 
 void EndGameDisplay()
@@ -385,6 +371,24 @@ void EndGameDisplay()
 	}
 
 	// replay button
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.0, 1.0);
+	glVertex2f(-0.1, -0.6);
+	glVertex2f(-0.1, -0.4);
+	glVertex2f(0.25, -0.4);
+	glVertex2f(0.25, -0.6);
+	glEnd();
+	glPopMatrix();
+
+	glColor3f(1.0, 1.0, 1.0);
+	glRasterPos2f(-0.04, -0.53);
+	stringstream ss;
+	ss << "Replay";
+	string play = ss.str();
+	for (int i = 0; i<play.length(); i++){
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, play[i]);
+	}
 }
 #pragma mark endregion
 void drawOutline()
@@ -422,6 +426,19 @@ void display()
 	}
 	glutSwapBuffers();
 	//glFlush();
+}
+
+void resizeWindow(int x, int y)
+{
+	glutReshapeWindow(500,500);
+
+	glMatrixMode(GL_PROJECTION); // set the matrix mode to reset the camera
+	glLoadIdentity(); // get the identity matrix
+	glViewport(0, 0, 500, 500);	// set up viewport
+	//gluPerspective(fieldofview, aspectRatio, nearPlane, farPlane);
+
+	glMatrixMode(GL_MODELVIEW); // bring it back to matrix mode for scaling/rotation/translations
+	glLoadIdentity(); // load back the identity matrix JIC
 }
 
 void init()

@@ -15,6 +15,7 @@ int main(int argc, char* argv[])
 	/* create a callback routine for (re-)display */
 	glutIdleFunc(speechWait);
 	glutDisplayFunc(display);
+	glutReshapeFunc(resizeWindow);
 	glutMotionFunc(motion);
 	glutMouseFunc(MouseButton);
 	glutKeyboardFunc(movement);
@@ -146,6 +147,7 @@ void playerSetup()
 		Sniper* sniper = new Sniper(1);
 		Soldier* soldier = new Soldier(1);
 
+		unitList1.clear();
 		unitList1.push_back(commander);
 		unitList1.push_back(heavy);
 		unitList1.push_back(medic);
@@ -174,6 +176,7 @@ void playerSetup()
 		Sniper* sniper = new Sniper(2);
 		Soldier* soldier = new Soldier(2);
 
+		unitList2.clear();
 		unitList2.push_back(commander);
 		unitList2.push_back(heavy);
 		unitList2.push_back(medic);
@@ -190,8 +193,6 @@ void playerSetup()
 	}
 }
 #pragma mark endregion
-
-bool isSet = false;
 
 // should run on separate thread from display
 void game()
@@ -213,6 +214,9 @@ void game()
 			break;
 		case 2: // main game
 			MainGameControl();
+			break;
+		case 3: // end game, do nothing
+			break;
 		default: // unknown scene, do nothing (display should display error message)
 			break;
 		}
@@ -252,8 +256,6 @@ void MainGameControl()
 		selectedUnit->unselect();
 		selectedUnit = NULL;
 	}
-	// check win game conditions, if
-	//endGame = true; // change current scene
 }
 
 void performAction()
@@ -273,6 +275,8 @@ void performAction()
 	case sapi.Goodbye:
 		sapi.Say("Goodbye User");
 		cout << "Goodbye User" << endl;
+		currentScene = 3;
+		// disable restart?
 		endGame = true;
 		break;
 	case sapi.Attack:
@@ -296,6 +300,11 @@ void performAction()
 				if (unitList2.at(n)->getHealth() <= 0)
 				{
 					unitList2.erase(unitList2.begin() + n);
+					if (n == 0 || unitList2.size() == 0)
+					{
+						currentScene = 3;
+						playerWinner = 1;
+					}
 				}
 			}
 		}
@@ -315,6 +324,11 @@ void performAction()
 				if (unitList1.at(n)->getHealth() <= 0)
 				{
 					unitList1.erase(unitList1.begin() + n);
+					if (n == 0 || unitList1.size() == 0)
+					{
+						currentScene = 3;
+						playerWinner = 2;
+					}
 				}
 			}
 		}
