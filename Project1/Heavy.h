@@ -26,8 +26,8 @@ public:
 		timer=0;
 		health = 100;
 		movement = 200;
-		attackDamage = 10;
-		attackRange = 200;
+		attackDamage = 20;
+		attackRange = 0.2f;
 		selected = false;
 	}
 	~Heavy(){}
@@ -69,7 +69,7 @@ public:
 	}
 	string toString()
 	{
-		text = "This is the Heavy\n";
+		text = "Heavy";
 		return text;
 	}
 	void drawPiece()

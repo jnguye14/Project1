@@ -24,10 +24,10 @@ public:
 			posY = -0.5f;
 		}	
 		timer=0;
-		health = 500;
+		health = 100;
 		movement = 500;
-		attackDamage = 500;
-		attackRange = 500;
+		attackDamage = 10;
+		attackRange = 0.3f;
 		selected = false;
 	}
 	~Sniper(){}
@@ -70,7 +70,7 @@ float getPosX()
 
 	string toString()
 	{
-		text = "This is the Sniper\n";
+		text = "Sniper";
 		return text;
 	}
 	

@@ -25,10 +25,10 @@ public:
 			posY = -0.2f;
 		}
 		timer=0;
-		health = 100;
+		health = 200;
 		movement = 100;
-		attackDamage = 100;
-		attackRange = 100;
+		attackDamage = 20;
+		attackRange = 0.2f;
 		selected = false;
 	}
 	~Commander(){}
@@ -70,7 +70,7 @@ public:
 	}
 	string toString()
 	{
-		text = "This is the Commander\n";
+		text = "Commander";
 		return text;
 	}
 	void drawPiece()

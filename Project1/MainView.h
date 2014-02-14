@@ -51,6 +51,33 @@ void hud(int player)
 			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,play[i]);
 		}
 	}
+	ss.str(string());
+	if(selectedUnit){
+		glColor3f(1.0,0.0,0.0);
+		ss<<"Unit: "<<selectedUnit->toString();
+		float xx=-0.9,yy=0.5;
+		string stats = ss.str();
+		glRasterPos2f(xx,0.5);
+		for(int i =0;i<stats.length();i++){
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
+		}
+		ss.str(string());
+		ss<<"Attack damage: "<<selectedUnit->getAttackDamage();
+		//yy=-0.01;
+		glRasterPos2f(xx,0.4);
+		stats = ss.str();
+		for(int i =0;i<stats.length();i++){
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
+		}
+		ss.str(string());
+		ss<<"Health: "<<selectedUnit->getHealth();
+		//yy=-0.01;
+		glRasterPos2f(xx,0.3);
+		stats = ss.str();
+		for(int i =0;i<stats.length();i++){
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
+		}
+	}
 }
 void MouseButton(int button, int state, int x, int y)
 {
@@ -126,36 +153,31 @@ void movement(unsigned char key, int x, int y)
 	//find selected unit. store that in a variable
 	if(key=='w')
 	{
-		//move commnander 1
-		unitList2.at(0)->moveU();
-		unitList2.at(1)->moveU();
-		unitList2.at(2)->moveU();
-		unitList2.at(3)->moveU();
-		unitList2.at(4)->moveU();
+		if(selectedUnit!=NULL)
+		{
+			selectedUnit->moveU();
+		}
 	}
 	if(key=='a')
 	{
-		unitList2.at(0)->moveL();
-		unitList2.at(1)->moveL();
-		unitList2.at(2)->moveL();
-		unitList2.at(3)->moveL();
-		unitList2.at(4)->moveL();
+		if(selectedUnit!=NULL)
+		{
+			selectedUnit->moveL();
+		}
 	}
 	if(key=='s')
 	{
-		unitList2.at(0)->moveD();
-		unitList2.at(1)->moveD();
-		unitList2.at(2)->moveD();
-		unitList2.at(3)->moveD();
-		unitList2.at(4)->moveD();
+		if(selectedUnit!=NULL)
+		{
+			selectedUnit->moveD();
+		}
 	}
 	if(key=='d')
 	{
-		unitList2.at(0)->moveR();
-		unitList2.at(1)->moveR();
-		unitList2.at(2)->moveR();
-		unitList2.at(3)->moveR();
-		unitList2.at(4)->moveR();
+		if(selectedUnit!=NULL)
+		{
+			selectedUnit->moveR();
+		}
 	}
 }
 

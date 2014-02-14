@@ -24,10 +24,10 @@ public:
 			posY = -0.5f;
 		}
 		timer=0;
-		health = 600;
+		health = 100;
 		movement = 600;
-		attackDamage = 600;
-		attackRange = 600;
+		attackDamage = 10;
+		attackRange = 0.2f;
 		selected = false;
 	}
 	~Soldier(){}
@@ -69,7 +69,7 @@ public:
 	}
 	string toString()
 	{
-		text = "This is the Soldier\n";
+		text = "Soldier";
 		return text;
 	}
 

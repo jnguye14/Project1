@@ -361,12 +361,15 @@ void performAction()
 	}
 }
 
+//change unit range to float
+//make everyone's range in their separate .h files to 0.1
+//set sniper to 0.3
 bool checkPiece(MasterPiece* unit, MasterPiece* target)
 {
-	float minX = unit->getPosX() - 0.1f;
-	float maxX = unit->getPosX() + 0.1f;
-	float minY = unit->getPosY() - 0.1f;
-	float maxY = unit->getPosY() + 0.1f;
+	float minX = unit->getPosX() - unit->getAttackRange();
+	float maxX = unit->getPosX() + unit->getAttackRange();
+	float minY = unit->getPosY() - unit->getAttackRange();
+	float maxY = unit->getPosY() + unit->getAttackRange();
 	float TargetX = target->getPosX();
 	float TargetY = target->getPosY();
 

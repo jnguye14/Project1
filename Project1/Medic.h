@@ -24,10 +24,10 @@ public:
 			posY = -0.2f;
 		}
 		timer=0;
-		health = 300;
+		health = 100;
 		movement = 300;
-		attackDamage = 300;
-		attackRange = 300;
+		attackDamage = 10;
+		attackRange = 0.2f;
 		selected = false;
 	}
 	~Medic(){}
@@ -69,7 +69,7 @@ public:
 	}
 	string toString()
 	{
-		text = "This is the Medic\n";
+		text = "Medic";
 		return text;
 	}
 

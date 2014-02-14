@@ -107,6 +107,10 @@ public:
 	{
 		return attackDamage;
 	}
+	virtual	float getAttackRange()
+	{
+		return attackRange;
+	}
 	virtual void isAttacked(float damageAmount)
 	{
 		setHealth( getHealth() -damageAmount );
