@@ -340,6 +340,10 @@ void performAction()
 	case sapi.Heal:
 		sapi.Say("Healing Piece");
 		cout << sapi.pieceLocation << " healing piece " << sapi.actionLocation << endl;
+		if(selectedUnit->toString()=="Medic")
+		{
+			cout<<"Hello"<<endl;
+		}
 		break;
 	case sapi.King:
 		break;
