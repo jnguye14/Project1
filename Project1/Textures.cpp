@@ -6,26 +6,42 @@ GLubyte *image;
 GLuint texture_1;
 GLubyte *image_1;
 
+GLuint playTexture;
+GLubyte *playImage;
+
+GLuint quitTexture;
+GLubyte *quitImage;
+
+GLuint turnTexture;
+GLubyte *turnImage;
+
 int imageWidth = 64*6;
 int imageHeight = 64;
 int bitDepth = 32;
 
-void LoadTexture()
+void LoadGameTextures()
 {
-	/* Load in a PNG image */
-	//int loadCorrectly = 0;
+	LoadTexture("Images/Units.png", &image, &texture, imageWidth, imageHeight, bitDepth);
+	LoadTexture("Images/Units_Blue.png", &image_1, &texture_1, imageWidth, imageHeight, bitDepth);
+	LoadTexture("Images/Play.png", &playImage, &playTexture, 128, 64, 64);
+	LoadTexture("Images/Quit.png", &quitImage, &quitTexture, 128, 64, 64);
+	LoadTexture("Images/Player_Turn.png", &turnImage, &turnTexture, 128, 64, 64);
+}
+
+void LoadTexture(char const *filename, GLubyte** image, GLuint* texture, int imageWidth, int imageHeight, int bitDepth)
+{
 	//Use the stbi_image file to load an image
-	image = stbi_load("Units/Units_G.bmp", &imageWidth, &imageHeight, &bitDepth, 0);
-	
+	*image = stbi_load(filename, &imageWidth, &imageHeight, &bitDepth, 0);
+
 	//gluScaleImage(GL_RGB,imageWidth,imageHeight,GL_RGB,imageWidth,imageHeight,GL_RGB,image);
 
-	glGenTextures(1, &texture); //generate the texture with the loaded data
+	glGenTextures(1, texture); //generate the texture with the loaded data
 
 
 	//The first thing that must take place in the process of uploading the texture is a call to glBindTexture. 
 	//What glBindTexture does is it tells OpenGL which texture "id" we will be working with. 
 	//A texture "id" is just a number that you will use to access your textures. Here is a sample call.
-	glBindTexture(GL_TEXTURE_2D, texture); //bind texture to its array
+	glBindTexture(GL_TEXTURE_2D, *texture); //bind texture to its array
 
 
 
@@ -65,21 +81,5 @@ void LoadTexture()
 	//pixels - Pointer to the image data. 
 	//This is the image data that will be uploaded to the video memory. 
 	//Note that after your call to glTexImage2D you can free this memory since the texture is already uploaded into video memory.
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-
-	image_1 = stbi_load("Units/Units_B.bmp", &imageWidth, &imageHeight, &bitDepth, 0);
-	glGenTextures(1, &texture_1); //generate the texture with the loaded data
-
-	glBindTexture(GL_TEXTURE_2D, texture_1); //bind texture to its array
-
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);// GL_MIRRORED_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);// GL_MIRRORED_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image_1);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, *image);
 }

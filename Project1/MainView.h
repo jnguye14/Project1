@@ -255,8 +255,32 @@ void UnitSetupDisplay()
 	//currentScene = 2; // MainGameDisplay()
 }
 
+//*
+void drawGrid()
+{
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glLineWidth(2);
+	glColor3f(1.0f, 1.0f, 1.0f);
+
+	glBegin(GL_LINES);
+	for (float i = -0.9f; i <= 0.95f; i += 0.1f)
+	{
+		// draw horizontal lines
+		glVertex2f(-0.9f, i);
+		glVertex2f(0.9f, i);
+
+		// draw vertical line
+		glVertex2f(i, -0.9f);
+		glVertex2f(i, 0.9f);
+	}
+	glEnd();
+}//*/
+
 void MainGameDisplay()
 {
+	drawGrid();
+
 	// Allen Renders Battle Scene
 	for (int i = 0; i<unitList1.size(); i++)
 	{
@@ -391,18 +415,7 @@ void EndGameDisplay()
 	}
 }
 #pragma mark endregion
-void drawOutline()
-{
-	glClear(GL_COLOR_BUFFER_BIT);
-	glBegin(GL_POLYGON);
-		glColor3f(0.3,0.79,0.12);
-		glVertex2f(-unitList1.at(0)->getPosX(), -unitList1.at(0)->getPosX());
-		glVertex2f( unitList1.at(0)->getPosX(), -unitList1.at(0)->getPosX());
-		glColor3f(0.52,0.34,0.22);
-		glVertex2f( unitList1.at(0)->getPosX(),  unitList1.at(0)->getPosX());
-		glVertex2f(-unitList1.at(0)->getPosX(),  unitList1.at(0)->getPosX());
-	glEnd();
-}
+
 void display()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -443,7 +456,8 @@ void resizeWindow(int x, int y)
 
 void init()
 {
-	LoadTexture();
+	LoadGameTextures();
+	//LoadTexture();
 
 	/* set background clear color to black */
 	glClearColor(0.0, 0.0, 0.0, 0.0);

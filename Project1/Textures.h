@@ -12,11 +12,22 @@ extern GLubyte *image; // unsigned char *
 extern GLuint texture_1;
 extern GLubyte *image_1;
 
+extern GLuint playTexture;
+extern GLubyte *playImage;
+
+extern GLuint quitTexture;
+extern GLubyte *quitImage;
+
+extern GLuint turnTexture;
+extern GLubyte *turnImage;
+
 extern int imageWidth;
 extern int imageHeight;
 extern int bitDepth;
 
 // texture functions
-void LoadTexture();
+void LoadGameTextures();
+void LoadTexture(char const *filename, GLubyte** image, GLuint* texture, int imageWidth, int imageHeight, int bitDepth);
+//void LoadTexture();
 
 #endif
