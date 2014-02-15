@@ -12,6 +12,9 @@ extern GLubyte *image; // unsigned char *
 extern GLuint texture_1;
 extern GLubyte *image_1;
 
+extern GLuint titleTexture;
+extern GLubyte *titleImage;
+
 extern GLuint playTexture;
 extern GLubyte *playImage;
 

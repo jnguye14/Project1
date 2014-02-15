@@ -199,47 +199,44 @@ void motion(int x, int y)
 	printf("(%d, %d)\n", x, y);
 }
 
+// float values with respect to gl ortho viewport
+// (x,y) = LOWER left corner of square
+// w = width
+// h = height
+// texture = GLuint indicating which texture to use
+void drawRect(float x, float y, float w, float h, GLuint texture)
+{
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glPushMatrix();
+	glBegin(GL_TRIANGLES);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex2f(x, y + h);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex2f(x + w, y + h);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex2f(x + w, y);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex2f(x, y + h);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex2f(x + w, y);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex2f(x, y);
+	glEnd();
+	glPopMatrix();
+
+	glDisable(GL_TEXTURE_2D);
+}
+
 #pragma mark region Game Screens
 void MainMenuDisplay()
 {
-	glPushMatrix();
-	glBegin(GL_POLYGON);
-	glColor3f(0.0, 0.0, 1.0);
-	glVertex2f(-0.6, -0.1);
-	glVertex2f(-0.6, 0.1);
-	glVertex2f(-0.3, 0.1);
-	glVertex2f(-0.3, -0.1);
-	glEnd();
-	glPopMatrix();
-
-	glColor3f(1.0,1.0,1.0);
-	glRasterPos2f(-0.54,-0.03);
-	stringstream ss;
-	ss<<"PLAY";
-	string play = ss.str();
-	for(int i =0;i<play.length();i++){
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,play[i]);
-	}
-
-	glPushMatrix();
-	glBegin(GL_POLYGON);
-	glColor3f(0.0, 0.0, 1.0);
-	glVertex2f(0.6, -0.1);
-	glVertex2f(0.6, 0.1);
-	glVertex2f(0.3, 0.1);
-	glVertex2f(0.3, -0.1);
-	glEnd();
-	glPopMatrix();
+	// draw play and quit buttons
+	drawRect(-0.6f, -0.1f, 0.3f, 0.2f, playTexture);
+	drawRect(0.3f, -0.1f, 0.3f, 0.2f, quitTexture);
 	
-	glColor3f(1.0,1.0,1.0);
-	glRasterPos2f(0.35,-0.03);
-	stringstream sss;
-	sss<<"QUIT";
-	string Quit = sss.str();
-	for(int i =0;i<Quit.length();i++){
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,Quit[i]);
-	}
-
 	glColor3f(1.0,1.0,1.0);
 	glRasterPos2f(-0.28,0.5);
 	stringstream titleStream;
@@ -258,8 +255,6 @@ void UnitSetupDisplay()
 //*
 void drawGrid()
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glLineWidth(2);
 	glColor3f(1.0f, 1.0f, 1.0f);
 
@@ -457,7 +452,8 @@ void resizeWindow(int x, int y)
 void init()
 {
 	LoadGameTextures();
-	//LoadTexture();
+	glEnable(GL_BLEND); // For blending alpha chanels
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	/* set background clear color to black */
 	glClearColor(0.0, 0.0, 0.0, 0.0);
