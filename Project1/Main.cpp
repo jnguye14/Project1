@@ -300,7 +300,7 @@ void performAction()
 				if (unitList2.at(n)->getHealth() <= 0)
 				{
 					unitList2.erase(unitList2.begin() + n);
-					if (n == 0 || unitList2.size() == 0)
+					if (n == 0 || unitList2.size() == 1)
 					{
 						currentScene = 3;
 						playerWinner = 1;
@@ -324,7 +324,7 @@ void performAction()
 				if (unitList1.at(n)->getHealth() <= 0)
 				{
 					unitList1.erase(unitList1.begin() + n);
-					if (n == 0 || unitList1.size() == 0)
+					if (n == 0 || unitList1.size() == 1)
 					{
 						currentScene = 3;
 						playerWinner = 2;

@@ -22,6 +22,7 @@ protected:
 	string text;
 	bool selected;
 	int timer;
+	bool isBlue;
 public:
 	GLuint texture;
 	MasterPiece(){
@@ -86,7 +87,26 @@ public:
 
 	virtual string toString(){
 	return text;} //debugging purposes
-	virtual void drawPiece(){}
+	virtual void drawPiece()
+	{
+		//timer = 1000;
+		if (timer>0)
+		{
+			if (isBlue)
+			{
+				glColor3f(0.0, 1.0, 0.0);
+			}
+			else
+			{
+				glColor3f(1.0, 0.0, 0.0);
+			}
+			timer--;
+		}
+		else
+		{
+			glColor3f(1.0, 1.0, 1.0);
+		}
+	}
 	virtual void setHealth(float newHealth)
 	{
 		health = newHealth;
@@ -115,20 +135,12 @@ public:
 	{
 		setHealth( getHealth() -damageAmount );
 		timer = 1000;
+		isBlue = false;
 	}
 	virtual void healed()
 	{
-	
 		timer=1000;
-		if(timer>0)
-		{
-			glColor3f(0.0,1.0,0.0);
-			timer--;
-		}
-		else
-		{
-			glColor3f(1.0,1.0,1.0);
-		}
+		isBlue = true;
 	}
 };
 
