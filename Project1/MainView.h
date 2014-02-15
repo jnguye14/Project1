@@ -250,6 +250,16 @@ void MainMenuDisplay()
 void UnitSetupDisplay()
 {
 	//currentScene = 2; // MainGameDisplay()
+	glColor3f(1.0, 1.0, 1.0);
+	glRasterPos2f(-0.28, 0.5);
+	stringstream loadingText;
+	loadingText << "Loading . . .";
+	string title = loadingText.str();
+	for (int i = 0; i<title.length(); i++){
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, title[i]);
+	}
+	glutSwapBuffers();
+	Sleep(1000);
 }
 
 //*
@@ -312,7 +322,7 @@ void EndGameDisplay()
 				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
 		}
 		yy=yy-0.1;
-		for (int i =0;i<5;i++)
+		for (int i =0;i<unitList2.size();i++)
 		{
 			endStat.str(string());
 			endStat<<unitList2.at(i)->toString();
@@ -334,7 +344,7 @@ void EndGameDisplay()
 				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
 		}
 		yy=yy-0.1;
-		for (int i =0;i<5;i++)
+		for (int i =0;i<unitList1.size();i++)
 		{
 			endStat.str(string());
 			endStat<<unitList1.at(i)->toString();
@@ -356,7 +366,7 @@ void EndGameDisplay()
 				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
 		}
 		yy=yy-0.1;
-		for (int i =0;i<5;i++)
+		for (int i =0;i<unitList1.size();i++)
 		{	
 			endStat.str(string());
 			endStat<<unitList1.at(i)->toString();
@@ -376,7 +386,7 @@ void EndGameDisplay()
 				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
 		}
 		yy2=yy2-0.1;
-		for (int i =0;i<5;i++)
+		for (int i =0;i<unitList2.size();i++)
 		{		
 			endStat.str(string());
 			endStat<<unitList2.at(i)->toString();

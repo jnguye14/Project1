@@ -277,7 +277,7 @@ void performAction()
 		cout << "Goodbye User" << endl;
 		currentScene = 3;
 		// disable restart?
-		endGame = true;
+		//endGame = true;
 		break;
 	case sapi.Attack:
 		sapi.Say("Attacking Piece");
