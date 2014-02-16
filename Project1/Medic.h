@@ -104,10 +104,6 @@ public:
 
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
-
-		//cout << "enter outline" << endl;
-		drawOutline();
-		//cout << "exit outline" << endl;
 	}
 };
 

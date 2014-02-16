@@ -33,6 +33,19 @@ public:
 		if(selected)
 		{
 			glLineWidth(10);
+			
+			// circle
+			float PI, theta, radius = 0.1f;
+			PI = acos((float) (-1));
+			glBegin(GL_LINE_LOOP);
+			glColor3f(1.0, 0.0, 0.0);
+			for (theta = 0; theta<2 * PI; theta += (2.0f * PI) / 360.0f)
+			{
+				glVertex2f(-posX + cos(theta)*radius, -posY + sin(theta)*radius);
+			}
+			glEnd();
+
+			/* // square
 			glBegin(GL_LINE_LOOP);
 			glColor3f(1.0,0.0,0.0);
 			glVertex2f(-posX-0.1f, -posY-0.1f);
@@ -40,6 +53,8 @@ public:
 			glVertex2f(-posX+0.1f, -posY+0.1f);
 			glVertex2f(-posX-0.1f, -posY+0.1f);
 			glEnd();
+			//*/
+
 			glColor3f(1.0,1.0,1.0);
 		}
 	}
@@ -89,6 +104,7 @@ public:
 	return text;} //debugging purposes
 	virtual void drawPiece()
 	{
+		drawOutline();
 		//timer = 1000;
 		if (timer>0)
 		{

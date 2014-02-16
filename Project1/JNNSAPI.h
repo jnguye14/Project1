@@ -70,7 +70,7 @@ public:
 	{
 		cout << "Initializing SAPI interface" << endl;
 		commandList.push_back("hello");
-		commandList.push_back("goodbye");
+		commandList.push_back("I surrender");
 		commandList.push_back("attack");
 		commandList.push_back("group");
 		commandList.push_back("heal");

@@ -101,7 +101,6 @@ float getPosX()
 
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
-		drawOutline();
 	}
 };
 

@@ -275,6 +275,14 @@ void performAction()
 	case sapi.Goodbye:
 		sapi.Say("Goodbye User");
 		cout << "Goodbye User" << endl;
+		if (isPlayerOneTurn)
+		{
+			playerWinner = 2;
+		}
+		else // player 2 surrendered
+		{
+			playerWinner = 1;
+		}
 		currentScene = 3;
 		// disable restart?
 		//endGame = true;
