@@ -42,11 +42,11 @@ void MouseButton(int button, int state, int x, int y)
 			switch (currentScene)
 			{
 			case 0: // main menu
-				if ((x > 325) && (x < 400) && (y>225) && (y < 275))
+				if ((x > 325) && (x < 400) && (y>275) && (y < 330))
 				{
 					exit(0);
 				}
-				if ((x > 100) && (x < 175) && (y>225) && (y < 275))
+				if ((x > 100) && (x < 175) && (y>275) && (y < 330))
 				{
 					currentScene = 1;
 					glutPostRedisplay();
@@ -91,7 +91,7 @@ void MouseButton(int button, int state, int x, int y)
 				break;
 			case 3: // end game
 				// restart button
-				if ((x > 225) && (x < 313) && (y>350) && (y < 400))
+				if ((x > 210) && (x < 260) && (y>400) && (y < 465))
 				{
 					isPlayerOneTurn = true;
 					isSet = false;
