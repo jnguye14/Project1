@@ -27,6 +27,18 @@ extern GLubyte *turnImage1;
 extern GLuint turnTexture2;
 extern GLubyte *turnImage2;
 
+extern GLuint playWinTexture1;
+extern GLubyte *playWinImage1;
+
+extern GLuint playWinTexture2;
+extern GLubyte *playWinImage2;
+
+extern GLuint itIsADrawTexture;
+extern GLubyte *itIsADrawImage;
+
+extern GLuint replayTexture;
+extern GLubyte *replayImage;
+
 extern int imageWidth;
 extern int imageHeight;
 extern int bitDepth;

@@ -185,36 +185,34 @@ void hud(int player)
 {
 	glColor3f(1.0,1.0,1.0);
 	stringstream ss;
-	if(!isPlayerOneTurn)
+	if(isPlayerOneTurn)
 	{
-		drawRect(-0.3f,0.8f,0.5f,0.3f,turnTexture1);
+		drawRect(-0.3f,-0.5f,0.5f,0.9f,turnTexture1);
 	}
 	else
 	{
-		drawRect(-0.3f,0.8f,0.5f,0.3f,turnTexture2);
+		drawRect(-0.3f,-0.5f,0.5f,0.9f,turnTexture2);
 	}
 	ss.str(string());
 	if(selectedUnit){
 		glColor3f(1.0,0.0,0.0);
 		if (selectedUnit) ss << "Unit: " << selectedUnit->toString();
-		float xx=-0.9,yy=0.5;
+		float xx=-0.9;
 		string stats = ss.str();
-		glRasterPos2f(xx,0.5);
+		glRasterPos2f(xx,0.7);
 		for(int i =0;i<stats.length();i++){
 			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
 		}
 		ss.str(string());
 		if (selectedUnit) ss << "Attack damage: " << selectedUnit->getAttackDamage();
-		//yy=-0.01;
-		glRasterPos2f(xx,0.4);
+		glRasterPos2f(xx,0.3);
 		stats = ss.str();
 		for(int i =0;i<stats.length();i++){
 			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
 		}
 		ss.str(string());
 		if (selectedUnit) ss << "Health: " << selectedUnit->getHealth();
-		//yy=-0.01;
-		glRasterPos2f(xx,0.3);
+		glRasterPos2f(xx,-0.1);
 		stats = ss.str();
 		for(int i =0;i<stats.length();i++){
 			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
@@ -231,13 +229,6 @@ void MainMenuDisplay()
 
 	drawRect(-0.28f,0.5f,0.5f,0.5f, titleTexture);
 	glColor3f(1.0,1.0,1.0);
-	/*glRasterPos2f(-0.28,0.5);
-	stringstream titleStream;
-	titleStream<<"THE EMBLEMS!";
-	string title = titleStream.str();
-	for(int i =0;i<title.length();i++){
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,title[i]);
-	}*/
 }
 
 void UnitSetupDisplay()
@@ -289,7 +280,7 @@ void MainGameDisplay()
 	{
 		unitList2.at(i)->drawPiece();
 	}
-	hud(playerNumber);
+	//hud(playerNumber);
 }
 
 void EndGameDisplay()
@@ -297,16 +288,12 @@ void EndGameDisplay()
 	glColor3f(1.0,1.0,1.0);
 	glRasterPos2f(-0.28,0.5);
 	stringstream endStat;
-	endStat<<"Player "<<playerWinner<< " is the winner!";
-	string endGame = endStat.str();
-	for(int i =0;i<endGame.length();i++){
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,endGame[i]);
-	}
-	endStat.str(string());
+	string endGame;
 	float yy=0.2;
 	glColor3f(0.5,0.5,0.5);
 	if(unitList1.size()==0)
 	{
+		drawRect(-0.28f,0.5f,0.7f,0.3f,playWinTexture2);
 		endStat<<"Player 1's army is empty!!!! ";
 		endStat<<"Player 2's remaining army is : ";
 		glRasterPos2f(-0.5,yy);
@@ -329,6 +316,7 @@ void EndGameDisplay()
 	}
 	else if(unitList2.size()==0)
 	{
+		drawRect(-0.28f,0.5f,0.7f,0.3f,playWinTexture1);
 		endStat<<"Player 2's army is empty!!!! ";
 		endStat<<"Player 1's remaining army is : ";
 		glRasterPos2f(-0.5,yy);
@@ -351,9 +339,10 @@ void EndGameDisplay()
 	}
 	else
 	{	
+		drawRect(-0.28f,0.5f,0.7f,0.3f,itIsADrawTexture);
 		float yy2=0.2;
-		endStat<<"Player 1's remaining army is : ";
 		glRasterPos2f(-0.5,yy);
+		endStat<<"Player 1's remaining army is : ";
 		endGame = endStat.str();
 		for(int i =0;i<endGame.length();i++){
 				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10,endGame[i]);
@@ -391,26 +380,10 @@ void EndGameDisplay()
 			yy2=yy2-0.1;
 		}
 	}
-
-	// replay button
+	//replay button
 	glPushMatrix();
-	glBegin(GL_POLYGON);
-	glColor3f(0.0, 0.0, 1.0);
-	glVertex2f(-0.1, -0.6);
-	glVertex2f(-0.1, -0.4);
-	glVertex2f(0.25, -0.4);
-	glVertex2f(0.25, -0.6);
-	glEnd();
+	drawRect(-0.15f,-0.55f,0.2f,0.2f,replayTexture);
 	glPopMatrix();
-
-	glColor3f(1.0, 1.0, 1.0);
-	glRasterPos2f(-0.04, -0.53);
-	stringstream ss;
-	ss << "Replay";
-	string play = ss.str();
-	for (int i = 0; i<play.length(); i++){
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, play[i]);
-	}
 }
 #pragma mark endregion
 
@@ -420,15 +393,21 @@ void display()
 	switch (currentScene)
 	{
 	case 0: // main menu
+		glViewport(0,0,500,600);
 		MainMenuDisplay();
 		break;
 	case 1:	// set up pieces
+		glViewport(0,0,500,600);
 		UnitSetupDisplay();
 		break;
 	case 2: // main gain
+		glViewport(0,500,500,100);
+		hud(playerNumber);
+		glViewport(0,0,500,500);
 		MainGameDisplay();
 		break;
 	case 3: // end game
+		glViewport(0,0,500,600);
 		EndGameDisplay();
 		break;
 	default:
@@ -441,13 +420,13 @@ void display()
 
 void resizeWindow(int x, int y)
 {
-	glutReshapeWindow(500,500);
+	glutReshapeWindow(500,600);
 
 	glMatrixMode(GL_PROJECTION); // set the matrix mode to reset the camera
 	glLoadIdentity(); // get the identity matrix
-	glViewport(0, 0, 500, 500);	// set up viewport
+	//glViewport(0, 0, 500, 500);	// set up viewport
 	//gluPerspective(fieldofview, aspectRatio, nearPlane, farPlane);
-
+	
 	glMatrixMode(GL_MODELVIEW); // bring it back to matrix mode for scaling/rotation/translations
 	glLoadIdentity(); // load back the identity matrix JIC
 }
