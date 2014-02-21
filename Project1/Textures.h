@@ -21,8 +21,11 @@ extern GLubyte *playImage;
 extern GLuint quitTexture;
 extern GLubyte *quitImage;
 
-extern GLuint turnTexture;
-extern GLubyte *turnImage;
+extern GLuint turnTexture1;
+extern GLubyte *turnImage1;
+
+extern GLuint turnTexture2;
+extern GLubyte *turnImage2;
 
 extern int imageWidth;
 extern int imageHeight;

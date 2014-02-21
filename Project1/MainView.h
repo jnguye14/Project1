@@ -30,55 +30,7 @@ MasterPiece* selectedUnit;
 //mutex curSceneLock; // for int currentScene;
 //mutex playerTurnLock; // for bool isPlayerOneTurn;
 //mutex endGameLock; // for bool endGame;
-void hud(int player)
-{
-	glColor3f(1.0,1.0,1.0);
-	glRasterPos2f(-0.5,0.9);
-	stringstream ss;
-	if(isPlayerOneTurn)
-	{
-		ss<<"Player 1 turn";
-		string play = ss.str();
-		for(int i =0;i<play.length();i++){
-			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,play[i]);
-		}
-	}
-	else
-	{
-		ss<<"Player 2 turn";
-		string play = ss.str();
-		for(int i =0;i<play.length();i++){
-			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,play[i]);
-		}
-	}
-	ss.str(string());
-	if(selectedUnit){
-		glColor3f(1.0,0.0,0.0);
-		if (selectedUnit) ss << "Unit: " << selectedUnit->toString();
-		float xx=-0.9,yy=0.5;
-		string stats = ss.str();
-		glRasterPos2f(xx,0.5);
-		for(int i =0;i<stats.length();i++){
-			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
-		}
-		ss.str(string());
-		if (selectedUnit) ss << "Attack damage: " << selectedUnit->getAttackDamage();
-		//yy=-0.01;
-		glRasterPos2f(xx,0.4);
-		stats = ss.str();
-		for(int i =0;i<stats.length();i++){
-			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
-		}
-		ss.str(string());
-		if (selectedUnit) ss << "Health: " << selectedUnit->getHealth();
-		//yy=-0.01;
-		glRasterPos2f(xx,0.3);
-		stats = ss.str();
-		for(int i =0;i<stats.length();i++){
-			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
-		}
-	}
-}
+
 void MouseButton(int button, int state, int x, int y)
 {
 	// Respond to mouse button presses.
@@ -229,6 +181,46 @@ void drawRect(float x, float y, float w, float h, GLuint texture)
 
 	glDisable(GL_TEXTURE_2D);
 }
+void hud(int player)
+{
+	glColor3f(1.0,1.0,1.0);
+	stringstream ss;
+	if(!isPlayerOneTurn)
+	{
+		drawRect(-0.3f,0.8f,0.5f,0.3f,turnTexture1);
+	}
+	else
+	{
+		drawRect(-0.3f,0.8f,0.5f,0.3f,turnTexture2);
+	}
+	ss.str(string());
+	if(selectedUnit){
+		glColor3f(1.0,0.0,0.0);
+		if (selectedUnit) ss << "Unit: " << selectedUnit->toString();
+		float xx=-0.9,yy=0.5;
+		string stats = ss.str();
+		glRasterPos2f(xx,0.5);
+		for(int i =0;i<stats.length();i++){
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
+		}
+		ss.str(string());
+		if (selectedUnit) ss << "Attack damage: " << selectedUnit->getAttackDamage();
+		//yy=-0.01;
+		glRasterPos2f(xx,0.4);
+		stats = ss.str();
+		for(int i =0;i<stats.length();i++){
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
+		}
+		ss.str(string());
+		if (selectedUnit) ss << "Health: " << selectedUnit->getHealth();
+		//yy=-0.01;
+		glRasterPos2f(xx,0.3);
+		stats = ss.str();
+		for(int i =0;i<stats.length();i++){
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,stats[i]);
+		}
+	}
+}
 
 #pragma mark region Game Screens
 void MainMenuDisplay()
@@ -236,15 +228,16 @@ void MainMenuDisplay()
 	// draw play and quit buttons
 	drawRect(-0.6f, -0.1f, 0.3f, 0.2f, playTexture);
 	drawRect(0.3f, -0.1f, 0.3f, 0.2f, quitTexture);
-	
+
+	drawRect(-0.28f,0.5f,0.5f,0.5f, titleTexture);
 	glColor3f(1.0,1.0,1.0);
-	glRasterPos2f(-0.28,0.5);
+	/*glRasterPos2f(-0.28,0.5);
 	stringstream titleStream;
 	titleStream<<"THE EMBLEMS!";
 	string title = titleStream.str();
 	for(int i =0;i<title.length();i++){
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,title[i]);
-	}
+	}*/
 }
 
 void UnitSetupDisplay()

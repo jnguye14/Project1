@@ -15,8 +15,11 @@ GLubyte *playImage;
 GLuint quitTexture;
 GLubyte *quitImage;
 
-GLuint turnTexture;
-GLubyte *turnImage;
+GLuint turnTexture1;
+GLubyte *turnImage1;
+
+GLuint turnTexture2;
+GLubyte *turnImage2;
 
 int imageWidth = 64*6;
 int imageHeight = 64;
@@ -26,10 +29,11 @@ void LoadGameTextures()
 {
 	LoadTexture("Images/Units.png", &image, &texture, imageWidth, imageHeight, bitDepth);
 	LoadTexture("Images/Units_Blue.png", &image_1, &texture_1, imageWidth, imageHeight, bitDepth);
-	LoadTexture("Images/Game_Screen.psd", &titleImage, &titleTexture, 256, 128, 64);
+	LoadTexture("Images/Game_Screen.png", &titleImage, &titleTexture, 256, 128, 64);
 	LoadTexture("Images/Play.png", &playImage, &playTexture, 128, 64, 32);
 	LoadTexture("Images/Quit.png", &quitImage, &quitTexture, 128, 64, 64);
-	LoadTexture("Images/Player_Turn.png", &turnImage, &turnTexture, 128, 64, 64);
+	LoadTexture("Images/PlayerTurn1.png", &turnImage1, &turnTexture1, 128, 64, 64);
+	LoadTexture("Images/PlayerTurn2.png", &turnImage2, &turnTexture2, 128, 64, 64);
 }
 
 void LoadTexture(char const *filename, GLubyte** image, GLuint* texture, int imageWidth, int imageHeight, int bitDepth)
