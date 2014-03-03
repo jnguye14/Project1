@@ -263,6 +263,7 @@ void performAction()
 	if (selectedUnit == NULL)
 	{
 		sapi.Say("No units selected for action.");
+		isPlayerOneTurn = !isPlayerOneTurn;
 		return;
 	}
 
