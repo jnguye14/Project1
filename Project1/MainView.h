@@ -291,10 +291,10 @@ void EndGameDisplay()
 	string endGame;
 	float yy=0.2;
 	glColor3f(0.5,0.5,0.5);
-	if(unitList1.size()==0)
+	if(playerWinner == 2)//unitList1.size()==0)
 	{
 		drawRect(-0.28f,0.5f,0.7f,0.3f,playWinTexture2);
-		endStat<<"Player 1's army is empty!!!! ";
+		endStat << "Player 1's army has lost!!!! ";//is empty!!!! ";
 		endStat<<"Player 2's remaining army is : ";
 		glRasterPos2f(-0.5,yy);
 		endGame = endStat.str();
@@ -314,10 +314,10 @@ void EndGameDisplay()
 			yy=yy-0.1;
 		}		
 	}
-	else if(unitList2.size()==0)
+	else if(playerWinner == 1)//unitList2.size()==0)
 	{
 		drawRect(-0.28f,0.5f,0.7f,0.3f,playWinTexture1);
-		endStat<<"Player 2's army is empty!!!! ";
+		endStat << "Player 2's army has lost!!!! ";//is empty!!!! ";
 		endStat<<"Player 1's remaining army is : ";
 		glRasterPos2f(-0.5,yy);
 		endGame = endStat.str();

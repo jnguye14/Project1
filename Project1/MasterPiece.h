@@ -87,10 +87,10 @@ public:
 	bool isMouseOver(int x, int y)
 	{
 		//they were all 500 before hand. i tried 223,273,682,654
-		int xmin = 500 * ((-posX - 0.1f + 1.0f)/2.0f); // why negative?
-		int xmax = 500 * ((-posX + 0.1f + 1.0f)/2.0f); // why negative?
-		int ymin = 500 * ((posY - 0.1f + 1.0f)/2.0f);
-		int ymax = 700 * ((posY + 0.1f + 1.0f)/2.0f);
+		int xmin = 100 + 500 * ((-posX - 0.1f + 1.0f)/2.0f); // why negative? // left
+		int xmax = 100 + 500 * ((-posX + 0.1f + 1.0f) / 2.0f); // why negative? // right
+		int ymin = 100 + 500 * ((posY - 0.1f + 1.0f) / 2.0f); // up
+		int ymax = 100 + 500 * ((posY + 0.1f + 1.0f) / 2.0f); // down
 		if ((x > xmin) && (x < xmax) && (y > ymin) && (y < ymax))
 		{
 			return true;
